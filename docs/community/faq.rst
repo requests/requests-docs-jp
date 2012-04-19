@@ -1,32 +1,52 @@
 .. _faq:
 
-Frequently Asked Questions
-==========================
+よくある質問
+=====================
 
-This part of the documentation answers common questions about Requests.
+.. Frequently Asked Questions
+   ==========================
 
-Encoded Data?
--------------
+.. This part of the documentation answers common questions about Requests.
 
-Requests automatically decompresses gzip-encoded responses, and does
-its best to decode response content to unicode when possible.
+ドキュメントのこの章は、Requestsについての一般的な質問に答えます。
 
-You can get direct access to the raw response (and even the socket),
-if needed as well.
+.. Encoded Data?
+   -------------
 
+データはエンコードされますか?
+-----------------------------------
 
-Custom User-Agents?
--------------------
+.. Requests automatically decompresses gzip-encoded responses, and does
+   its best to decode response content to unicode when possible.
 
-Requests allows you to easily override User-Agent strings, along with
-any other HTTP Header.
+Requestsは自動的にgzipエンコードされたレスポンスを解凍します。そして、可能ならレスポンスの本文をユニコードにしてデコードします。
 
+.. You can get direct access to the raw response (and even the socket),
+   if needed as well.
 
-Why not Httplib2?
------------------
+必要なら、生のレスポンス(ソケットも)に直接アクセスすることができます。
 
-Chris Adams gave an excellent summary on
-`Hacker News <http://news.ycombinator.com/item?id=2884406>`_:
+.. Custom User-Agents?
+   -------------------
+
+ユーザーエージェントをカスタムできますか?
+--------------------------------------------------
+
+.. Requests allows you to easily override User-Agent strings, along with
+   any other HTTP Header.
+
+Requestsは、他の任意のHTTPヘッダーとともにユーザーエージェントの文字列を簡単に上書きできます。
+
+.. Why not Httplib2?
+   -----------------
+
+なぜHttplib2ではないのですか?
+---------------------------------------
+
+.. Chris Adams gave an excellent summary on
+   `Hacker News <http://news.ycombinator.com/item?id=2884406>`_:
+
+Chris Adamsさんは、 `Hacker News <http://news.ycombinator.com/item?id=2884406>`_ ですばらいい見解を与えてくれました。
 
     httplib2 is part of why you should use requests: it's far more respectable
     as a client but not as well documented and it still takes way too much code
@@ -48,11 +68,16 @@ Chris Adams gave an excellent summary on
     httplib2" would get the working version.
 
 
-Python 3 Support?
------------------
+.. Python 3 Support?
+   -----------------
 
-Yes! Here's a list of Python platforms that are officially
-supported:
+Python 3をサポートしていますか?
+----------------------------------------
+
+.. Yes! Here's a list of Python platforms that are officially
+   supported:
+
+はい! 公式にサポートしているPythonプラットフォームのリストは以下のとおりです。
 
 * cPython 2.6
 * cPython 2.7
@@ -64,20 +89,30 @@ supported:
 * PyPy-c 1.7
 
 
-Keep-alive Support?
--------------------
+.. Keep-alive Support?
+   -------------------
 
-Yep!
+Keep-aliveはサポートしていますか?
+-----------------------------------------
 
+.. Yep!
 
-Proxy Support?
---------------
+してるよ!
 
-You bet!
+.. Proxy Support?
+   --------------
 
+プロキシはサポートしていますか?
+------------------------------------
+
+.. You bet!
+
+もちろん!
 
 SSL Verification?
 -----------------
 
-Absolutely.
+.. Absolutely.
+
+そのとおりです。
 
