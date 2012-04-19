@@ -52,6 +52,8 @@ Keep-aliveやHTTP接続は `urllib3 <https://github.com/shazow/urllib3>`_ によ
 ------------
 
 `PayPal <https://www.paypal.com/>`_,
+`Heroku <http://heroku.com>`_, `PayPal <https://www.paypal.com/>`_,
+`Transifex <https://www.transifex.net/>`_,
 `Native Instruments <http://www.native-instruments.com/>`_, `The Washington Post <http://www.washingtonpost.com/>`_,
 `Twitter, Inc <http://twitter.com>`_,
 `Readability <http://readability.com>`_, and
