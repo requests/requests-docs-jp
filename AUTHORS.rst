@@ -1,7 +1,12 @@
-Requests is written and maintained by Kenneth Reitz and
-various contributors:
+.. Requests is written and maintained by Kenneth Reitz and
+   various contributors:
 
-Development Lead
+Requestsは、Kenneth Reitzやたくさんのコントリビューターによって作成してメンテナンスされています。 :
+
+.. Development Lead
+   ````````````````
+
+メイン開発者
 ````````````````
 
 - Kenneth Reitz <me@kennethreitz.com>
@@ -13,8 +18,11 @@ Urllib3
 - Andrey Petrov <andrey.petrov@shazow.net>
 
 
-Patches and Suggestions
-```````````````````````
+.. Patches and Suggestions
+   ```````````````````````
+
+パッチと提案
+``````````````````
 
 - Various Pocoo Members
 - Chris Adams
