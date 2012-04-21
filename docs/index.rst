@@ -3,24 +3,31 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Requests: HTTP for Humans
-=========================
+.. Requests: HTTP for Humans
+   =========================
 
-Release v\ |version|. (:ref:`Installation <install>`)
+Requests: 人のためのHTTP
+============================
+
+.. Release v\ |version|. (:ref:`Installation <install>`)
+
+リリース v\ |version|. (:ref:`Installation <install>`)
 
 .. Requests is an :ref:`ISC Licensed <isc>` HTTP library, written in Python, for human beings.
 
-Requestsは、使いやすい、Pythonで書かれた :ref:`ISC Licensed <isc>` ベースのHTTPライブラリです。
+Requestsは、人が使いやすいように作られていて、Pythonで書かれた :ref:`ISC Licensed <isc>` ベースのHTTPライブラリです。
 
 .. Python's standard **urllib2** module provides most of
    the HTTP capabilities you need, but the API is thoroughly **broken**.
    It was built for a different time — and a different web. It requires an *enormous* amount of work (even method overrides) to perform the simplest of tasks.
 
 Pythonの標準の **urllib2** モジュールは、必要とされるほとんどのHTTPの機能を備えていますが、APIがまともに **使えません** 。
-異なる時間、ウェブ用に作成されました。
+様々なウェブ用に作られていて、何回も修正されてきました。
 簡単なことをするため(メソッドの上書きでさえ)に、かなりの量の作業が必要になります。
 
-Things shouldn’t be this way. Not in Python.
+.. Things shouldn’t be this way. Not in Python.
+
+そんなに複雑にすべきではない。それはPythonではない。
 
 ::
 
@@ -51,14 +58,24 @@ Keep-aliveやHTTP接続は `urllib3 <https://github.com/shazow/urllib3>`_ によ
 推薦文
 ------------
 
+.. `Heroku <http://heroku.com>`_,
+   `PayPal <https://www.paypal.com/>`_,
+   `Transifex <https://www.transifex.net/>`_,
+   `Native Instruments <http://www.native-instruments.com/>`_, `The Washington Post <http://www.washingtonpost.com/>`_,
+   `Twitter, Inc <http://twitter.com>`_,
+   `Readability <http://readability.com>`_, and
+   Federal US Institutions
+   use Requests internally. It has been installed over 100,000 times from PyPI.
+
+`Heroku <http://heroku.com>`_, 
 `PayPal <https://www.paypal.com/>`_,
-`Heroku <http://heroku.com>`_, `PayPal <https://www.paypal.com/>`_,
 `Transifex <https://www.transifex.net/>`_,
-`Native Instruments <http://www.native-instruments.com/>`_, `The Washington Post <http://www.washingtonpost.com/>`_,
+`Native Instruments <http://www.native-instruments.com/>`_,
+`The Washington Post <http://www.washingtonpost.com/>`_,
 `Twitter, Inc <http://twitter.com>`_,
-`Readability <http://readability.com>`_, and
-Federal US Institutions
-use Requests internally. It has been installed over 100,000 times from PyPI.
+`Readability <http://readability.com>`_,
+Federal US Institutions は内部でRequestsを使っています。
+PyPIから100,000回以上インストールされています。
 
 **Armin Ronacher**
     .. Requests is the perfect example how beautiful an API can be with the
@@ -108,12 +125,13 @@ Requestsは現在のウェブに欠かせない機能を持っています。
 .. ``.netrc`` support
 
 - ドメインとURLの国際化
-- Keep-Aliveとコネクションのポーリング
+- Keep-Aliveとコネクションプーリング
 - Cookieによるセッションの永続化
+- ブラウザのようなSSL接続
 - ベーシック/ダイジェスト認証
-- エレガントなキー/バリューを持つCookie
-- 圧縮の自動的な解凍
-- ユニコードレスポンスボディ
+- キー/バリューが整理されたCookie
+- 圧縮の自動的な展開
+- レスポンスの本文のユニコード化
 - 複数のファイルアップロード
 - コネクションのタイムアウト
 - ``.netrc`` のサポート
@@ -145,8 +163,10 @@ Requestsは現在のウェブに欠かせない機能を持っています。
 コミュニティガイド
 --------------------
 
-This part of the documentation, which is mostly prose, details the
-Requests ecosystem and community.
+.. This part of the documentation, which is mostly prose, details the
+   Requests ecosystem and community.
+
+ドキュメントのこの章は、Requestsのエコシステムやコミュニティについて書いています。
 
 .. toctree::
    :maxdepth: 1
