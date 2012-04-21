@@ -27,7 +27,7 @@ Pythonの標準の **urllib2** モジュールは、必要とされるほとん�
 
 .. Things shouldn’t be this way. Not in Python.
 
-そんなに複雑にすべきではない。それはPythonではない。
+それはPython的ではないので、そんなに複雑にするべきではありません。
 
 ::
 
@@ -146,7 +146,8 @@ Requestsは現在のウェブに欠かせない機能を持っています。
    background information about Requests, then focuses on step-by-step
    instructions for getting the most out of Requests.
 
-ドキュメントのこの章は
+ドキュメントのこの章は、Requestsに関するいくつかの背景を説明することから始めます。
+それから、Requestsを有効に使うための説明をステップバイステップで紹介します。
 
 .. toctree::
    :maxdepth: 2
