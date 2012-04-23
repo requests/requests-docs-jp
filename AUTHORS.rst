@@ -103,3 +103,4 @@ Urllib3
 - Michael Kelly
 - Michael Newman <newmaniese@gmail.com>
 - Jonty Wareing <jonty@jonty.co.uk>
+- Shivaram Lingamneni
