@@ -11,10 +11,20 @@ import time
 import hashlib
 
 from base64 import b64encode
+
 from .compat import urlparse, str
 from .utils import randombytes, parse_dict_header
 
+try:
+    from oauthlib.oauth1.rfc5849 import (Client, SIGNATURE_HMAC, SIGNATURE_TYPE_AUTH_HEADER)
+    from oauthlib.common import extract_params
+    # hush pyflakes:
+    SIGNATURE_HMAC; SIGNATURE_TYPE_AUTH_HEADER
+except (ImportError, SyntaxError):
+    SIGNATURE_HMAC = None
+    SIGNATURE_TYPE_AUTH_HEADER = None
 
+CONTENT_TYPE_FORM_URLENCODED = 'application/x-www-form-urlencoded'
 
 def _basic_auth_str(username, password):
     """Returns a Basic Auth string."""
@@ -27,6 +37,37 @@ class AuthBase(object):
 
     def __call__(self, r):
         raise NotImplementedError('Auth hooks must be callable.')
+
+
+class OAuth1(AuthBase):
+    """Signs the request using OAuth 1 (RFC5849)"""
+    def __init__(self, client_key,
+            client_secret=None,
+            resource_owner_key=None,
+            resource_owner_secret=None,
+            callback_uri=None,
+            signature_method=SIGNATURE_HMAC,
+            signature_type=SIGNATURE_TYPE_AUTH_HEADER,
+            rsa_key=None, verifier=None):
+
+        try:
+            signature_type = signature_type.upper()
+        except AttributeError:
+            pass
+
+        self.client = Client(client_key, client_secret, resource_owner_key,
+            resource_owner_secret, callback_uri, signature_method,
+            signature_type, rsa_key, verifier)
+
+    def __call__(self, r):
+        contenttype = r.headers.get('Content-Type', None)
+        decoded_body = extract_params(r.data)
+        if contenttype == None and decoded_body != None:
+            r.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+
+        r.url, r.headers, r.data = self.client.sign(
+            unicode(r.url), unicode(r.method), r.data, r.headers)
+        return r
 
 
 class HTTPBasicAuth(AuthBase):
@@ -56,6 +97,8 @@ class HTTPDigestAuth(AuthBase):
     def handle_401(self, r):
         """Takes the given response and tries digest-auth, if needed."""
 
+        r.request.deregister_hook('response', self.handle_401)
+
         s_auth = r.headers.get('www-authenticate', '')
 
         if 'digest' in s_auth.lower():
@@ -74,21 +117,21 @@ class HTTPDigestAuth(AuthBase):
             algorithm = algorithm.upper()
             # lambdas assume digest modules are imported at the top level
             if algorithm == 'MD5':
-                def h(x):
+                def md5_utf8(x):
                     if isinstance(x, str):
                         x = x.encode('utf-8')
                     return hashlib.md5(x).hexdigest()
-                H = h
+                hash_utf8 = md5_utf8
             elif algorithm == 'SHA':
-                def h(x):
+                def sha_utf8(x):
                     if isinstance(x, str):
                         x = x.encode('utf-8')
                     return hashlib.sha1(x).hexdigest()
-                H = h
+                hash_utf8 = sha_utf8
             # XXX MD5-sess
-            KD = lambda s, d: H("%s:%s" % (s, d))
+            KD = lambda s, d: hash_utf8("%s:%s" % (s, d))
 
-            if H is None:
+            if hash_utf8 is None:
                 return None
 
             # XXX not implemented yet
@@ -115,10 +158,10 @@ class HTTPDigestAuth(AuthBase):
                 s += randombytes(8)
 
                 cnonce = (hashlib.sha1(s).hexdigest()[:16])
-                noncebit = "%s:%s:%s:%s:%s" % (nonce, ncvalue, cnonce, qop, H(A2))
-                respdig = KD(H(A1), noncebit)
+                noncebit = "%s:%s:%s:%s:%s" % (nonce, ncvalue, cnonce, qop, hash_utf8(A2))
+                respdig = KD(hash_utf8(A1), noncebit)
             elif qop is None:
-                respdig = KD(H(A1), "%s:%s" % (nonce, H(A2)))
+                respdig = KD(hash_utf8(A1), "%s:%s" % (nonce, hash_utf8(A2)))
             else:
                 # XXX handle auth-int.
                 return None
