@@ -3,14 +3,25 @@
 History
 -------
 
-0.11.2 (2012-04-??)
+0.12.0 (2012-05-02)
++++++++++++++++++++
+
+- EXPERIMENTAL OAUTH SUPPORT!
+- Proper CookieJar-backed cookies interface with awesome dict-like interface.
+- Speed fix for non-iterated content chunks.
+- Move ``pre_request`` to a more usable place.
+- New ``pre_send`` hook.
+- Lazily encode data, params, files
+- Load system Certificate Bundle if ``certify`` isn't available.
+- Cleanups, fixes.
+
+0.11.2 (2012-04-22)
 +++++++++++++++++++
 
 - Attempt to use the OS's certificate bundle if ``certifi`` isn't available.
 - Infinite digest auth redirect fix
 - Multi-part file upload improvements
 - Fix decoding of invalid %encodings in URLs
-- Rewrite unquote_unreserved based on urllib.unquote
 - If there is no content in a response don't throw an error the second time that content is attempted to be read.
 - Upload data on redirects.
 
@@ -442,4 +453,3 @@ History
 
 * Frustration
 * Conception
-

@@ -1,2 +1,3 @@
 nose
 rudolf2
+git+git://github.com/idangazit/oauthlib.git
