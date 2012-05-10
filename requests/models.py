@@ -7,6 +7,7 @@ requests.models
 This module contains the primary objects that power Requests.
 """
 
+import json
 import os
 from datetime import datetime
 
@@ -32,7 +33,7 @@ from .utils import (
     DEFAULT_CA_BUNDLE_PATH)
 from .compat import (
     cookielib, urlparse, urlunparse, urljoin, urlsplit, urlencode, str, bytes,
-    is_py2)
+    StringIO, is_py2)
 
 # Import chardet if it is available.
 try:
@@ -202,6 +203,12 @@ class Request(object):
                 # Save cookies in Response.
                 response.cookies = self.cookies
 
+                # Save cookies in Session.
+                # (in safe mode, cookies may be None if the request didn't succeed)
+                if self.cookies is not None:
+                    for cookie in self.cookies:
+                        self.session.cookies.set_cookie(cookie)
+
                 # No exceptions were harmed in the making of this request.
                 response.error = getattr(resp, 'error', None)
 
@@ -235,6 +242,7 @@ class Request(object):
 
                 url = r.headers['location']
                 data = self.data
+                files = self.files
 
                 # Handle redirection without scheme (see: RFC 1808 Section 4)
                 if url.startswith('//'):
@@ -253,6 +261,7 @@ class Request(object):
                 if r.status_code is codes.see_other:
                     method = 'GET'
                     data = None
+                    files = None
                 else:
                     method = self.method
 
@@ -262,10 +271,12 @@ class Request(object):
                     if r.status_code in (codes.moved, codes.found) and self.method == 'POST':
                         method = 'GET'
                         data = None
+                        files = None
 
                     if (r.status_code == 303) and self.method != 'HEAD':
                         method = 'GET'
                         data = None
+                        files = None
 
                 # Remove the cookie headers that were sent.
                 headers = self.headers
@@ -277,7 +288,7 @@ class Request(object):
                 request = Request(
                     url=url,
                     headers=headers,
-                    files=self.files,
+                    files=files,
                     method=method,
                     params=self.session.params,
                     auth=self.auth,
@@ -348,6 +359,8 @@ class Request(object):
             else:
                 fn = guess_filename(v) or k
                 fp = v
+            if isinstance(fp, (bytes, str)):
+                fp = StringIO(fp)
             fields.update({k: (fn, fp.read())})
 
         (body, content_type) = encode_multipart_formdata(fields)
@@ -796,8 +809,6 @@ class Response(object):
         if self.encoding is None:
             if chardet is not None:
                 encoding = chardet.detect(self.content)['encoding']
-            else:
-                raise ValueError("Can't detect page encoding.")
 
         # Decode unicode from given encoding.
         try:
@@ -810,6 +821,14 @@ class Response(object):
             content = str(self.content, errors='replace')
 
         return content
+
+    @property
+    def json(self):
+        """Returns the json-encoded content of a request, if any."""
+        try:
+            return json.loads(self.text or self.content)
+        except ValueError:
+            return None
 
     def raise_for_status(self, allow_redirects=True):
         """Raises stored :class:`HTTPError` or :class:`URLError`, if one occurred."""

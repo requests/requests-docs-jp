@@ -1,19 +1,23 @@
-Requests: HTTP for Humans
-=========================
+.. Requests: HTTP for Humans
+   =========================
 
+Requests: 人間のためのHTTP
+=====================================
 
-.. image:: https://secure.travis-ci.org/kennethreitz/requests.png?branch=develop
+.. Requests is an ISC Licensed HTTP library, written in Python, for human
+   beings.
 
-Requests is an ISC Licensed HTTP library, written in Python, for human
-beings.
+Requestsは、人が使いやすいように作られていて、Pythonで書かれたISCライセンスのHTTPライブラリです。
 
-Most existing Python modules for sending HTTP requests are extremely
-verbose and cumbersome. Python's builtin urllib2 module provides most of
-the HTTP capabilities you should need, but the api is thoroughly broken.
-It requires an enormous amount of work (even method overrides) to
-perform the simplest of tasks.
+.. Most existing Python modules for sending HTTP requests are extremely
+   verbose and cumbersome. Python's builtin urllib2 module provides most of
+   the HTTP capabilities you should need, but the api is thoroughly broken.
+   It requires an enormous amount of work (even method overrides) to
+   perform the simplest of tasks.
 
-Things shouldn't be this way. Not in Python.
+HTTPリクエストを送るための既にあるPythonモジュール
+
+.. Things shouldn't be this way. Not in Python.
 
 ::
 
@@ -34,8 +38,11 @@ response data in the same way. It's powered by httplib and `urllib3
 hacks for you.
 
 
-Features
---------
+.. Features
+   --------
+
+機能
+-----------
 
 - International Domains and URLs
 - Keep-Alive & Connection Pooling
@@ -47,10 +54,14 @@ Features
 - Unicode Response Bodies
 - Multipart File Uploads
 - Connection Timeouts
+- Thread-safety
 
 
-Installation
-------------
+.. Installation
+   ------------
+
+インストール
+---------------
 
 To install requests, simply: ::
 

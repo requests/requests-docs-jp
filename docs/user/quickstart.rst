@@ -1,29 +1,45 @@
 .. _quickstart:
 
-Quickstart
-==========
+クイックスタート
+=====================
+
+.. Quickstart
+   ==========
 
 .. module:: requests.models
 
-Eager to get started? This page gives a good introduction in how to get started
-with Requests. This assumes you already have Requests installed. If you do not,
-head over to the :ref:`Installation <install>` section.
+.. Eager to get started? This page gives a good introduction in how to get started
+   with Requests. This assumes you already have Requests installed. If you do not,
+   head over to the :ref:`Installation <install>` section.
 
-First, make sure that:
+はじめましょうか?
+このページはRequestsを使い方の紹介をします。ここではRequestsはインストールされているものとします。
+まだの場合は、 :ref:`Installation <install>` の章を見て下さい。
 
-* Requests is :ref:`installed <install>`
-* Requests is :ref:`up-to-date <updates>`
+.. First, make sure that:
 
+最初に、以下を確認して下さい。 :
 
-Lets gets started with some simple use cases and examples.
+.. Requests is :ref:`installed <install>`
+.. Requests is :ref:`up-to-date <updates>`
 
+* Requestsが :ref:`インストールされている <install>`
+* Requestsを :ref:`最新版にアップデートしている <updates>`
+
+.. Lets gets started with some simple use cases and examples.
+
+いくつかの簡単なユースケースとサンプルを始めましょう。
 
 Make a GET Request
 ------------------
 
-Making a standard request with Requests is very simple.
+.. Making a standard request with Requests is very simple.
 
-Let's get GitHub's public timeline ::
+Requestsで標準的なリクエストを作成することはとても簡単です。
+
+.. Let's get GitHub's public timeline ::
+
+GitHubのパブリックなタイムラインを取得してみましょう。 ::
 
     r = requests.get('https://github.com/timeline.json')
 
@@ -219,6 +235,34 @@ Setting filename explicitly::
         "Host": "httpbin.org:80",
         "Content-Type": "multipart/form-data; boundary=127.0.0.1.502.21746.1321131593.786.1"
       },
+      "data": ""
+    }
+
+Sending strings to be received as files::
+
+    >>> url = 'http://httpbin.org/post'
+    >>> files = {'file': ('report.csv', 'some,data,to,send\nanother,row,to,send\n')}
+
+    >>> r = requests.post(url, files=files)
+    >>> r.text
+    {
+      "origin": "179.13.100.4",
+      "files": {
+        "file": "some,data,to,send\\nanother,row,to,send\\n"
+      },
+      "form": {},
+      "url": "http://httpbin.org/post",
+      "args": {},
+      "headers": {
+        "Content-Length": "216",
+        "Accept-Encoding": "identity, deflate, compress, gzip",
+        "Connection": "keep-alive",
+        "Accept": "*/*",
+        "User-Agent": "python-requests/0.11.1",
+        "Host": "httpbin.org",
+        "Content-Type": "multipart/form-data; boundary=127.0.0.1.502.41433.1335385481.788.1"
+      },
+      "json": null,
       "data": ""
     }
 

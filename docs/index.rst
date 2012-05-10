@@ -6,7 +6,7 @@
 .. Requests: HTTP for Humans
    =========================
 
-Requests: 人のためのHTTP
+Requests: 人間のためのHTTP
 ============================
 
 .. Release v\ |version|. (:ref:`Installation <install>`)
@@ -123,6 +123,7 @@ Requestsは現在のウェブに欠かせない機能を持っています。
 .. Multipart File Uploads
 .. Connection Timeouts
 .. ``.netrc`` support
+.. Thread-safe.
 
 - ドメインとURLの国際化
 - Keep-Aliveとコネクションプーリング
@@ -135,6 +136,7 @@ Requestsは現在のウェブに欠かせない機能を持っています。
 - 複数のファイルアップロード
 - コネクションのタイムアウト
 - ``.netrc`` のサポート
+- スレッドセーフ.
 
 .. User Guide
    ----------

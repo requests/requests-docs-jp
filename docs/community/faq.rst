@@ -48,17 +48,22 @@ Requestsは、他の任意のHTTPヘッダーとともにユーザーエージ�
 
 Chris Adamsさんは、 `Hacker News <http://news.ycombinator.com/item?id=2884406>`_ ですばらいい見解を与えてくれました。
 
-    httplib2 is part of why you should use requests: it's far more respectable
-    as a client but not as well documented and it still takes way too much code
-    for basic operations. I appreciate what httplib2 is trying to do, that
-    there's a ton of hard low-level annoyances in building a modern HTTP
-    client, but really, just use requests instead. Kenneth Reitz is very
-    motivated and he gets the degree to which simple things should be simple
-    whereas httplib2 feels more like an academic exercise than something
-    people should use to build production systems[1].
+    .. httplib2 is part of why you should use requests: it's far more respectable
+       as a client but not as well documented and it still takes way too much code
+       for basic operations. I appreciate what httplib2 is trying to do, that
+       there's a ton of hard low-level annoyances in building a modern HTTP
+       client, but really, just use requests instead. Kenneth Reitz is very
+       motivated and he gets the degree to which simple things should be simple
+       whereas httplib2 feels more like an academic exercise than something
+       people should use to build production systems[1].
 
-    Disclosure: I'm listed in the requests AUTHORS file but can claim credit
-    for, oh, about 0.0001% of the awesomeness.
+    httplib2はrequestsを
+    
+
+    .. Disclosure: I'm listed in the requests AUTHORS file but can claim credit
+       for, oh, about 0.0001% of the awesomeness.
+
+    : requestsのAUTHORSファイルにリストされていますが、
 
     1. http://code.google.com/p/httplib2/issues/detail?id=96 is a good example:
     an annoying bug which affect many people, there was a fix available for

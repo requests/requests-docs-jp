@@ -106,3 +106,5 @@ Urllib3
 - Shivaram Lingamneni
 - Miguel Turner
 - Rohan Jain (crodjer)
+- Justin Barber <barber.justin@gmail.com>
+- Roman Haritonov <@reclosedev>
