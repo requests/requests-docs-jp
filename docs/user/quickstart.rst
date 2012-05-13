@@ -30,12 +30,15 @@
 
 いくつかの簡単なユースケースとサンプルを始めましょう。
 
-Make a GET Request
-------------------
+.. Make a GET Request
+   ------------------
+
+GETリクエストの生成
+---------------------
 
 .. Making a standard request with Requests is very simple.
 
-Requestsで標準的なリクエストを作成することはとても簡単です。
+Requestsで一般的なリクエストを生成することはとても簡単です。
 
 .. Let's get GitHub's public timeline ::
 
@@ -43,12 +46,19 @@ GitHubのパブリックなタイムラインを取得してみましょう。 :
 
     r = requests.get('https://github.com/timeline.json')
 
-Now, we have a :class:`Response` object called ``r``. We can get all the
-information we need from this.
+.. Now, we have a :class:`Response` object called ``r``. We can get all the
+   information we need from this.
 
-Typically, you want to send some sort of data in the urls query string.
-To do this, simply pass a dictionary to the `params` argument. Your
-dictionary of data will automatically be encoded when the request is made::
+現在、 ``r`` と呼ばれる :class:`Response` オブジェクトがあります。
+これから必要な情報を全て取得することができます。
+
+.. Typically, you want to send some sort of data in the urls query string.
+   To do this, simply pass a dictionary to the `params` argument. Your
+   dictionary of data will automatically be encoded when the request is made::
+
+一般的にURLのクエリ文字列のデータの
+これをするためには、 `params` 引数に辞書を渡すだけです。
+データの辞書はリクエストを生成する時に自動的にエンコードされます。
 
     >>> payload = {'key1': 'value1', 'key2': 'value2'}
     >>> r = requests.get("http://httpbin.org/get", params=payload)
@@ -73,16 +83,24 @@ dictionary of data will automatically be encoded when the request is made::
 
 
 
-Response Content
-----------------
+.. Response Content
+   ----------------
 
-We can read the content of the server's response::
+レスポンスの内容
+-------------------
+
+.. We can read the content of the server's response::
+
+サーバーのレスポンスの内容を見ることができます。 ::
 
     >>> r.text
     '[{"repository":{"open_issues":0,"url":"https://github.com/...
 
-Requests will automatically decode content from the server. Most unicode
-charsets are seamlessly decoded.
+.. Requests will automatically decode content from the server. Most unicode
+   charsets are seamlessly decoded.
+
+Requestsはサーバーからの内容を自動的にデコードします。
+ほとんどのユニコード文字はシームレスにデコードされます。
 
 When you make a request, ``r.encoding`` is set, based on the HTTP headers.
 Requests will use that encoding when you access ``r.text``.  If ``r.encoding``
@@ -90,11 +108,20 @@ is ``None``, Requests will make an extremely educated guess of the encoding
 of the response body. You can manually set ``r.encoding`` to any encoding
 you'd like, and that charset will be used.
 
+リクエストを生成する時に、 ``r.encoding`` 
+Requestsは、 ``r.text`` にアクセスした時に
 
-Binary Response Content
------------------------
+
+
+.. Binary Response Content
+   -----------------------
+
+バイナリのレスポンスの内容
+---------------------------------
 
 You can also access the response body as bytes, for non-text requests::
+
+
 
     >>> r.content
     b'[{"repository":{"open_issues":0,"url":"https://github.com/...
@@ -109,11 +136,16 @@ use the following code:
     >>> i = Image.open(StringIO(r.content))
 
 
-Raw Response Content
---------------------
+.. Raw Response Content
+   --------------------
 
-In the rare case that you'd like to get the absolute raw socket response from the server,
-you can access ``r.raw``::
+生のレスポンスの内容
+-----------------------
+
+.. In the rare case that you'd like to get the absolute raw socket response from the server,
+   you can access ``r.raw``::
+
+サーバーからの生のソケットレスポンスの全てを取得したい稀なケースでは、 ``r.raw`` にアクセスできます。 ::
 
     >>> r.raw
     <requests.packages.urllib3.response.HTTPResponse object at 0x101194810>
@@ -123,10 +155,15 @@ you can access ``r.raw``::
 
 
 
-Make a POST Request
--------------------
+.. Make a POST Request
+   -------------------
 
-POST requests are equally simple::
+POSTリクエストの生成
+--------------------------
+
+.. POST requests are equally simple::
+
+POSTリクエストは、同じくらい簡単です。 ::
 
     r = requests.post("http://httpbin.org/post")
 
@@ -168,8 +205,11 @@ For example, the GitHub API v3 accepts JSON-Encoded POST/PATCH data::
     r = requests.post(url, data=json.dumps(payload))
 
 
-Custom Headers
---------------
+.. Custom Headers
+   --------------
+
+カスタムヘッダー
+---------------------
 
 If you'd like to add HTTP headers to a request, simply pass in a ``dict`` to the
 ``headers`` parameter.
@@ -185,6 +225,8 @@ For example, we didn't specify our content-type in the previous example::
 
 POST a Multipart-Encoded File
 -----------------------------
+
+
 
 Requests makes it simple to upload Multipart-encoded files::
 
@@ -267,8 +309,11 @@ Sending strings to be received as files::
     }
 
 
-Response Status Codes
----------------------
+.. Response Status Codes
+   ---------------------
+
+レスポンスステータスコード
+--------------------------------
 
 We can check the response status code::
 
@@ -302,8 +347,11 @@ But, since our ``status_code`` was ``200``, when we call it::
 All is well.
 
 
-Response Headers
-----------------
+.. Response Headers
+   ----------------
+
+レスポンスヘッダー
+-----------------------
 
 We can view the server's response headers with a simple Python dictionary
 interface::
@@ -338,8 +386,11 @@ If a header doesn't exist in the Response, its value defaults to ``None``::
     None
 
 
-Cookies
--------
+.. Cookies
+   -------
+
+クッキー
+-------------
 
 If a response contains some Cookies, you can get quick access to them::
 
@@ -360,8 +411,11 @@ parameter::
     '{"cookies": {"cookies_are": "working"}}'
 
 
-Basic Authentication
---------------------
+.. Basic Authentication
+   --------------------
+
+ベーシック認証
+-----------------
 
 Most web services require authentication. There many different types of
 authentication, but the most common is HTTP Basic Auth.
@@ -382,8 +436,11 @@ Providing the credentials as a tuple in this fashion is functionally equivalent
 to the ``HTTPBasicAuth`` example above.
 
 
-Digest Authentication
----------------------
+.. Digest Authentication
+   ---------------------
+
+ダイジェスト認証
+--------------------
 
 Another popular form of web service protection is Digest Authentication::
 
@@ -393,8 +450,11 @@ Another popular form of web service protection is Digest Authentication::
     <Response [200]>
 
 
-OAuth Authentication
---------------------
+.. OAuth Authentication
+   --------------------
+
+OAuth認証
+--------------
 
 Miguel Araujo's `requests-oauth <http://pypi.python.org/pypi/requests-oauth>`_ project provides a simple interface for
 establishing OAuth connections. Documentation and examples can be found on the requests-oauth `git repository <https://github.com/maraujop/requests-oauth>`_.
@@ -436,8 +496,11 @@ If you're using POST, PUT, PATCH, *&c*, you can also explicitly enable redirecti
     [<Response [301]>]
 
 
-Timeouts
---------
+.. Timeouts
+   --------
+
+タイムアウト
+------------------
 
 You can tell requests to stop waiting for a response after a given number of seconds with the ``timeout`` parameter::
 
@@ -451,8 +514,11 @@ You can tell requests to stop waiting for a response after a given number of sec
     ``timeout`` only effects the connection process itself, not the downloading of the response body.
 
 
-Errors and Exceptions
----------------------
+.. Errors and Exceptions
+   ---------------------
+
+エラーと例外
+-------------------
 
 In the event of a network problem (e.g. DNS failure, refused connection, etc),
 Requests will raise a :class:`ConnectionError` exception.

@@ -1,17 +1,26 @@
 .. _advanced:
 
-Advanced Usage
-==============
+高度な使い方
+=================
 
-This document covers some of Requests more advanced features.
+.. Advanced Usage
+   ==============
 
+.. This document covers some of Requests more advanced features.
 
-Session Objects
----------------
+この文章は、Requestsのより高度な機能を幾つか紹介します。
+
+.. Session Objects
+   ---------------
+
+セッションオブジェクト
+-----------------------------
 
 The Session object allows you to persist certain parameters across
 requests. It also persists cookies across all requests made from the
 Session instance.
+
+セッションオブジェクトは
 
 A session object has all the methods of the main Requests API.
 
@@ -103,7 +112,10 @@ If you'd like to disable keep-alive, you can simply set the ``keep_alive`` confi
     s.config['keep_alive'] = False
 
 
-Asynchronous Requests
+.. Asynchronous Requests
+   ----------------------
+
+非同期のリクエスト
 ----------------------
 
 Requests has first-class support for concurrent requests, powered by gevent.
@@ -145,8 +157,11 @@ will also guarantee execution of the ``response`` hook, described below. ::
         async.map(rs, size=5)
 
 
-Event Hooks
------------
+.. Event Hooks
+   -----------
+
+イベントフック
+------------------
 
 Requests has a hook system that you can use to manipulate portions of
 the request process, or signal event handling.
@@ -224,8 +239,11 @@ And give it a try::
     }
 
 
-Custom Authentication
----------------------
+.. Custom Authentication
+   ---------------------
+
+カスタム認証
+-----------------
 
 Requests allows you to use specify your own authentication mechanism.
 
@@ -259,8 +277,11 @@ Then, we can make a request using our Pizza Auth::
     <Response [200]>
 
 
-Streaming Requests
-------------------
+.. Streaming Requests
+   ------------------
+
+ストリーミングリクエスト
+------------------------------
 
 With ``requests.Response.iter_lines()`` you can easily iterate over streaming
 APIs such as the `Twitter Streaming API <https://dev.twitter.com/docs/streaming-api>`_.
@@ -293,8 +314,11 @@ To do so, just configure Requests with a stream to write to::
     2011-08-17T03:04:23.380175   GET   http://httpbin.org/headers
     <Response [200]>
 
-Proxies
--------
+.. Proxies
+   -------
+
+プロキシ
+------------
 
 If you need to use a proxy, you can configure individual requests with the
 ``proxies`` argument to any request method:

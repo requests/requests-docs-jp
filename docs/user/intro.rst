@@ -14,7 +14,7 @@
 
 .. Requests was developed with a few :pep:`20` idioms in mind.
 
-Requestsは、PEP 20規約に基づいて開発されました。
+Requestsは、 :pep:`20` 規約に基づいて開発されました。
 
 .. Beautiful is better than ugly.
 .. Explicit is better than implicit.
@@ -43,7 +43,8 @@ ISCライセンス
    go-to license for your next open source project.
 
 今日、見つかるオープンソースプロジェクトのほとんどが `GPL Licensed`_ です。
-
+GPLは様々な
+次のオープンソースプロジェクトのライセンスで使用する
 
 .. A project that is released as GPL cannot be used in any commercial product
    without the product itself also being offered as open source.
