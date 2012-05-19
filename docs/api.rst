@@ -79,11 +79,16 @@ Async
 
 
 
-Utilities
----------
+.. Utilities
+   ---------
 
-These functions are used internally, but may be useful outside of
-Requests.
+ユーティリティ
+------------------
+
+.. These functions are used internally, but may be useful outside of
+   Requests.
+
+これらの関数は内部で使われていますが、Requests以外で使う場合も便利かもしれません。
 
 .. module:: requests.utils
 
@@ -103,8 +108,11 @@ Status Code Lookup
     >>> requests.codes['\o/']
     200
 
-Cookies
-~~~~~~~
+.. Cookies
+   ~~~~~~~
+
+クッキー
+~~~~~~~~~~~~~~
 
 .. autofunction:: dict_from_cookiejar
 .. autofunction:: cookiejar_from_dict

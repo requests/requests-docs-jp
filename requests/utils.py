@@ -247,9 +247,14 @@ def header_expand(headers):
 
 
 def dict_from_cookiejar(cj):
-    """Returns a key/value dictionary from a CookieJar.
+    """
+    .. Returns a key/value dictionary from a CookieJar.
 
-    :param cj: CookieJar object to extract cookies from.
+    CookieJarからキー/バリューの辞書を返します。
+
+    .. :param cj: CookieJar object to extract cookies from.
+
+    :param cj: クッキーを取得するためのCookieJarオブジェクト
     """
 
     cookie_dict = {}

@@ -6,19 +6,24 @@
 
 .. Requests is under active development, and contributions are more than welcome!
 
-Requestsは積極的に開発されていて、プロジェクトへの貢献はどしどし受け付けています!
+Requestsは活発に開発中で、プロジェクトへの貢献はどしどし受け付けています!
 
-#. Check for open issues or open a fresh issue to start a discussion around a feature idea or a bug.
+.. Check for open issues or open a fresh issue to start a discussion around a feature idea or a bug.
    There is a Contributor Friendly tag for issues that should be ideal for people who are not very
    familiar with the codebase yet.
-#. Fork `the repository <https://github.com/kennethreitz/requests>`_ on Github to start making your
+.. Fork `the repository <https://github.com/kennethreitz/requests>`_ on Github to start making your
    changes to the **develop** branch (or branch off of it).
-#. Write a test which shows that the bug was fixed or that the feature works as expected.
-#. Send a pull request and bug the maintainer until it gets merged and published. :)
+.. Write a test which shows that the bug was fixed or that the feature works as expected.
+.. Send a pull request and bug the maintainer until it gets merged and published. :)
    Make sure to add yourself to `AUTHORS <https://github.com/kennethreitz/requests/blob/develop/AUTHORS.rst>`_.
 
-公開されている問題の一覧をチェックするか、機能のアイデアやバグに関するディスカッションを開始するために新しい問題を作成して下さい。
-
+#. 公開されているissueの一覧をチェックするか、機能のアイデアやバグに関するディスカッションを開始するために新しいissueを作成して下さい。
+   コントリビューター
+#. **develop** ブランチ(もしくはそれから派生したブランチ)に修正を加えるために、
+   Githubの `リポジトリ <https://github.com/kennethreitz/requests>`_ をフォークして下さい。
+#. 期待している通りに動くか修正したバグが分かるようなテストを書く。
+#. プルリクエストを送るとバグのメンテナーがマージして公開します。
+   `AUTHORS <https://github.com/kennethreitz/requests/blob/develop/AUTHORS.rst>`_ に追加されるでしょう。
 
 .. Development dependencies
    ------------------------
