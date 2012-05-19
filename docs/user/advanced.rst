@@ -301,13 +301,21 @@ To use the Twitter Streaming API to track the keyword "requests":
 		    print json.loads(line)
 
 
-Verbose Logging
----------------
+.. Verbose Logging
+   ---------------
 
-If you want to get a good look at what HTTP requests are being sent
-by your application, you can turn on verbose logging.
+Verboseロギング
+------------------
 
-To do so, just configure Requests with a stream to write to::
+.. If you want to get a good look at what HTTP requests are being sent
+   by your application, you can turn on verbose logging.
+
+アプリケーションで送られてたHTTPリクエストを見やすくしたいなら、
+Verboseロギングをオンにすることができます。
+
+.. To do so, just configure Requests with a stream to write to::
+
+これを行うには、ストリームを以下のようにしてRequestsを設定するだけです。 ::
 
     >>> my_config = {'verbose': sys.stderr}
     >>> requests.get('http://httpbin.org/headers', config=my_config)
