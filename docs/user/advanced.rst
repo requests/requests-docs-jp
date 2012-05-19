@@ -283,10 +283,15 @@ Then, we can make a request using our Pizza Auth::
 ストリーミングリクエスト
 ------------------------------
 
-With ``requests.Response.iter_lines()`` you can easily iterate over streaming
-APIs such as the `Twitter Streaming API <https://dev.twitter.com/docs/streaming-api>`_.
+.. With ``requests.Response.iter_lines()`` you can easily iterate over streaming
+   APIs such as the `Twitter Streaming API <https://dev.twitter.com/docs/streaming-api>`_.
 
-To use the Twitter Streaming API to track the keyword "requests":
+``requests.Response.iter_lines()`` で、 `Twitter Streaming API <https://dev.twitter.com/docs/streaming-api>`_
+のようなストリーミングAPIから簡単に反復処理をすることができます。
+
+.. To use the Twitter Streaming API to track the keyword "requests":
+
+"requests"というキーワードをトラッキングするためにTwitterのストリーミングAPIを使うには :
 
 ::
 
