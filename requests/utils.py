@@ -302,9 +302,13 @@ def get_encodings_from_content(content):
 
 
 def get_encoding_from_headers(headers):
-    """Returns encodings from given HTTP Header Dict.
+    """
+    .. Returns encodings from given HTTP Header Dict.
 
-    :param headers: dictionary to extract encoding from.
+    与えられたHTTPヘッダーの辞書からエンコードを返します。
+
+    .. :param headers: dictionary to extract encoding from.
+    :param headers: エンコードを取得するための辞書
     """
 
     content_type = headers.get('content-type')
@@ -340,17 +344,30 @@ def stream_decode_response_unicode(iterator, r):
 
 
 def get_unicode_from_response(r):
-    """Returns the requested content back in unicode.
+    """
+    .. Returns the requested content back in unicode.
 
-    :param r: Response object to get unicode content from.
+    要求されたコンテンツをユニコードにして返します。
 
-    Tried:
+    .. :param r: Response object to get unicode content from.
 
-    1. charset from content-type
+    :param r: ユニコードのコンテンツを取得するためのレスポンスオブジェクト
 
-    2. every encodings from ``<meta ... charset=XXX>``
+    .. Tried:
 
-    3. fall back and replace all unicode characters
+    以下の事を試みます。 :
+
+    .. charset from content-type
+
+    1. content-typeのcharsetを見ます
+
+    .. every encodings from ``<meta ... charset=XXX>``
+
+    2. ``<meta ... charset=XXX>`` のエンコードを見ます。
+
+    .. fall back and replace all unicode characters
+
+    3. 全ての文字列をユニコード文字列に置き換えます。
 
     """
 
