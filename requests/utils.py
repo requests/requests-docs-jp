@@ -269,10 +269,15 @@ def dict_from_cookiejar(cj):
 
 
 def add_dict_to_cookiejar(cj, cookie_dict):
-    """Returns a CookieJar from a key/value dictionary.
+    """
+    .. Returns a CookieJar from a key/value dictionary.
 
-    :param cj: CookieJar to insert cookies into.
-    :param cookie_dict: Dict of key/values to insert into CookieJar.
+    キー/バリューの辞書からCookieJarを返します。
+
+    .. :param cj: CookieJar to insert cookies into.
+    .. :param cookie_dict: Dict of key/values to insert into CookieJar.
+    :param cj: クッキーに追加するためのCookieJar
+    :param cookie_dict: CookieJarに追加するためのキー/バリューの辞書
     """
 
     cj2 = cookiejar_from_dict(cookie_dict)
@@ -282,9 +287,13 @@ def add_dict_to_cookiejar(cj, cookie_dict):
 
 
 def get_encodings_from_content(content):
-    """Returns encodings from given content string.
+    """
+    .. Returns encodings from given content string.
 
-    :param content: bytestring to extract encodings from.
+    contentに与えられた文字列からエンコードを返します。
+
+    .. :param content: bytestring to extract encodings from.
+    :param content: エンコードを取得するためのバイト文字列
     """
 
     charset_re = re.compile(r'<meta.*?charset=["\']*(.+?)["\'>]', flags=re.I)

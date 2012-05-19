@@ -119,8 +119,11 @@ Status Code Lookup
 .. autofunction:: add_dict_to_cookiejar
 
 
-Encodings
-~~~~~~~~~
+.. Encodings
+   ~~~~~~~~~
+
+エンコード
+~~~~~~~~~~~~~~
 
 .. autofunction:: get_encodings_from_content
 .. autofunction:: get_encoding_from_headers
