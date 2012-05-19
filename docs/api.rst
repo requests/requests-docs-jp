@@ -38,10 +38,11 @@ They all return an instance of the :class:`Response <Response>` object.
 
 .. autofunction:: session
 
-
-
-Exceptions
+例外
 ~~~~~~~~~~
+
+.. Exceptions
+   ~~~~~~~~~~
 
 .. module:: requests
 
