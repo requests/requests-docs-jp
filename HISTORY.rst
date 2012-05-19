@@ -3,6 +3,13 @@
 History
 -------
 
+0.13.0 (2012-05-??)
++++++++++++++++++++
+- Removal of Requests.async in favor of `grequests <https://github.com/kennethreitz/grequests>`_
+- New implimentation of safe_mode
+- cookies.get now supports default argument
+- Session cookies not saved when Session.request is called with return_response=False
+
 0.12.1 (2012-05-08)
 +++++++++++++++++++
 

@@ -1,3 +1,17 @@
+.coverage
 .project
 .pydevproject
 .settings/*
+MANIFEST
+coverage.xml
+nosetests.xml
+junit-report.xml
+pylint.txt
+toy.py
+violations.pyflakes.txt
+cover/
+docs/_build
+requests.egg-info/
+*.pyc
+*.swp
+env/

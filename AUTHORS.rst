@@ -108,4 +108,4 @@ Urllib3
 - Rohan Jain (crodjer)
 - Justin Barber <barber.justin@gmail.com>
 - Roman Haritonov <@reclosedev>
-- Josh Imhoff <joshimhoff13@gmail.com>
+- Arup Malakar <amalakar@gmail.com>

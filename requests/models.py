@@ -17,7 +17,6 @@ from .status_codes import codes
 
 from .auth import HTTPBasicAuth, HTTPProxyAuth
 from .cookies import cookiejar_from_dict, extract_cookies_to_jar, get_cookie_header
-from .packages.urllib3.response import HTTPResponse
 from .packages.urllib3.exceptions import MaxRetryError, LocationParseError
 from .packages.urllib3.exceptions import SSLError as _SSLError
 from .packages.urllib3.exceptions import HTTPError as _HTTPError
@@ -60,6 +59,7 @@ class Request(object):
         params=dict(),
         auth=None,
         cookies=None,
+        store_cookies=True,
         timeout=None,
         redirect=False,
         allow_redirects=False,
@@ -109,6 +109,9 @@ class Request(object):
 
         # Dictionary mapping protocol to the URL of the proxy (e.g. {'http': 'foo.bar:3128'})
         self.proxies = dict(proxies or [])
+
+        #param store_cookies: (optional) if ``False``, the received cookies as part of the HTTP response would be ignored.
+        self.store_cookies = store_cookies
 
         # If no proxies are given, allow configuration by environment variables
         # HTTP_PROXY and HTTPS_PROXY.
@@ -197,8 +200,9 @@ class Request(object):
                 # Set encoding.
                 response.encoding = get_encoding_from_headers(response.headers)
 
-                # Add new cookies from the server.
-                extract_cookies_to_jar(self.cookies, self, resp)
+                # Add new cookies from the server. Don't if configured not to
+                if self.store_cookies:
+                    extract_cookies_to_jar(self.cookies, self, resp)
 
                 # Save cookies in Response.
                 response.cookies = self.cookies
@@ -458,7 +462,7 @@ class Request(object):
             return False
 
     def send(self, anyway=False, prefetch=False):
-        """Sends the request. Returns True of successful, False if not.
+        """Sends the request. Returns True if successful, False if not.
         If there was an HTTPError during transmission,
         self.response.status_code will contain the HTTPError code.
 

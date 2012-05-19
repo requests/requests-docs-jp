@@ -7,13 +7,14 @@ requests.auth
 This module contains the authentication handlers for Requests.
 """
 
+import os
 import time
 import hashlib
 
 from base64 import b64encode
 
 from .compat import urlparse, str
-from .utils import randombytes, parse_dict_header
+from .utils import parse_dict_header
 
 try:
     from oauthlib.oauth1.rfc5849 import (Client, SIGNATURE_HMAC, SIGNATURE_TYPE_AUTH_HEADER)
@@ -60,14 +61,51 @@ class OAuth1(AuthBase):
             signature_type, rsa_key, verifier)
 
     def __call__(self, r):
+        """Add OAuth parameters to the request.
+
+        Parameters may be included from the body if the content-type is
+        urlencoded, if no content type is set an educated guess is made.
+        """
         contenttype = r.headers.get('Content-Type', None)
+        # extract_params will not give params unless the body is a properly
+        # formatted string, a dictionary or a list of 2-tuples.
         decoded_body = extract_params(r.data)
         if contenttype == None and decoded_body != None:
-            r.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+            # extract_params can only check the present r.data and does not know
+            # of r.files, thus an extra check is performed. We know that 
+            # if files are present the request will not have 
+            # Content-type: x-www-form-urlencoded. We guess it will have
+            # a mimetype of multipart/form-encoded and if this is not the case
+            # we assume the correct header will be set later.
+            if r.files:
+                # Omit body data in the signing and since it will always
+                # be empty (cant add paras to body if multipart) and we wish
+                # to preserve body. 
+                r.headers['Content-Type'] = 'multipart/form-encoded'
+                r.url, r.headers, _ = self.client.sign(
+                    unicode(r.url), unicode(r.method), None, r.headers)
+            else:
+                # Normal signing
+                r.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+                r.url, r.headers, r.data = self.client.sign(
+                    unicode(r.url), unicode(r.method), r.data, r.headers)
 
-        r.url, r.headers, r.data = self.client.sign(
-            unicode(r.url), unicode(r.method), r.data, r.headers)
-        return r
+            # Having the authorization header, key or value, in unicode will
+            # result in UnicodeDecodeErrors when the request is concatenated
+            # by httplib. This can easily be seen when attaching files.
+            # Note that simply encoding the value is not enough since Python
+            # saves the type of first key set. Thus we remove and re-add.
+            # >>> d = {u'a':u'foo'}
+            # >>> d['a'] = 'foo'
+            # >>> d
+            # { u'a' : 'foo' }
+            u_header = unicode('Authorization')
+            if u_header in r.headers:
+                auth_header = r.headers[u_header].encode('utf-8')
+                del r.headers[u_header]
+                r.headers['Authorization'] = auth_header
+    
+            return r
 
 
 class HTTPBasicAuth(AuthBase):
@@ -155,7 +193,7 @@ class HTTPDigestAuth(AuthBase):
                 s = str(nonce_count).encode('utf-8')
                 s += nonce.encode('utf-8')
                 s += time.ctime().encode('utf-8')
-                s += randombytes(8)
+                s += os.urandom(8)
 
                 cnonce = (hashlib.sha1(s).hexdigest()[:16])
                 noncebit = "%s:%s:%s:%s:%s" % (nonce, ncvalue, cnonce, qop, hash_utf8(A2))

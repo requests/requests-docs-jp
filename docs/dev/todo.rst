@@ -26,12 +26,19 @@ Requestsは積極的に開発されていて、プロジェクトへの貢献は
 開発の際の依存関係
 -------------------------
 
-.. You'll need to install ``gunicorn`` and ``httpbin`` in order to run requests' test suite::
+.. You'll need to install ``gunicorn`` and ``httpbin`` and various other dependencies in
+   order to run requests' test suite::
 
-requestsのテストを実行するために、 ``gunicorn`` や ``httpbin`` をインストールが必要なら ::
+requestsのテストスイートを実行するために、 ``gunicorn`` や ``httpbin`` や他の依存するものをインストールする必要があります。 ::
 
-    $ pip install -r requirements.txt
+    $ virtualenv env
+    $ . env/bin/activate
+    $ make
+    $ make test
 
+.. The ``Makefile`` has various useful targets for testing.
+
+``Makefile`` はテストをするために便利な対象があります。
 
 .. What Needs to be Done
    ---------------------
