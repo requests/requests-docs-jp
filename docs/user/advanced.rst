@@ -320,8 +320,11 @@ To do so, just configure Requests with a stream to write to::
 プロキシ
 ------------
 
-If you need to use a proxy, you can configure individual requests with the
-``proxies`` argument to any request method:
+.. If you need to use a proxy, you can configure individual requests with the
+   ``proxies`` argument to any request method:
+
+プロキシを使う必要があるなら、 ``proxies`` 引数に任意のリクエストメソッドを渡して個々のリクエストを
+設定することができます。
 
 ::
 
@@ -334,7 +337,9 @@ If you need to use a proxy, you can configure individual requests with the
 
     requests.get("http://example.org", proxies=proxies)
 
-You can also configure proxies by environment variables ``HTTP_PROXY`` and ``HTTPS_PROXY``.
+.. You can also configure proxies by environment variables ``HTTP_PROXY`` and ``HTTPS_PROXY``.
+
+``HTTP_PROXY`` や ``HTTPS_PROXY`` の環境変数によってプロキシを設定することもできます。
 
 ::
 
