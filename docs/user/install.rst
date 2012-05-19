@@ -55,7 +55,7 @@ Cheeseshopはダウンしている場合は、Kenneth Reitzの `Cheeseshopのミ
 .. Requests is actively developed on GitHub, where the code is
    `always available <https://github.com/kennethreitz/requests>`_.
 
-Requestsは、GitHubで積極的に開発されていて、コードは `いつでも見ることができます <https://github.com/kennethreitz/requests>`_ 。
+Requestsは、GitHub上で活発に開発されていて、コードは `いつでも見ることができます <https://github.com/kennethreitz/requests>`_ 。
 
 .. You can either clone the public repository::
 
@@ -79,7 +79,7 @@ Requestsは、GitHubで積極的に開発されていて、コードは `いつ�
 .. Once you have a copy of the source, you can embed it in your Python package,
    or install it into your site-packages easily::
 
-ソースのコピーを持っていたら、Pythonパッケージに埋め込むか、site-packagesに
+ソースのコピーを持っていないなら、Pythonパッケージに埋め込んだり、site-packagesに
 簡単にインストールすることができます。
 
     $ python setup.py install
