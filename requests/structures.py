@@ -48,7 +48,11 @@ class CaseInsensitiveDict(dict):
             return default
 
 class LookupDict(dict):
-    """Dictionary lookup object."""
+    """
+    .. Dictionary lookup object.
+
+    ルックアップオブジェクトの辞書
+    """
 
     def __init__(self, name=None):
         self.name = name
