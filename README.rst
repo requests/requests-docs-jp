@@ -4,8 +4,10 @@
 Requests: 人間のためのHTTP
 =====================================
 
-.. warning:: このドキュメントは `Requests <http://docs.python-requests.org/>`_ のドキュメントを翻訳したものです。
-   翻訳の間違いなどの指摘は、 `翻訳リポジトリのIssues <https://github.com/tokuda109/requests-docs-ja/issues>`_ に登録して頂けるとうれしいです。
+このドキュメントは `Requests <http://docs.python-requests.org/>`_ のドキュメントを翻訳したものです。
+翻訳の間違いなどの指摘は、 `翻訳リポジトリのIssues <https://github.com/tokuda109/requests-docs-ja/issues>`_ に登録して頂けるとうれしいです。
+
+-------------------------------------
 
 .. Requests is an ISC Licensed HTTP library, written in Python, for human
    beings.
@@ -52,17 +54,17 @@ hacks for you.
 機能
 -----------
 
-- International Domains and URLs
-- Keep-Alive & Connection Pooling
-- Sessions with Cookie Persistence
-- Browser-style SSL Verification
-- Basic/Digest Authentication
-- Elegant Key/Value Cookies
-- Automatic Decompression
-- Unicode Response Bodies
-- Multipart File Uploads
-- Connection Timeouts
-- Thread-safety
+.. International Domains and URLs
+.. Keep-Alive & Connection Pooling
+.. Sessions with Cookie Persistence
+.. Browser-style SSL Verification
+.. Basic/Digest Authentication
+.. Elegant Key/Value Cookies
+.. Automatic Decompression
+.. Unicode Response Bodies
+.. Multipart File Uploads
+.. Connection Timeouts
+.. Thread-safety
 
 - ドメインとURLの国際化
 - Keep-Aliveとコネクションプーリング
