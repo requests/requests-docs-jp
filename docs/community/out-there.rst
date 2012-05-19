@@ -37,15 +37,18 @@
 - `French blog post introducing Requests <http://www.nicosphere.net/requests-urllib2-de-python-simplifie-2432/>`_
 
 
-Integrations
-============
+.. Integrations
+   ============
+
+インテグレーション
+=======================
 
 ScraperWiki
 ------------
 
-`ScraperWiki <https://scraperwiki.com/>`_ is an excellent service that allows
-you to run Python, Ruby, and PHP scraper scripts on the web. Now, Requests
-v0.6.1 is available to use in your scrapers!
+.. `ScraperWiki <https://scraperwiki.com/>`_ is an excellent service that allows
+   you to run Python, Ruby, and PHP scraper scripts on the web. Now, Requests
+   v0.6.1 is available to use in your scrapers!
 
 `ScraperWiki <https://scraperwiki.com/>`_ はウェブ上でPython、Ruby、PHPのスクレイパースクリプトを
 実行できる優れたサービスです。
