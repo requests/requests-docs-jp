@@ -168,9 +168,13 @@ POSTリクエストは、同じくらい簡単です。 ::
     r = requests.post("http://httpbin.org/post")
 
 
-Typically, you want to send some form-encoded data — much like an HTML form.
-To do this, simply pass a dictionary to the `data` argument. Your
-dictionary of data will automatically be form-encoded when the request is made::
+.. Typically, you want to send some form-encoded data — much like an HTML form.
+   To do this, simply pass a dictionary to the `data` argument. Your
+   dictionary of data will automatically be form-encoded when the request is made::
+
+ほとんどのHTMLフォームのように - 通常は、何らかの形でエンコードされたデータを送信します。
+これをするには、 `data` 引数に辞書を渡すだけです。
+データ辞書は、リクエストが作られる時に自動的にエンコードされます。
 
     >>> payload = {'key1': 'value1', 'key2': 'value2'}
     >>> r = requests.post("http://httpbin.org/post", data=payload)
@@ -195,7 +199,10 @@ dictionary of data will automatically be form-encoded when the request is made::
       "data": ""
     }
 
-There are many times that you want to send data that is not form-encoded. If you pass in a ``string`` instead of a ``dict``, that data will be posted directly.
+.. There are many times that you want to send data that is not form-encoded. If you pass in a ``string`` instead of a ``dict``, that data will be posted directly.
+
+エンコードされていないデータを送りたい場合が何度もあると思います。
+``dict`` の代わりに ``string`` を渡した場合、データは直接送信されます。
 
 .. For example, the GitHub API v3 accepts JSON-Encoded POST/PATCH data::
 
@@ -317,19 +324,27 @@ Sending strings to be received as files::
 レスポンスステータスコード
 --------------------------------
 
-We can check the response status code::
+.. We can check the response status code::
+
+レスポンスのステータスコードを確認することができます。 ::
 
     >>> r.status_code
     200
 
-Requests also comes with a built-in status code lookup object for easy
-reference::
+.. Requests also comes with a built-in status code lookup object for easy
+   reference::
+
+Requestsは簡単に参照できるように、組み込みのステータスコードのルックアップオブジェクト
+があります。 ::
 
     >>> r.status_code == requests.codes.ok
     True
 
-If we made a bad request (non-200 response), we can raise it with
-:class:`Response.raise_for_status()`::
+.. If we made a bad request (non-200 response), we can raise it with
+   :class:`Response.raise_for_status()`::
+
+不正なリクエスト(200以外のレスポンス)を作りたい場合は、
+:class:`Response.raise_for_status()` で例外を発生させることができます。 ::
 
     >>> _r = requests.get('http://httpbin.org/status/404')
     >>> _r.status_code
@@ -341,12 +356,16 @@ If we made a bad request (non-200 response), we can raise it with
         raise self.error
     urllib2.HTTPError: HTTP Error 404: NOT FOUND
 
-But, since our ``status_code`` was ``200``, when we call it::
+.. But, since our ``status_code`` was ``200``, when we call it::
+
+しかし呼び出した時は、 ``status_code`` が ``200`` だったので ::
 
     >>> r.raise_for_status()
     None
 
-All is well.
+.. All is well.
+
+全て上手くいきました。
 
 
 .. Response Headers
@@ -355,8 +374,10 @@ All is well.
 レスポンスヘッダー
 -----------------------
 
-We can view the server's response headers with a simple Python dictionary
-interface::
+.. We can view the server's response headers with a simple Python dictionary
+   interface::
+
+Pythonの辞書形式で簡単にサーバーのレスポンスヘッダーを見ることができます。 ::
 
     >>> r.headers
     {
@@ -370,11 +391,16 @@ interface::
         'content-type': 'application/json; charset=utf-8'
     }
 
-The dictionary is special, though: it's made just for HTTP headers. According to
-`RFC 2616 <http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html>`_, HTTP
-Headers are case-insensitive.
+.. The dictionary is special, though: it's made just for HTTP headers. According to
+   `RFC 2616 <http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html>`_, HTTP
+   Headers are case-insensitive.
 
-So, we can access the headers using any capitalization we want::
+辞書とはいえ、特別です。辞書はHTTPヘッダーを作成するためだけに作られます。
+`RFC 2616 <http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html>`_ によると、HTTPヘッダーは大文字と小文字を区別しません。
+
+.. So, we can access the headers using any capitalization we want::
+
+そこで、任意の大文字と小文字を使用してヘッダーにアクセスできます。 ::
 
     >>> r.headers['Content-Type']
     'application/json; charset=utf-8'
@@ -382,7 +408,9 @@ So, we can access the headers using any capitalization we want::
     >>> r.headers.get('content-type')
     'application/json; charset=utf-8'
 
-If a header doesn't exist in the Response, its value defaults to ``None``::
+.. If a header doesn't exist in the Response, its value defaults to ``None``::
+
+レスポンスにはないヘッダーを参照すると、値はデフォルトの ``None`` になります。
 
     >>> r.headers['X-Random']
     None
@@ -394,7 +422,9 @@ If a header doesn't exist in the Response, its value defaults to ``None``::
 クッキー
 -------------
 
-If a response contains some Cookies, you can get quick access to them::
+.. If a response contains some Cookies, you can get quick access to them::
+
+レスポンスにクッキーが含まれているなら、簡単にアクセスして取得することができます。 ::
 
     >>> url = 'http://httpbin.org/cookies/set/requests-is/awesome'
     >>> r = requests.get(url)
@@ -402,8 +432,10 @@ If a response contains some Cookies, you can get quick access to them::
     >>> print r.cookies
     {'requests-is': 'awesome'}
 
-To send your own cookies to the server, you can use the ``cookies``
-parameter::
+.. To send your own cookies to the server, you can use the ``cookies``
+   parameter::
+
+サーバーにクッキーを送信するには、 ``cookies`` パラメーターを使うことができます。 ::
 
     >>> url = 'http://httpbin.org/cookies'
     >>> cookies = dict(cookies_are='working')
@@ -469,9 +501,12 @@ Requestsはこの認証を手動で行うためのメソッドがあります。
 OAuth認証
 --------------
 
-Miguel Araujo's `requests-oauth <http://pypi.python.org/pypi/requests-oauth>`_ project provides a simple interface for
-establishing OAuth connections. Documentation and examples can be found on the requests-oauth `git repository <https://github.com/maraujop/requests-oauth>`_.
+.. Miguel Araujo's `requests-oauth <http://pypi.python.org/pypi/requests-oauth>`_ project provides a simple interface for
+   establishing OAuth connections. Documentation and examples can be found on the requests-oauth `git repository <https://github.com/maraujop/requests-oauth>`_.
 
+Miguel Araujoの `requests-oauth <http://pypi.python.org/pypi/requests-oauth>`_ プロジェクトは
+OAuth接続を確立するための簡単なインターフェースを提供しています。
+ドキュメントとサンプルは、requests-oauthの `git repository <https://github.com/maraujop/requests-oauth>`_ にあります。
 
 .. Redirection and History
    -----------------------
@@ -481,7 +516,7 @@ establishing OAuth connections. Documentation and examples can be found on the r
 
 .. Requests will automatically perform location redirection while using idempotent methods.
 
-Requestsは、
+Requestsは、冪等メソッドを使っている時に自動的にリダイレクトを行います。
 
 .. GitHub redirects all HTTP requests to HTTPS. Let's see what happens::
 
