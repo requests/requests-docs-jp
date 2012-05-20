@@ -116,7 +116,7 @@ Requestsは、 ``r.text`` にアクセスした時に
 .. Binary Response Content
    -----------------------
 
-バイナリのレスポンスの内容
+バイナリのレスポンスの本文
 ---------------------------------
 
 You can also access the response body as bytes, for non-text requests::
@@ -197,7 +197,9 @@ dictionary of data will automatically be form-encoded when the request is made::
 
 There are many times that you want to send data that is not form-encoded. If you pass in a ``string`` instead of a ``dict``, that data will be posted directly.
 
-For example, the GitHub API v3 accepts JSON-Encoded POST/PATCH data::
+.. For example, the GitHub API v3 accepts JSON-Encoded POST/PATCH data::
+
+例えば、GitHubのAPI v3はJSONエンコードされたPOST/PATCHデータを受け取ります。 ::
 
     url = 'https://api.github.com/some/endpoint'
     payload = {'some': 'data'}
@@ -417,24 +419,33 @@ parameter::
 ベーシック認証
 -----------------
 
-Most web services require authentication. There many different types of
-authentication, but the most common is HTTP Basic Auth.
+.. Most web services require authentication. There many different types of
+   authentication, but the most common is HTTP Basic Auth.
 
-Making requests with Basic Auth is extremely simple::
+ほとんどのウェブサービスは認証システムが必要です。
+認証には様々な種類がありますが、最も一般的なのはHTTPベーシック認証です。
+
+.. Making requests with Basic Auth is extremely simple::
+
+ベーシック認証を使ったリクエストを作成することはとても簡単です。 ::
 
     >>> from requests.auth import HTTPBasicAuth
     >>> requests.get('https://api.github.com/user', auth=HTTPBasicAuth('user', 'pass'))
     <Response [200]>
 
-Due to the prevalence of HTTP Basic Auth, requests provides a shorthand for
-this authentication method::
+.. Due to the prevalence of HTTP Basic Auth, requests provides a shorthand for
+   this authentication method::
+
+HTTPベーシック認証の
+Requestsはこの認証を手動で行うためのメソッドがあります。
 
     >>> requests.get('https://api.github.com/user', auth=('user', 'pass'))
     <Response [200]>
 
-Providing the credentials as a tuple in this fashion is functionally equivalent
-to the ``HTTPBasicAuth`` example above.
+.. Providing the credentials as a tuple in this fashion is functionally equivalent
+   to the ``HTTPBasicAuth`` example above.
 
+この方法で、タプルとして認証情報を与えることは、上記の ``HTTPBasicAuth`` の例と機能的には同等です。
 
 .. Digest Authentication
    ---------------------
@@ -442,7 +453,9 @@ to the ``HTTPBasicAuth`` example above.
 ダイジェスト認証
 --------------------
 
-Another popular form of web service protection is Digest Authentication::
+.. Another popular form of web service protection is Digest Authentication::
+
+他の人気があるウェブサービスの認証システムはダイジェスト認証です。 ::
 
     >>> from requests.auth import HTTPDigestAuth
     >>> url = 'http://httpbin.org/digest-auth/auth/user/pass'
@@ -460,12 +473,19 @@ Miguel Araujo's `requests-oauth <http://pypi.python.org/pypi/requests-oauth>`_ p
 establishing OAuth connections. Documentation and examples can be found on the requests-oauth `git repository <https://github.com/maraujop/requests-oauth>`_.
 
 
-Redirection and History
------------------------
+.. Redirection and History
+   -----------------------
 
-Requests will automatically perform location redirection while using idempotent methods.
+リダイレクトとヒストリー
+------------------------------
 
-GitHub redirects all HTTP requests to HTTPS. Let's see what happens::
+.. Requests will automatically perform location redirection while using idempotent methods.
+
+Requestsは、
+
+.. GitHub redirects all HTTP requests to HTTPS. Let's see what happens::
+
+GitHubは全てのHTTPリクエストをHTTPSにリダイレクトします。何が起こるか見てみましょう ::
 
     >>> r = requests.get('http://github.com')
     >>> r.url
@@ -475,11 +495,17 @@ GitHub redirects all HTTP requests to HTTPS. Let's see what happens::
     >>> r.history
     [<Response [301]>]
 
-The :class:`Response.history` list contains a list of the
-:class:`Request` objects that were created in order to complete the request.
+.. The :class:`Response.history` list contains a list of the
+   :class:`Request` objects that were created in order to complete the request.
 
-If you're using GET, HEAD, or OPTIONS, you can disable redirection
-handling with the ``allow_redirects`` parameter::
+:class:`Response.history` は、リクエストが完了したときに作られる :class:`Request` オブジェクトが
+リストとして入っています。
+
+.. If you're using GET, HEAD, or OPTIONS, you can disable redirection
+   handling with the ``allow_redirects`` parameter::
+
+GET、HEAD、OPTIONSを使う場合、 ``allow_redirects`` パラメーターを使うことでリダイレクトの処理を
+無効にすることができます。 ::
 
     >>> r = requests.get('http://github.com', allow_redirects=False)
     >>> r.status_code
@@ -487,7 +513,9 @@ handling with the ``allow_redirects`` parameter::
     >>> r.history
     []
 
-If you're using POST, PUT, PATCH, *&c*, you can also explicitly enable redirection as well::
+.. If you're using POST, PUT, PATCH, *&c*, you can also explicitly enable redirection as well::
+
+POST、PUT、PATCHを使う場合、明示的にリダイレクトを有効にすることができます。 ::
 
     >>> r = requests.post('http://github.com', allow_redirects=True)
     >>> r.url
@@ -502,16 +530,22 @@ If you're using POST, PUT, PATCH, *&c*, you can also explicitly enable redirecti
 タイムアウト
 ------------------
 
-You can tell requests to stop waiting for a response after a given number of seconds with the ``timeout`` parameter::
+.. You can tell requests to stop waiting for a response after a given number of seconds with the ``timeout`` parameter::
+
+``timeout`` パラメーターに秒数を与えると、Requestsに与えた秒数で応答の待機を止めることができます。 ::
 
     >>> requests.get('http://github.com', timeout=0.001)
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
     requests.exceptions.Timeout: Request timed out.
 
-.. admonition:: Note
+.. Note
 
-    ``timeout`` only effects the connection process itself, not the downloading of the response body.
+.. admonition:: 注意
+
+    .. ``timeout`` only effects the connection process itself, not the downloading of the response body.
+
+    ``timeout`` は、レスポンスの本文をダウンロードせず接続の処理だけにしか影響しません。
 
 
 .. Errors and Exceptions
