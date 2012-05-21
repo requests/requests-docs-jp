@@ -105,8 +105,11 @@ Async
 
 .. module:: requests.utils
 
-Status Code Lookup
-~~~~~~~~~~~~~~~~~~
+.. Status Code Lookup
+   ~~~~~~~~~~~~~~~~~~
+
+ステータスコードのルックアップ
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. autofunction:: requests.codes
 
@@ -147,13 +150,18 @@ Status Code Lookup
 Internals
 ---------
 
-These items are an internal component to Requests, and should never be
-seen by the end user (developer). This part of the API documentation
-exists for those who are extending the functionality of Requests.
+.. These items are an internal component to Requests, and should never be
+   seen by the end user (developer). This part of the API documentation
+   exists for those who are extending the functionality of Requests.
 
+これらはRequestsの内部のコンポーネントで、作業者(開発者)の側から参照すべきではありません。
+APIのドキュメントのこの章は、Requestsの機能を拡張剃る方法があります。
 
-Classes
-~~~~~~~
+.. Classes
+   ~~~~~~~
+
+クラス
+-------------
 
 .. autoclass:: requests.Response
    :inherited-members:
