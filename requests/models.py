@@ -46,8 +46,13 @@ REDIRECT_STATI = (codes.moved, codes.found, codes.other, codes.temporary_moved)
 CONTENT_CHUNK_SIZE = 10 * 1024
 
 class Request(object):
-    """The :class:`Request <Request>` object. It carries out all functionality of
-    Requests. Recommended interface is with the Requests functions.
+    """
+    .. The :class:`Request <Request>` object. It carries out all functionality of
+       Requests. Recommended interface is with the Requests functions.
+
+    :class:`Request <Request>` オブジェクトです。
+    Requestsの全ての機能を担います。
+    推奨されるインターフェイスは、Requestsの機能を使用することです。
     """
 
     def __init__(self,
@@ -72,7 +77,8 @@ class Request(object):
         session=None,
         cert=None):
 
-        #: Dictionary of configurations for this request.
+        # Dictionary of configurations for this request.
+        #: このリクエストの設定が入っている辞書
         self.config = dict(config or [])
 
         #: Float describes the timeout of the request.
@@ -91,8 +97,10 @@ class Request(object):
         #: HTTP Method to use.
         self.method = method
 
-        #: Dictionary or byte of request body data to attach to the
-        #: :class:`Request <Request>`.
+        # Dictionary or byte of request body data to attach to the
+        # :class:`Request <Request>`.
+        #: :class:`Request <Request>` に添付するためのリクエストの本文データの
+        #: バイトか辞書
         self.data = None
 
         #: Dictionary or byte of querystring data to attach to the
@@ -104,7 +112,8 @@ class Request(object):
         #: and HTTPError storage).
         self.redirect = redirect
 
-        #: Set to True if full redirects are allowed (e.g. re-POST-ing of data at new ``Location``)
+        # Set to True if full redirects are allowed (e.g. re-POST-ing of data at new ``Location``)
+        #: 全てのリダイレクトを許可する場合はTrueにして下さい。(例: 新しい ``Location`` にデータを再POSTする)
         self.allow_redirects = allow_redirects
 
         # Dictionary mapping protocol to the URL of the proxy (e.g. {'http': 'foo.bar:3128'})
@@ -126,7 +135,8 @@ class Request(object):
         #: content and metadata of HTTP Response, once :attr:`sent <send>`.
         self.response = Response()
 
-        #: Authentication tuple or object to attach to :class:`Request <Request>`.
+        # Authentication tuple or object to attach to :class:`Request <Request>`.
+        #: :class:`Request <Request>` に添付する認証タプルかオブジェクト
         self.auth = auth
 
         #: CookieJar to attach to :class:`Request <Request>`.
@@ -149,13 +159,16 @@ class Request(object):
         for (k, v) in list(hooks.items()):
             self.register_hook(event=k, hook=v)
 
-        #: Session.
+        # Session.
+        #: セッション
         self.session = session
 
-        #: SSL Verification.
+        # SSL Verification.
+        #: SSL検証
         self.verify = verify
 
-        #: SSL Certificate
+        # SSL Certificate
+        #: SSL証明書
         self.cert = cert
 
         #: Prefetch response content
@@ -805,10 +818,15 @@ class Response(object):
 
     @property
     def text(self):
-        """Content of the response, in unicode.
+        """
+        .. Content of the response, in unicode.
 
-        if Response.encoding is None and chardet module is available, encoding
-        will be guessed.
+           if Response.encoding is None and chardet module is available, encoding
+           will be guessed.
+
+        レスポンスの本文をユニコードで返します。
+
+        Response.encodingがNoneでchardetモジュールが有効ならエンコーディングは推測されます。
         """
 
         # Try charset from content-type
@@ -834,14 +852,22 @@ class Response(object):
 
     @property
     def json(self):
-        """Returns the json-encoded content of a request, if any."""
+        """
+        .. Returns the json-encoded content of a request, if any.
+
+        リクエストの本文を任意でJSONエンコードして返します。
+        """
         try:
             return json.loads(self.text or self.content)
         except ValueError:
             return None
 
     def raise_for_status(self, allow_redirects=True):
-        """Raises stored :class:`HTTPError` or :class:`URLError`, if one occurred."""
+        """
+        .. Raises stored :class:`HTTPError` or :class:`URLError`, if one occurred.
+
+        保管されている :class:`HTTPError` か :class:`URLError` のどちらかが発生した時、例外を発生させます。
+        """
 
         if self.error:
             raise self.error
