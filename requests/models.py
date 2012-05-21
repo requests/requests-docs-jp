@@ -636,10 +636,15 @@ class Request(object):
 
 
 class Response(object):
-    """The core :class:`Response <Response>` object. All
-    :class:`Request <Request>` objects contain a
-    :class:`response <Response>` attribute, which is an instance
-    of this class.
+    """
+    .. The core :class:`Response <Response>` object. All
+       :class:`Request <Request>` objects contain a
+       :class:`response <Response>` attribute, which is an instance
+       of this class.
+
+    コアとなる :class:`Response <Response>` オブジェクトです。
+    全ての :class:`Request <Request>` オブジェクトは
+    このクラスのインスタンス :class:`response <Response>` アトリビュートを持っています。
     """
 
     def __init__(self):
@@ -647,38 +652,51 @@ class Response(object):
         self._content = False
         self._content_consumed = False
 
-        #: Integer Code of responded HTTP Status.
+        # Integer Code of responded HTTP Status.
+        #: 応答したHTTPステータスのコード
         self.status_code = None
 
-        #: Case-insensitive Dictionary of Response Headers.
-        #: For example, ``headers['content-encoding']`` will return the
-        #: value of a ``'Content-Encoding'`` response header.
+        # Case-insensitive Dictionary of Response Headers.
+        # For example, ``headers['content-encoding']`` will return the
+        # value of a ``'Content-Encoding'`` response header.
+        #: レスポンスヘッダーの大文字と小文字を区別しない辞書。
+        #: 例えば、 ``headers['content-encoding']`` はレスポンスヘッダーの
+        #: ``'Content-Encoding'`` の値を返します。
         self.headers = CaseInsensitiveDict()
 
-        #: File-like object representation of response (for advanced usage).
+        # File-like object representation of response (for advanced usage).
+        #: レスポンスのファイルのようなオブジェクト (高度な使い方)
         self.raw = None
 
-        #: Final URL location of Response.
+        # Final URL location of Response.
+        #: レスポンスの最終的なURL
         self.url = None
 
-        #: Resulting :class:`HTTPError` of request, if one occurred.
+        # Resulting :class:`HTTPError` of request, if one occurred.
+        #: エラーが起こった場合のリクエストの :class:`HTTPError` の内容
         self.error = None
 
-        #: Encoding to decode with when accessing r.content.
+        # Encoding to decode with when accessing r.content.
+        #: r.contentにアクセスした時にデコードするためのエンコーディング
         self.encoding = None
 
-        #: A list of :class:`Response <Response>` objects from
-        #: the history of the Request. Any redirect responses will end
-        #: up here.
+        # A list of :class:`Response <Response>` objects from
+        # the history of the Request. Any redirect responses will end
+        # up here.
+        #: Requestsのhistoryから :class:`Response <Response>` オブジェクトがリストで入っています。
+        #: リダイレクトレスポンスはここで終了します。
         self.history = []
 
-        #: The :class:`Request <Request>` that created the Response.
+        # The :class:`Request <Request>` that created the Response.
+        #: レスポンスが作られる時の :class:`Request <Request>` クラス
         self.request = None
 
-        #: A CookieJar of Cookies the server sent back.
+        # A CookieJar of Cookies the server sent back.
+        #: サーバーが送り返してくるクッキーのCookieJar
         self.cookies = None
 
-        #: Dictionary of configurations for this request.
+        # Dictionary of configurations for this request.
+        #: このリクエストの設定が入っている辞書
         self.config = {}
 
     def __repr__(self):
@@ -701,10 +719,16 @@ class Response(object):
         return True
 
     def iter_content(self, chunk_size=1, decode_unicode=False):
-        """Iterates over the response data.  This avoids reading the content
-        at once into memory for large responses.  The chunk size is the number
-        of bytes it should read into memory.  This is not necessarily the
-        length of each item returned as decoding can take place.
+        """
+        .. Iterates over the response data.  This avoids reading the content
+           at once into memory for large responses.  The chunk size is the number
+           of bytes it should read into memory.  This is not necessarily the
+           length of each item returned as decoding can take place.
+
+        レスポンスデータを反復処理します。
+        これはメモリにある大きなレスポンスの内容を一度に読みに行かないためです。
+        チャンクサイズはメモリに読み込ませるバイト数です。
+        これは分割されたデータがデコードを行うことができるようなデータサイズである必要はありません。
         """
         if self._content_consumed:
             raise RuntimeError(
@@ -727,9 +751,13 @@ class Response(object):
         return gen
 
     def iter_lines(self, chunk_size=10 * 1024, decode_unicode=None):
-        """Iterates over the response data, one line at a time.  This
-        avoids reading the content at once into memory for large
-        responses.
+        """
+        .. Iterates over the response data, one line at a time.  This
+           avoids reading the content at once into memory for large
+           responses.
+
+        レスポンスデータを一度に一行ずつ反復処理します。
+        これはメモリにある大きなレスポンスの内容を一度に読みに行かないためです。
         """
 
         pending = None

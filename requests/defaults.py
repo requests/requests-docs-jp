@@ -4,21 +4,38 @@
 requests.defaults
 ~~~~~~~~~~~~~~~~~
 
-This module provides the Requests configuration defaults.
+.. This module provides the Requests configuration defaults.
 
-Configurations:
+このモジュールはRequestsのデフォルトの設定を提供します。
 
-:base_headers: Default HTTP headers.
-:verbose: Stream to write request logging to.
-:max_redirects: Maximum number of redirects allowed within a request.s
-:keep_alive: Reuse HTTP Connections?
-:max_retries: The number of times a request should be retried in the event of a connection failure.
-:danger_mode: If true, Requests will raise errors immediately.
-:safe_mode: If true, Requests will catch all errors.
-:strict_mode: If true, Requests will do its best to follow RFCs (e.g. POST redirects).
-:pool_maxsize: The maximium size of an HTTP connection pool.
-:pool_connections: The number of active HTTP connection pools to use.
-:encode_uri: If true, URIs will automatically be percent-encoded.
+.. Configurations:
+
+コンフィグレーション:
+
+.. :base_headers: Default HTTP headers.
+.. :verbose: Stream to write request logging to.
+.. :max_redirects: Maximum number of redirects allowed within a request.s
+.. :keep_alive: Reuse HTTP Connections?
+.. :max_retries: The number of times a request should be retried in the event of a connection failure.
+.. :danger_mode: If true, Requests will raise errors immediately.
+.. :safe_mode: If true, Requests will catch all errors.
+.. :strict_mode: If true, Requests will do its best to follow RFCs (e.g. POST redirects).
+.. :pool_maxsize: The maximium size of an HTTP connection pool.
+.. :pool_connections: The number of active HTTP connection pools to use.
+.. :encode_uri: If true, URIs will automatically be percent-encoded.
+.. :trust_env: If true, the surrouding environment will be trusted (environ, netrc).
+
+:base_headers: デフォルトのHTTPヘッダー
+:verbose: リクエストのログを書き込みます。
+:max_redirects: request.sにおいて、リダイレクトしてもいい回数の最大値
+:keep_alive: HTTP接続の維持
+:max_retries: リクエストがコネクションに失敗した時にリトライする回数の最大値
+:danger_mode: trueにすると、Requestsはすぐにエラーを発生させます。
+:safe_mode: trueにすると、全てのエラーをキャッチします。
+:strict_mode: trueにすると、RequestsはRFCsに準拠します(例えば、POSTのリダイレクト)。
+:pool_maxsize: HTTPコネクションプールのサイズの最大値
+:pool_connections: 使用するアクティブなHTTPコネクションプールの数
+:encode_uri: trueにすると、URIは自動的にパーセントエンコードされます。
 :trust_env: If true, the surrouding environment will be trusted (environ, netrc).
 
 """

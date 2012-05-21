@@ -5,16 +5,25 @@ API
 
 .. module:: requests
 
-This part of the documentation covers all the interfaces of Requests.  For
-parts where Requests depends on external libraries, we document the most
-important right here and provide links to the canonical documentation.
+.. This part of the documentation covers all the interfaces of Requests.  For
+   parts where Requests depends on external libraries, we document the most
+   important right here and provide links to the canonical documentation.
 
+ドキュメントのこの章は、Requestsのインターフェースを全てカバーしています。 
+Requestsが外部ライブラリに依存している部分については、大事な部分だけをここでは取り上げ、
+その他はドキュメントのリンクを載せます。
 
-Main Interface
---------------
+.. Main Interface
+   --------------
 
-All of Request's functionality can be accessed by these 7 methods.
-They all return an instance of the :class:`Response <Response>` object.
+メインのインターフェース
+------------------------------
+
+.. All of Request's functionality can be accessed by these 7 methods.
+   They all return an instance of the :class:`Response <Response>` object.
+
+Requestの機能の全ては、以下の7つのメソッドを使ってアクセスできます。
+これらは全て :class:`Response <Response>` オブジェクトのインスタンスを返します。
 
 .. autofunction:: request
 
@@ -55,8 +64,11 @@ They all return an instance of the :class:`Response <Response>` object.
 
 .. _configurations:
 
-Configurations
---------------
+.. Configurations
+   --------------
+
+コンフィグレーション
+----------------------------
 
 .. automodule:: requests.defaults
 
