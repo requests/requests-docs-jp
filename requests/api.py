@@ -45,10 +45,15 @@ def request(method, url, **kwargs):
 
 
 def get(url, **kwargs):
-    """Sends a GET request. Returns :class:`Response` object.
+    """
+    .. Sends a GET request. Returns :class:`Response` object.
 
-    :param url: URL for the new :class:`Request` object.
-    :param \*\*kwargs: Optional arguments that ``request`` takes.
+    GETリクエストを送信します。 :class:`Response` オブジェクトが返ってきます。
+
+    .. :param url: URL for the new :class:`Request` object.
+    .. :param \*\*kwargs: Optional arguments that ``request`` takes.
+    :param url: 新しい :class:`Request` オブジェクトのURL
+    :param \*\*kwargs: ``request`` が受け取る未定義の引数
     """
 
     kwargs.setdefault('allow_redirects', True)
@@ -67,10 +72,15 @@ def options(url, **kwargs):
 
 
 def head(url, **kwargs):
-    """Sends a HEAD request. Returns :class:`Response` object.
+    """
+    .. Sends a HEAD request. Returns :class:`Response` object.
 
-    :param url: URL for the new :class:`Request` object.
-    :param \*\*kwargs: Optional arguments that ``request`` takes.
+    HEADリクエストを送信します。 :class:`Response` オブジェクトが返ってきます。
+
+    .. :param url: URL for the new :class:`Request` object.
+    .. :param \*\*kwargs: Optional arguments that ``request`` takes.
+    :param url: 新しい :class:`Request` オブジェクトのURL
+    :param \*\*kwargs: ``request`` が受け取る未定義の引数
     """
 
     kwargs.setdefault('allow_redirects', False)
@@ -78,43 +88,66 @@ def head(url, **kwargs):
 
 
 def post(url, data=None, **kwargs):
-    """Sends a POST request. Returns :class:`Response` object.
+    """
+    .. Sends a POST request. Returns :class:`Response` object.
 
-    :param url: URL for the new :class:`Request` object.
-    :param data: (optional) Dictionary or bytes to send in the body of the :class:`Request`.
-    :param \*\*kwargs: Optional arguments that ``request`` takes.
+    POSTリクエストを送信します。 :class:`Response` オブジェクトが返ってきます。
+
+    .. :param url: URL for the new :class:`Request` object.
+    .. :param data: (optional) Dictionary or bytes to send in the body of the :class:`Request`.
+    .. :param \*\*kwargs: Optional arguments that ``request`` takes.
+    :param url: 新しい :class:`Request` オブジェクトのURL
+    :param data: :class:`Request` の本文に送るための(任意の)バイトや辞書
+    :param \*\*kwargs: ``request`` が受け取る未定義の引数
     """
 
     return request('post', url, data=data, **kwargs)
 
 
 def put(url, data=None, **kwargs):
-    """Sends a PUT request. Returns :class:`Response` object.
+    """
+    .. Sends a PUT request. Returns :class:`Response` object.
 
-    :param url: URL for the new :class:`Request` object.
-    :param data: (optional) Dictionary or bytes to send in the body of the :class:`Request`.
-    :param \*\*kwargs: Optional arguments that ``request`` takes.
+    PUTリクエストを送信します。 :class:`Response` オブジェクトが返ってきます。
+
+    .. :param url: URL for the new :class:`Request` object.
+    .. :param data: (optional) Dictionary or bytes to send in the body of the :class:`Request`.
+    .. :param \*\*kwargs: Optional arguments that ``request`` takes.
+    :param url: 新しい :class:`Request` オブジェクトのURL
+    :param data: :class:`Request` の本文に送るための(任意の)バイトや辞書
+    :param \*\*kwargs: ``request`` が受け取る未定義の引数
     """
 
     return request('put', url, data=data, **kwargs)
 
 
 def patch(url, data=None, **kwargs):
-    """Sends a PATCH request. Returns :class:`Response` object.
+    """
+    .. Sends a PATCH request. Returns :class:`Response` object.
 
-    :param url: URL for the new :class:`Request` object.
-    :param data: (optional) Dictionary or bytes to send in the body of the :class:`Request`.
-    :param \*\*kwargs: Optional arguments that ``request`` takes.
+    PATCHリクエストを送信します。 :class:`Response` オブジェクトが返ってきます。
+
+    .. :param url: URL for the new :class:`Request` object.
+    .. :param data: (optional) Dictionary or bytes to send in the body of the :class:`Request`.
+    .. :param \*\*kwargs: Optional arguments that ``request`` takes.
+    :param url: 新しい :class:`Request` オブジェクトのURL
+    :param data: :class:`Request` の本文に送るための(任意の)バイトや辞書
+    :param \*\*kwargs: ``request`` が受け取る未定義の引数
     """
 
     return request('patch', url,  data=data, **kwargs)
 
 
 def delete(url, **kwargs):
-    """Sends a DELETE request. Returns :class:`Response` object.
+    """
+    .. Sends a DELETE request. Returns :class:`Response` object.
 
-    :param url: URL for the new :class:`Request` object.
-    :param \*\*kwargs: Optional arguments that ``request`` takes.
+    DELETEリクエストを送信します。 :class:`Response` オブジェクトが返ってきます。
+
+    .. :param url: URL for the new :class:`Request` object.
+    .. :param \*\*kwargs: Optional arguments that ``request`` takes.
+    :param url: 新しい :class:`Request` オブジェクトのURL
+    :param \*\*kwargs: ``request`` が受け取る未定義の引数
     """
 
     return request('delete', url, **kwargs)

@@ -325,6 +325,10 @@ class Session(object):
 
 
 def session(**kwargs):
-    """Returns a :class:`Session` for context-management."""
+    """
+    .. Returns a :class:`Session` for context-management.
+
+    コンテキストを管理する :class:`Session` を返します。
+    """
 
     return Session(**kwargs)
