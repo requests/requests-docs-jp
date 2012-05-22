@@ -127,11 +127,32 @@ class Session(object):
         verify=None,
         cert=None):
 
-        """Constructs and sends a :class:`Request <Request>`.
-        Returns :class:`Response <Response>` object.
+        """
+        .. Constructs and sends a :class:`Request <Request>`.
+           Returns :class:`Response <Response>` object.
 
-        :param method: method for the new :class:`Request` object.
-        :param url: URL for the new :class:`Request` object.
+        :class:`Request <Request>` 生成して送信します。
+        :class:`Response <Response>` オブジェクトを返します。
+
+        .. :param method: method for the new :class:`Request` object.
+        .. :param url: URL for the new :class:`Request` object.
+        .. :param params: (optional) Dictionary or bytes to be sent in the query string for the :class:`Request`.
+        .. :param data: (optional) Dictionary or bytes to send in the body of the :class:`Request`.
+        .. :param headers: (optional) Dictionary of HTTP Headers to send with the :class:`Request`.
+        .. :param cookies: (optional) Dict or CookieJar object to send with the :class:`Request`.
+        .. :param store_cookies: (optional) if ``False``, the received cookies as part of the HTTP response would be ignored.
+        .. :param files: (optional) Dictionary of 'filename': file-like-objects for multipart encoding upload.
+        .. :param auth: (optional) Auth tuple or callable to enable Basic/Digest/Custom HTTP Auth.
+        .. :param timeout: (optional) Float describing the timeout of the request.
+        .. :param allow_redirects: (optional) Boolean. Set to True by default.
+        .. :param proxies: (optional) Dictionary mapping protocol to the URL of the proxy.
+        .. :param return_response: (optional) If False, an un-sent Request object will returned.
+        .. :param config: (optional) A configuration dictionary.
+        .. :param prefetch: (optional) if ``True``, the response content will be immediately downloaded.
+        .. :param verify: (optional) if ``True``, the SSL cert will be verified. A CA_BUNDLE path can also be provided.
+        .. :param cert: (optional) if String, path to ssl client cert file (.pem). If Tuple, ('cert', 'key') pair.
+        :param method: 新しい :class:`Request` オブジェクトのメソッド
+        :param url: 新しい :class:`Request` オブジェクトのURL
         :param params: (optional) Dictionary or bytes to be sent in the query string for the :class:`Request`.
         :param data: (optional) Dictionary or bytes to send in the body of the :class:`Request`.
         :param headers: (optional) Dictionary of HTTP Headers to send with the :class:`Request`.
@@ -143,7 +164,7 @@ class Session(object):
         :param allow_redirects: (optional) Boolean. Set to True by default.
         :param proxies: (optional) Dictionary mapping protocol to the URL of the proxy.
         :param return_response: (optional) If False, an un-sent Request object will returned.
-        :param config: (optional) A configuration dictionary.
+        :param config: コンフィグレーションの辞書(任意)
         :param prefetch: (optional) if ``True``, the response content will be immediately downloaded.
         :param verify: (optional) if ``True``, the SSL cert will be verified. A CA_BUNDLE path can also be provided.
         :param cert: (optional) if String, path to ssl client cert file (.pem). If Tuple, ('cert', 'key') pair.
@@ -240,10 +261,15 @@ class Session(object):
 
 
     def get(self, url, **kwargs):
-        """Sends a GET request. Returns :class:`Response` object.
+        """
+        .. Sends a GET request. Returns :class:`Response` object.
 
-        :param url: URL for the new :class:`Request` object.
-        :param \*\*kwargs: Optional arguments that ``request`` takes.
+        GETリクエストを送信します。 :class:`Response` オブジェクトが返ってきます。
+
+        .. :param url: URL for the new :class:`Request` object.
+        .. :param \*\*kwargs: Optional arguments that ``request`` takes.
+        :param url: 新しい :class:`Request` オブジェクトのURL
+        :param \*\*kwargs: ``request`` が受け取る未定義の引数
         """
 
         kwargs.setdefault('allow_redirects', True)
@@ -251,10 +277,15 @@ class Session(object):
 
 
     def options(self, url, **kwargs):
-        """Sends a OPTIONS request. Returns :class:`Response` object.
+        """
+        .. Sends a OPTIONS request. Returns :class:`Response` object.
 
-        :param url: URL for the new :class:`Request` object.
-        :param \*\*kwargs: Optional arguments that ``request`` takes.
+        OPTIONSリクエストを送信します。 :class:`Response` オブジェクトが返ってきます。
+
+        .. :param url: URL for the new :class:`Request` object.
+        .. :param \*\*kwargs: Optional arguments that ``request`` takes.
+        :param url: 新しい :class:`Request` オブジェクトのURL
+        :param \*\*kwargs: ``request`` が受け取る未定義の引数
         """
 
         kwargs.setdefault('allow_redirects', True)
@@ -262,10 +293,15 @@ class Session(object):
 
 
     def head(self, url, **kwargs):
-        """Sends a HEAD request. Returns :class:`Response` object.
+        """
+        .. Sends a HEAD request. Returns :class:`Response` object.
 
-        :param url: URL for the new :class:`Request` object.
-        :param \*\*kwargs: Optional arguments that ``request`` takes.
+        HEADリクエストを送信します。 :class:`Response` オブジェクトが返ってきます。
+
+        .. :param url: URL for the new :class:`Request` object.
+        .. :param \*\*kwargs: Optional arguments that ``request`` takes.
+        :param url: 新しい :class:`Request` オブジェクトのURL
+        :param \*\*kwargs: ``request`` が受け取る未定義の引数
         """
 
         kwargs.setdefault('allow_redirects', False)
@@ -273,43 +309,66 @@ class Session(object):
 
 
     def post(self, url, data=None, **kwargs):
-        """Sends a POST request. Returns :class:`Response` object.
+        """
+        .. Sends a POST request. Returns :class:`Response` object.
 
-        :param url: URL for the new :class:`Request` object.
-        :param data: (optional) Dictionary or bytes to send in the body of the :class:`Request`.
-        :param \*\*kwargs: Optional arguments that ``request`` takes.
+        POSTリクエストを送信します。 :class:`Response` オブジェクトが返ってきます。
+
+        .. :param url: URL for the new :class:`Request` object.
+        .. :param data: (optional) Dictionary or bytes to send in the body of the :class:`Request`.
+        .. :param \*\*kwargs: Optional arguments that ``request`` takes.
+        :param url: 新しい :class:`Request` オブジェクトのURL
+        :param data: :class:`Request` の本文に送るための(任意の)バイトや辞書
+        :param \*\*kwargs: ``request`` が受け取る未定義の引数
         """
 
         return self.request('post', url, data=data, **kwargs)
 
 
     def put(self, url, data=None, **kwargs):
-        """Sends a PUT request. Returns :class:`Response` object.
+        """
+        .. Sends a PUT request. Returns :class:`Response` object.
 
-        :param url: URL for the new :class:`Request` object.
-        :param data: (optional) Dictionary or bytes to send in the body of the :class:`Request`.
-        :param \*\*kwargs: Optional arguments that ``request`` takes.
+        PUTリクエストを送信します。 :class:`Response` オブジェクトが返ってきます。
+
+        .. :param url: URL for the new :class:`Request` object.
+        .. :param data: (optional) Dictionary or bytes to send in the body of the :class:`Request`.
+        .. :param \*\*kwargs: Optional arguments that ``request`` takes.
+        :param url: 新しい :class:`Request` オブジェクトのURL
+        :param data: :class:`Request` の本文に送るための(任意の)バイトや辞書
+        :param \*\*kwargs: ``request`` が受け取る未定義の引数
         """
 
         return self.request('put', url, data=data, **kwargs)
 
 
     def patch(self, url, data=None, **kwargs):
-        """Sends a PATCH request. Returns :class:`Response` object.
+        """
+        .. Sends a PATCH request. Returns :class:`Response` object.
 
-        :param url: URL for the new :class:`Request` object.
-        :param data: (optional) Dictionary or bytes to send in the body of the :class:`Request`.
-        :param \*\*kwargs: Optional arguments that ``request`` takes.
+        PATCHリクエストを送信します。 :class:`Response` オブジェクトが返ってきます。
+
+        .. :param url: URL for the new :class:`Request` object.
+        .. :param data: (optional) Dictionary or bytes to send in the body of the :class:`Request`.
+        .. :param \*\*kwargs: Optional arguments that ``request`` takes.
+        :param url: 新しい :class:`Request` オブジェクトのURL
+        :param data: :class:`Request` の本文に送るための(任意の)バイトや辞書
+        :param \*\*kwargs: ``request`` が受け取る未定義の引数
         """
 
         return self.request('patch', url,  data=data, **kwargs)
 
 
     def delete(self, url, **kwargs):
-        """Sends a DELETE request. Returns :class:`Response` object.
+        """
+        .. Sends a DELETE request. Returns :class:`Response` object.
 
-        :param url: URL for the new :class:`Request` object.
-        :param \*\*kwargs: Optional arguments that ``request`` takes.
+        DELETEリクエストを送信します。 :class:`Response` オブジェクトが返ってきます。
+
+        .. :param url: URL for the new :class:`Request` object.
+        .. :param \*\*kwargs: Optional arguments that ``request`` takes.
+        :param url: 新しい :class:`Request` オブジェクトのURL
+        :param \*\*kwargs: ``request`` が受け取る未定義の引数
         """
 
         return self.request('delete', url, **kwargs)
