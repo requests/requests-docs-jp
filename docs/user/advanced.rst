@@ -16,15 +16,20 @@
 セッションオブジェクト
 -----------------------------
 
-The Session object allows you to persist certain parameters across
-requests. It also persists cookies across all requests made from the
-Session instance.
+.. The Session object allows you to persist certain parameters across
+   requests. It also persists cookies across all requests made from the
+   Session instance.
 
-セッションオブジェクトは
+セッションオブジェクトは、リクエスト間で特定のパラメータを保持することができます。
+セッションインターフェースから作られた全てのリクエストにわたってクッキーを保持します。
 
-A session object has all the methods of the main Requests API.
+.. A session object has all the methods of the main Requests API.
 
-Let's persist some cookies across requests::
+セッションオブジェクトは、主要なRequestsのAPIのメソッドを全て持っています。
+
+.. Let's persist some cookies across requests::
+
+リクエスト間でいくつかのクッキーを保持してみましょう ::
 
     s = requests.session()
 
@@ -35,7 +40,9 @@ Let's persist some cookies across requests::
     # '{"cookies": {"sessioncookie": "123456789"}}'
 
 
-Sessions can also be used to provide default data to the request methods::
+.. Sessions can also be used to provide default data to the request methods::
+
+セッションは、リクエストのメソッドにデフォルトのデータを提供するために使用することができます ::
 
     headers = {'x-test': 'true'}
     auth = ('user', 'pass')
@@ -46,61 +53,107 @@ Sessions can also be used to provide default data to the request methods::
         c.get('http://httpbin.org/headers', headers={'x-test2': 'true'})
 
 
-Any dictionaries that you pass to a request method will be merged with the session-level values that are set. The method-level parameters override session parameters.
+.. Any dictionaries that you pass to a request method will be merged with the session-level values that are set. The method-level parameters override session parameters.
 
-.. admonition:: Remove a Value From a Dict Parameter
+リクエストメソッドに渡す任意の辞書が設定されているセッションレベルの値とマージされます。
+メソッドレベルのパラメータは、セッションパラメータを上書きします。
 
-    Sometimes you'll want to omit session-level keys from a dict parameter. To do this, you simply set that key's value to ``None`` in the method-level parameter. It will automatically be omitted.
+.. Remove a Value From a Dict Parameter
 
-All values that are contained within a session are directly available to you. See the :ref:`Session API Docs <sessionapi>` to learn more.
+   Sometimes you'll want to omit session-level keys from a dict parameter. To do this, you simply set that key's value to ``None`` in the method-level parameter. It will automatically be omitted.
 
-SSL Cert Verification
+.. admonition:: 辞書パラメーターから値を削除する
+
+    時々、辞書パラメーターからセッションレベルのキーを省略したい場合もあるかもしれません。
+    それをするには、キーの値を ``None`` 
+    それは自動的に省略されます。
+    Sometimes you'll want to omit session-level keys from a dict parameter.
+    To do this, you simply set that key's value to ``None`` in the method-level parameter. It will automatically be omitted.
+
+.. All values that are contained within a session are directly available to you. See the :ref:`Session API Docs <sessionapi>` to learn more.
+
+全ての値
+
+.. SSL Cert Verification
+   ---------------------
+
+SSL証明書の検証
 ---------------------
 
-Requests can verify SSL certificates for HTTPS requests, just like a web browser. To check a host's SSL certificate, you can use the ``verify`` argument::
+.. Requests can verify SSL certificates for HTTPS requests, just like a web browser. To check a host's SSL certificate, you can use the ``verify`` argument::
+
+RequestsはウェブブラウザのようにHTTPSリクエストのSSL証明書を検証可能です。
+ホストのSSL証明書をチェックするために、 ``verify`` 引数を使うことができます。
 
     >>> requests.get('https://kennethreitz.com', verify=True)
     requests.exceptions.SSLError: hostname 'kennethreitz.com' doesn't match either of '*.herokuapp.com', 'herokuapp.com'
 
-I don't have SSL setup on this domain, so it fails. Excellent. Github does though::
+.. I don't have SSL setup on this domain, so it fails. Excellent. Github does though::
+
+このドメインに設定するSSLを持っていないので失敗します。
+しかし、素晴らしい。Githubでは可能です。 ::
 
     >>> requests.get('https://github.com', verify=True)
     <Response [200]>
 
-You can also pass ``verify`` the path to a CA_BUNDLE file for private certs. You can also set the ``REQUESTS_CA_BUNDLE`` environment variable.
+.. You can also pass ``verify`` the path to a CA_BUNDLE file for private certs. You can also set the ``REQUESTS_CA_BUNDLE`` environment variable.
 
+プライベート証明書用のCA_BUNDLEファイルのパスを ``verify`` に渡すこともできます。
+``REQUESTS_CA_BUNDLE`` 環境変数を設定することもできます。
 
 Body Content Workflow
 ---------------------
 
-By default, when you make a request, the body of the response isn't downloaded immediately. The response headers are downloaded when you make a request, but the content isn't downloaded until you access the :class:`Response.content` attribute.
+.. By default, when you make a request, the body of the response isn't downloaded immediately. The response headers are downloaded when you make a request, but the content isn't downloaded until you access the :class:`Response.content` attribute.
 
-Let's walk through it::
+リクエストを作成する時にデフォルトで、レスポンスボディをすぐにダウンロードしません。
+リクエストを作成する時にレスポンスヘッダーがダウンロードされますが、本文は :class:`Response.content`
+アトリビュートにアクセスするまでダウンロードされません。
+
+.. Let's walk through it::
+
+ではやってみましょう ::
 
     tarball_url = 'https://github.com/kennethreitz/requests/tarball/master'
     r = requests.get(tarball_url)
 
-The request has been made, but the connection is still open. The response body has not been downloaded yet. ::
+.. The request has been made, but the connection is still open. The response body has not been downloaded yet. ::
+
+リクエストが作成されましたがまだ接続されたままです。
+レスポンスボディはまだダウンロードされていません。 ::
 
     r.content
 
-The content has been downloaded and cached.
+.. The content has been downloaded and cached.
 
-You can override this default behavior with the ``prefetch`` parameter::
+コンテンツがダウンロードされ、キャッシュされました。
+
+.. You can override this default behavior with the ``prefetch`` parameter::
+
+``prefetch`` パラメーターでデフォルトのこの振る舞いを上書きすることができます。 ::
 
     r = requests.get(tarball_url, prefetch=True)
     # Blocks until all of request body has been downloaded.
 
 
-Configuring Requests
+.. Configuring Requests
+   --------------------
+
+Requestsの設定
 --------------------
 
-Sometimes you may want to configure a request to customize its behavior. To do
-this, you can pass in a ``config`` dictionary to a request or session. See the :ref:`Configuration API Docs <configurations>` to learn more.
+.. Sometimes you may want to configure a request to customize its behavior. To do
+   this, you can pass in a ``config`` dictionary to a request or session. See the :ref:`Configuration API Docs <configurations>` to learn more.
 
+時々、振る舞いをカスタマイズするためにリクエストの設定をしたいかもしれません。
+これをするには、リクエストかセッションに ``config`` 辞書を渡すことができます。
+さらに知りたい場合は、 :ref:`Configuration API Docs <configurations>` を見て下さい。
 
-Keep-Alive
-----------
+.. Keep-Alive
+   ----------
+
+キープアライブ
+--------------------
 
 Excellent news — thanks to urllib3, keep-alive is 100% automatic within a session! Any requests that you make within a session will automatically reuse the appropriate connection!
 
@@ -152,9 +205,7 @@ will also guarantee execution of the ``response`` hook, described below. ::
 
 .. admonition:: Throttling
 
-    The ``map`` function also takes a ``size`` parameter, that specifies the number of connections to make at a time::
-
-        async.map(rs, size=5)
+   The ``map`` function also takes a ``size`` parameter, that specifies the number of connections to make at a time::
 
 
 .. Event Hooks
@@ -163,45 +214,68 @@ will also guarantee execution of the ``response`` hook, described below. ::
 イベントフック
 ------------------
 
-Requests has a hook system that you can use to manipulate portions of
-the request process, or signal event handling.
+.. Requests has a hook system that you can use to manipulate portions of
+   the request process, or signal event handling.
 
-Available hooks:
+Requestsにはリクエストの処理やシグナルイベントの処理の一部を操作することができるフックシステムがあります。
+
+.. Available hooks:
+
+フックを有効にするには :
 
 ``args``:
-    A dictionary of the arguments being sent to Request().
+    .. A dictionary of the arguments being sent to Request().
+
+    Request()に送られる引数の辞書
 
 ``pre_request``:
-    The Request object, directly before being sent.
+    .. The Request object, directly before being sent.
+
+    リクエストオブジェクト、
 
 ``post_request``:
-    The Request object, directly after being sent.
+    .. The Request object, directly after being sent.
+
+    リクエストオブジェクト、
 
 ``response``:
-    The response generated from a Request.
+    .. The response generated from a Request.
 
+    リクエストから生成されたレスポンス
 
-You can assign a hook function on a per-request basis by passing a
-``{hook_name: callback_function}`` dictionary to the ``hooks`` request
-parameter::
+.. You can assign a hook function on a per-request basis by passing a
+   ``{hook_name: callback_function}`` dictionary to the ``hooks`` request
+   parameter::
+
+``hooks`` リクエストのパラメーターに ``{hook_name: callback_function}``
+の辞書を渡すことで、リクエスト毎にフック関数を割り当てることができます。
 
     hooks=dict(args=print_url)
 
-That ``callback_function`` will receive a chunk of data as its first
-argument.
+.. That ``callback_function`` will receive a chunk of data as its first
+   argument.
+
+その ``callback_function`` は最初の引数としてデータのチャンクを受け取ります。
 
 ::
 
     def print_url(args):
         print args['url']
 
-If an error occurs while executing your callback, a warning is given.
+.. If an error occurs while executing your callback, a warning is given.
 
-If the callback function returns a value, it is assumed that it is to
-replace the data that was passed in. If the function doesn't return
-anything, nothing else is effected.
+コールバックの最中にエラーが発生したら、警告を発します。
 
-Let's print some request method arguments at runtime::
+.. If the callback function returns a value, it is assumed that it is to
+   replace the data that was passed in. If the function doesn't return
+   anything, nothing else is effected.
+
+コールバック関数が値を返す場合、コールバック関数は渡されたデータを置き換えることが想定されます。
+関数が何も返さなかった場合、他のものに影響を与えません。
+
+.. Let's print some request method arguments at runtime::
+
+ランタイムにリクエストメソッドの引数を表示させてみましょう ::
 
     >>> requests.get('http://httpbin.org', hooks=dict(args=print_url))
     http://httpbin.org
@@ -220,7 +294,9 @@ Let's hijack some arguments this time with a new callback::
     hooks = dict(args=hack_headers)
     headers = dict(yo=dawg)
 
-And give it a try::
+.. And give it a try::
+
+試してみて下さい ::
 
     >>> requests.get('http://httpbin.org/headers', hooks=hooks, headers=headers)
     {
