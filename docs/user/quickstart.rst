@@ -589,22 +589,36 @@ POST、PUT、PATCHを使う場合、明示的にリダイレクトを有効に�
 エラーと例外
 -------------------
 
-In the event of a network problem (e.g. DNS failure, refused connection, etc),
-Requests will raise a :class:`ConnectionError` exception.
+.. In the event of a network problem (e.g. DNS failure, refused connection, etc),
+   Requests will raise a :class:`ConnectionError` exception.
 
-In the event of the rare invalid HTTP response, Requests will raise
-an  :class:`HTTPError` exception.
+ネットワークの問題が起こった時(例えば、DNSのエラーやコネクションの切断等)に、Requestsは :class:`ConnectionError` の例外を発生します。
 
-If a request times out, a :class:`Timeout` exception is raised.
+.. In the event of the rare invalid HTTP response, Requests will raise
+   an  :class:`HTTPError` exception.
 
-If a request exceeds the configured number of maximum redirections, a :class:`TooManyRedirects` exception is raised.
+稀に不正なHTTPレスポンスがあった時に、Requestsは :class:`HTTPError` の例外を発生します。
 
-All exceptions that Requests explicitly raises inherit from
-:class:`requests.exceptions.RequestException`.
+.. If a request times out, a :class:`Timeout` exception is raised.
 
-You can refer to :ref:`Configuration API Docs <configurations>` for immediate raising of :class:`HTTPError` exceptions
-via the ``danger_mode`` option or have Requests catch the majority of :class:`requests.exceptions.RequestException` exceptions
-with the ``safe_mode`` option.
+リクエストがタイムアウトした場合、 :class:`Timeout` の例外を発生します。
+
+.. If a request exceeds the configured number of maximum redirections, a :class:`TooManyRedirects` exception is raised.
+
+リクエストが設定されたリダイレクトの最大数超えた場合、 :class:`TooManyRedirects` の例外を発生します。
+
+.. All exceptions that Requests explicitly raises inherit from
+   :class:`requests.exceptions.RequestException`.
+
+全ての例外は、 :class:`requests.exceptions.RequestException` を継承して明示的に発生させます。
+
+.. You can refer to :ref:`Configuration API Docs <configurations>` for immediate raising of :class:`HTTPError` exceptions
+   via the ``danger_mode`` option or have Requests catch the majority of :class:`requests.exceptions.RequestException` exceptions
+   with the ``safe_mode`` option.
+
+``danger_mode`` オプションにして :class:`HTTPError` の例外をすぐに発生させることや 、
+``safe_mode`` オプションで :class:`requests.exceptions.RequestException` でRequestsが捕まえる代表的な例外を取得するためには、
+:ref:`Configuration API Docs <configurations>` を見てください。
 
 -----------------------
 
