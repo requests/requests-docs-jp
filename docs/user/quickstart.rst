@@ -102,16 +102,16 @@ GitHubのパブリックなタイムラインを取得してみましょう。 :
 Requestsはサーバーからの内容を自動的にデコードします。
 ほとんどのユニコード文字はシームレスにデコードされます。
 
-When you make a request, ``r.encoding`` is set, based on the HTTP headers.
-Requests will use that encoding when you access ``r.text``.  If ``r.encoding``
-is ``None``, Requests will make an extremely educated guess of the encoding
-of the response body. You can manually set ``r.encoding`` to any encoding
-you'd like, and that charset will be used.
+.. When you make a request, ``r.encoding`` is set, based on the HTTP headers.
+   Requests will use that encoding when you access ``r.text``.  If ``r.encoding``
+   is ``None``, Requests will make an extremely educated guess of the encoding
+   of the response body. You can manually set ``r.encoding`` to any encoding
+   you'd like, and that charset will be used.
 
-リクエストを生成する時に、 ``r.encoding`` 
-Requestsは、 ``r.text`` にアクセスした時に
-
-
+リクエストを行う時に、HTTPヘッダーに基づいて、 ``r.encoding`` はセットされます。
+Requestsは、 ``r.text`` にアクセスした時にエンコーディングを使います。
+もし ``r.encoding`` が ``None`` の場合、Requestsはレスポンスボディーのエンコードから推測します。
+``r.encoding`` を好きなエンコードに手動で設定することができ、そのエンコードの文字列が使われます。
 
 .. Binary Response Content
    -----------------------
@@ -119,17 +119,21 @@ Requestsは、 ``r.text`` にアクセスした時に
 バイナリのレスポンスの本文
 ---------------------------------
 
-You can also access the response body as bytes, for non-text requests::
+.. You can also access the response body as bytes, for non-text requests::
 
-
+テキスト以外のリクエストに、バイトとしてレスポンスボディにアクセスできます。 ::
 
     >>> r.content
     b'[{"repository":{"open_issues":0,"url":"https://github.com/...
 
-The ``gzip`` and ``deflate`` transfer-encodings are automatically decoded for you.
+.. The ``gzip`` and ``deflate`` transfer-encodings are automatically decoded for you.
 
-For example to create an image from binary data returned by a request, you can
-use the following code:
+``gzip`` や ``deflate`` のようなTransfer-Encodingは自動的にデコードされます。
+
+.. For example to create an image from binary data returned by a request, you can
+   use the following code:
+
+リクエストによって返されたバイナリデータから画像を作成する例として、以下のようなコードになります。 :
 
     >>> from PIL import Image
     >>> from StringIO import StringIO
@@ -220,10 +224,14 @@ POSTリクエストは、同じくらい簡単です。 ::
 カスタムヘッダー
 ---------------------
 
-If you'd like to add HTTP headers to a request, simply pass in a ``dict`` to the
-``headers`` parameter.
+.. If you'd like to add HTTP headers to a request, simply pass in a ``dict`` to the
+   ``headers`` parameter.
 
-For example, we didn't specify our content-type in the previous example::
+リクエストにHTTPヘッダーを追加したい場合、 ``headers`` パラメーターに  ``dict`` を渡すだけです。
+
+.. For example, we didn't specify our content-type in the previous example::
+
+例えば、前の例のようにコンテントタイプを指定する必要はありません。 ::
 
     url = 'https://api.github.com/some/endpoint'
     payload = {'some': 'data'}
@@ -232,12 +240,15 @@ For example, we didn't specify our content-type in the previous example::
     r = requests.post(url, data=json.dumps(payload), headers=headers)
 
 
-POST a Multipart-Encoded File
------------------------------
+.. POST a Multipart-Encoded File
+   -----------------------------
 
+マルチパートでエンコードされたファイルのPOST
+---------------------------------------------------
 
+.. Requests makes it simple to upload Multipart-encoded files::
 
-Requests makes it simple to upload Multipart-encoded files::
+Requestsはマルチパートでエンコードされたファイルのアップロードが簡単にできます。 ::
 
     >>> url = 'http://httpbin.org/post'
     >>> files = {'report.xls': open('report.xls', 'rb')}
@@ -263,7 +274,9 @@ Requests makes it simple to upload Multipart-encoded files::
       "data": ""
     }
 
-Setting filename explicitly::
+.. Setting filename explicitly::
+
+ファイル名を明示的に設定して下さい。 ::
 
     >>> url = 'http://httpbin.org/post'
     >>> files = {'file': ('report.xls', open('report.xls', 'rb'))}
@@ -289,7 +302,9 @@ Setting filename explicitly::
       "data": ""
     }
 
-Sending strings to be received as files::
+.. Sending strings to be received as files::
+
+ファイルとして受け取る文字列の送信 ::
 
     >>> url = 'http://httpbin.org/post'
     >>> files = {'file': ('report.csv', 'some,data,to,send\nanother,row,to,send\n')}
@@ -622,4 +637,7 @@ POST、PUT、PATCHを使う場合、明示的にリダイレクトを有効に�
 
 -----------------------
 
-Ready for more? Check out the :ref:`advanced <advanced>` section.
+.. Ready for more? Check out the :ref:`advanced <advanced>` section.
+
+さらなる準備はできましたか?
+:ref:`advanced <advanced>` の章をチェックして下さい。
