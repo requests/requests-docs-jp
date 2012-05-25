@@ -72,7 +72,8 @@
 
 .. All values that are contained within a session are directly available to you. See the :ref:`Session API Docs <sessionapi>` to learn more.
 
-全ての値
+セッション内に含まれている全ての値が直接使用可能です。
+詳しくは :ref:`Session API Docs <sessionapi>` を見て下さい。
 
 .. SSL Cert Verification
    ---------------------
@@ -82,7 +83,7 @@ SSL証明書の検証
 
 .. Requests can verify SSL certificates for HTTPS requests, just like a web browser. To check a host's SSL certificate, you can use the ``verify`` argument::
 
-RequestsはウェブブラウザのようにHTTPSリクエストのSSL証明書を検証可能です。
+RequestsはウェブブラウザのようにHTTPSリクエストのSSL証明書を検証することができます。
 ホストのSSL証明書をチェックするために、 ``verify`` 引数を使うことができます。
 
     >>> requests.get('https://kennethreitz.com', verify=True)
@@ -91,7 +92,7 @@ RequestsはウェブブラウザのようにHTTPSリクエストのSSL証明書�
 .. I don't have SSL setup on this domain, so it fails. Excellent. Github does though::
 
 このドメインに設定するSSLを持っていないので失敗します。
-しかし、素晴らしい。Githubでは可能です。 ::
+けっこう。Githubでは可能です。 ::
 
     >>> requests.get('https://github.com', verify=True)
     <Response [200]>
@@ -101,7 +102,10 @@ RequestsはウェブブラウザのようにHTTPSリクエストのSSL証明書�
 プライベート証明書用のCA_BUNDLEファイルのパスを ``verify`` に渡すこともできます。
 ``REQUESTS_CA_BUNDLE`` 環境変数を設定することもできます。
 
-Body Content Workflow
+.. Body Content Workflow
+   ---------------------
+
+本文のワークフロー
 ---------------------
 
 .. By default, when you make a request, the body of the response isn't downloaded immediately. The response headers are downloaded when you make a request, but the content isn't downloaded until you access the :class:`Response.content` attribute.
@@ -155,9 +159,16 @@ Requestsの設定
 キープアライブ
 --------------------
 
-Excellent news — thanks to urllib3, keep-alive is 100% automatic within a session! Any requests that you make within a session will automatically reuse the appropriate connection!
+.. Excellent news — thanks to urllib3, keep-alive is 100% automatic within a session! Any requests that you make within a session will automatically reuse the appropriate connection!
 
-Note that connections are only released back to the pool for reuse once all body data has been read; be sure to either set ``prefetch`` to ``True`` or read the ``content`` property of the ``Response`` object.
+素晴らしいお知らせです。
+キープアライブはセッション内で100%自動的に行われるので、urllib3に感謝しています。
+セッション内で生成した任意のリクエストは自動的に接続が継続します。
+
+.. Note that connections are only released back to the pool for reuse once all body data has been read; be sure to either set ``prefetch`` to ``True`` にするかして下さい。or read the ``content`` property of the ``Response`` object.
+
+すべての本文のデータが読み込まれた後に接続が一度再利用のためにプールに戻されることに注意してください。
+``Response`` オブジェクトの ``content`` プロパティを見るか ``prefetch`` を ``True`` にするかして下さい。
 
 If you'd like to disable keep-alive, you can simply set the ``keep_alive`` configuration to ``False``::
 
@@ -321,7 +332,9 @@ Let's hijack some arguments this time with a new callback::
 カスタム認証
 -----------------
 
-Requests allows you to use specify your own authentication mechanism.
+.. Requests allows you to use specify your own authentication mechanism.
+
+Requestsは認証システムを好きなものを使うことができます。
 
 Any callable which is passed as the ``auth`` argument to a request method will
 have the opportunity to modify the request before it is dispatched.
@@ -347,7 +360,9 @@ Let's pretend that we have a web service that will only respond if the
             r.headers['X-Pizza'] = self.username
             return r
 
-Then, we can make a request using our Pizza Auth::
+.. Then, we can make a request using our Pizza Auth::
+
+それから、Pizza Authを使って、リクエストを生成することができます。 ::
 
     >>> requests.get('http://pizzabin.org/admin', auth=PizzaAuth('kenneth'))
     <Response [200]>
