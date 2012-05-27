@@ -15,7 +15,7 @@ Requests: 人間のためのHTTP
 
 .. Requests is an :ref:`ISC Licensed <isc>` HTTP library, written in Python, for human beings.
 
-Requestsは、人が使いやすいように作られていて、Pythonで書かれた :ref:`ISC Licensed <isc>` ベースのHTTPライブラリです。
+Requestsは、人が使いやすいように作られているPythonで書かれた :ref:`ISC Licensed <isc>` ベースのHTTPライブラリです。
 
 .. Python's standard **urllib2** module provides most of
    the HTTP capabilities you need, but the API is thoroughly **broken**.
@@ -50,7 +50,7 @@ Pythonの標準の **urllib2** モジュールは、必要とされるほとん�
 
 Requestsは、ウェブサーバーとシームレスに統合されたPythonのHTTP/1.1の処理の全てを受け持ちます。
 URLに手動でクエリを入力したり、POSTデータをエンコードしたりする必要はありません。
-Keep-aliveやHTTP接続は `urllib3 <https://github.com/shazow/urllib3>`_ によって100%自動で、Requestsに組み込まれています。
+Keep-aliveやHTTP接続は、Requestsに `urllib3 <https://github.com/shazow/urllib3>`_ が組み込まれているので、100%自動で行われます。
 
 .. Testimonials
    ------------
@@ -93,14 +93,14 @@ PyPIから100,000回以上インストールされています。
     .. Nuked a 1200 LOC spaghetti code library with 10 lines of code thanks to
        @kennethreitz's request library. Today has been AWESOME.
 
-    @kennethreitzのリクエストライブラリに感謝して
+    1200行のスパゲッティーコードのライブラリを10行くらいのコードにしてくれた@kennethreitzのリクエストライブラリに感謝しています。
     今日ではすばらしくなりました。
 
 **Kenny Meyers**
     .. Python HTTP: When in doubt, or when not in doubt, use Requests. Beautiful,
        simple, Pythonic.
 
-    PythonのHTTPにおいて、疑わしいときも、疑わしくない時も、Requestsを使います。美しくて、シンプルで、Pythonicだ。
+    PythonのHTTPにおいて、迷ったときも、そうでない時も、Requestsを使います。美しくて、シンプルで、Pythonicだ。
 
 .. Feature Support
    ---------------
