@@ -61,10 +61,15 @@ def get(url, **kwargs):
 
 
 def options(url, **kwargs):
-    """Sends a OPTIONS request. Returns :class:`Response` object.
+    """
+    .. Sends a OPTIONS request. Returns :class:`Response` object.
 
-    :param url: URL for the new :class:`Request` object.
-    :param \*\*kwargs: Optional arguments that ``request`` takes.
+    OPTIONSリクエストを送信します。 :class:`Response` オブジェクトが返ってきます。  
+
+    .. :param url: URL for the new :class:`Request` object.
+    .. :param \*\*kwargs: Optional arguments that ``request`` takes.
+    :param url: 新しい :class:`Request` オブジェクトのURL
+    :param \*\*kwargs: ``request`` が受け取る未定義の引数
     """
 
     kwargs.setdefault('allow_redirects', True)
