@@ -149,10 +149,12 @@ class Request(object):
         else:
             self.cookies = cookiejar_from_dict(cookies)
 
-        #: True if Request has been sent.
+        # True if Request has been sent.
+        #: リクエストが送信されたらTrueになります。
         self.sent = False
 
-        #: Event-handling hooks.
+        # Event-handling hooks.
+        #: フックのイベント処理
         self.hooks = {}
 
         for event in HOOKS:
@@ -175,7 +177,8 @@ class Request(object):
         #: SSL証明書
         self.cert = cert
 
-        #: Prefetch response content
+        # Prefetch response content
+        #: レスポンス本文のプリフェッチ
         self.prefetch = prefetch
 
         if headers:
@@ -388,7 +391,11 @@ class Request(object):
 
     @property
     def full_url(self):
-        """Build the actual URL to use."""
+        """
+        .. Build the actual URL to use.
+
+        使用する実際のURLを生成します。
+        """
 
         if not self.url:
             raise URLRequired()
@@ -439,7 +446,11 @@ class Request(object):
 
     @property
     def path_url(self):
-        """Build the path URL to use."""
+        """
+        .. Build the path URL to use.
+
+        使用するURLのパスを生成します。
+        """
 
         url = []
 
@@ -463,7 +474,11 @@ class Request(object):
         return ''.join(url)
 
     def register_hook(self, event, hook):
-        """Properly register a hook."""
+        """
+        .. Properly register a hook.
+
+        フックを登録します。
+        """
 
         self.hooks[event].append(hook)
 
