@@ -50,7 +50,11 @@ def merge_kwargs(local_kwarg, default_kwarg):
 
 
 class Session(object):
-    """A Requests session."""
+    """
+    .. A Requests session.
+
+    Requestsのセッション。
+    """
 
     __attrs__ = [
         'headers', 'cookies', 'auth', 'timeout', 'proxies', 'hooks',
@@ -153,21 +157,21 @@ class Session(object):
         .. :param cert: (optional) if String, path to ssl client cert file (.pem). If Tuple, ('cert', 'key') pair.
         :param method: 新しい :class:`Request` オブジェクトのメソッド
         :param url: 新しい :class:`Request` オブジェクトのURL
-        :param params: (optional) Dictionary or bytes to be sent in the query string for the :class:`Request`.
-        :param data: (optional) Dictionary or bytes to send in the body of the :class:`Request`.
-        :param headers: (optional) Dictionary of HTTP Headers to send with the :class:`Request`.
-        :param cookies: (optional) Dict or CookieJar object to send with the :class:`Request`.
-        :param store_cookies: (optional) if ``False``, the received cookies as part of the HTTP response would be ignored.
-        :param files: (optional) Dictionary of 'filename': file-like-objects for multipart encoding upload.
-        :param auth: (optional) Auth tuple or callable to enable Basic/Digest/Custom HTTP Auth.
-        :param timeout: (optional) Float describing the timeout of the request.
-        :param allow_redirects: (optional) Boolean. Set to True by default.
-        :param proxies: (optional) Dictionary mapping protocol to the URL of the proxy.
-        :param return_response: (optional) If False, an un-sent Request object will returned.
+        :param params: :class:`Request` クエリ文字列に送られる辞書かバイト。(任意)
+        :param data: :class:`Request` の本文(任意)
+        :param headers: :class:`Request` と一緒に送信するHTTPヘッダーの辞書(任意)
+        :param cookies: :class:`Request` と一緒に送信される辞書かCookieJarオブジェクト(任意)
+        :param store_cookies: ``False`` にすると、HTTPレスポンスの一部として受け取ったクッキーが除外されます。(任意)
+        :param files: 'ファイル名' の辞書。マルチパートエンコーディング(任意)
+        :param auth: ベーシック/ダイジェスト/カスタムのHTTP認証を有効にするために呼び出されるもの、もしくはタプル(任意)
+        :param timeout: リクエストのタイムアウトのフロート(任意)
+        :param allow_redirects: ブーリアン。デフォルトでTrueにセットされています。(任意)
+        :param proxies: プロキシのURLにプロトコルをマッピングする辞書(任意)
+        :param return_response: Falseにすると、送信されていないリクエストオブジェクトが返ってきます。(任意)
         :param config: コンフィグレーションの辞書(任意)
-        :param prefetch: (optional) if ``True``, the response content will be immediately downloaded.
-        :param verify: (optional) if ``True``, the SSL cert will be verified. A CA_BUNDLE path can also be provided.
-        :param cert: (optional) if String, path to ssl client cert file (.pem). If Tuple, ('cert', 'key') pair.
+        :param prefetch: ``True`` にすると、レスポンスの本文はすぐにダウンロードされます。(任意)
+        :param verify: ``True`` にすると、SSL証明書が検証されます。CA_BUNDLEへのパスもあります。(任意)
+        :param cert: 文字列の場合、SSLクライアントの証明書ファイル(.pem)へのパス。タプルの場合、('cert', 'key')のペア。(任意)
         """
 
         method = str(method).upper()
