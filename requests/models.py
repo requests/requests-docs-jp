@@ -85,16 +85,20 @@ class Request(object):
         #  (Use socket.setdefaulttimeout() as fallback)
         self.timeout = timeout
 
-        #: Request URL.
+        # Request URL.
+        #: リクエストのURL
         self.url = url
 
-        #: Dictionary of HTTP Headers to attach to the :class:`Request <Request>`.
+        # Dictionary of HTTP Headers to attach to the :class:`Request <Request>`.
+        #: :class:`Request <Request>` に添付するHTTPヘッダーの辞書
         self.headers = dict(headers or [])
 
-        #: Dictionary of files to multipart upload (``{filename: content}``).
+        # Dictionary of files to multipart upload (``{filename: content}``).
+        #: マルチパートアップロードするファイルの辞書 (``{filename: content}``)
         self.files = None
 
-        #: HTTP Method to use.
+        # HTTP Method to use.
+        #: 使用するHTTPメソッド
         self.method = method
 
         # Dictionary or byte of request body data to attach to the
@@ -464,8 +468,12 @@ class Request(object):
         self.hooks[event].append(hook)
 
     def deregister_hook(self, event, hook):
-        """Deregister a previously registered hook.
-        Returns True if the hook existed, False if not.
+        """
+        .. Deregister a previously registered hook.
+           Returns True if the hook existed, False if not.
+
+        登録されているフックの登録を解除する。
+        フックが既にある場合はTrueを返します。そうではない場合はFalseを返します。
         """
 
         try:
@@ -475,14 +483,22 @@ class Request(object):
             return False
 
     def send(self, anyway=False, prefetch=False):
-        """Sends the request. Returns True if successful, False if not.
-        If there was an HTTPError during transmission,
-        self.response.status_code will contain the HTTPError code.
+        """
+        .. Sends the request. Returns True if successful, False if not.
+           If there was an HTTPError during transmission,
+           self.response.status_code will contain the HTTPError code.
 
-        Once a request is successfully sent, `sent` will equal True.
+        リクエストを送信します。
+        成功したらTrueを返し、そうではない場合Falseを返します。
+        通信中にHTTPErrorが発生したら、self.response.status_codeにHTTPErrorのコードが挿入されます。
 
-        :param anyway: If True, request will be sent, even if it has
+        .. Once a request is successfully sent, `sent` will equal True.
+
+        リクエストの送信に成功したら、 `sent` はTrueになります。
+
+        .. :param anyway: If True, request will be sent, even if it has
         already been sent.
+        :param anyway: Trueにすると、既に送信されていたとしても、リクエストは送信されます。
         """
 
         # Build the URL
@@ -796,7 +812,11 @@ class Response(object):
 
     @property
     def content(self):
-        """Content of the response, in bytes."""
+        """
+        .. Content of the response, in bytes.
+
+        レスポンスの本文、バイトで返します。
+        """
 
         if self._content is False:
             # Read the contents.
