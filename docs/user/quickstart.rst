@@ -26,61 +26,71 @@
 * Requestsが :ref:`インストールされている <install>`
 * Requestsを :ref:`最新版にアップデートしている <updates>`
 
-.. Lets gets started with some simple use cases and examples.
+.. Let's get started with some simple examples.
 
-いくつかの簡単なユースケースとサンプルを始めましょう。
+いくつかの簡単な例をやってみましょう。
 
-.. Make a GET Request
+.. Make a Request
    ------------------
 
-GETリクエストの生成
+リクエストの生成
 ---------------------
 
-.. Making a standard request with Requests is very simple.
+.. Making a request with Requests is very simple.
 
-Requestsで一般的なリクエストを生成することはとても簡単です。
+Requestsを使ってリクエストを生成することはとても簡単です。
 
-.. Let's get GitHub's public timeline ::
+Begin by importing the Requests module::
+
+    >>> import requests
+
+.. Now, let's try to get a webpage. For this example, let's get GitHub's public
+   timeline ::
 
 GitHubのパブリックなタイムラインを取得してみましょう。 ::
 
-    r = requests.get('https://github.com/timeline.json')
+    >>> r = requests.get('https://github.com/timeline.json')
 
 .. Now, we have a :class:`Response` object called ``r``. We can get all the
-   information we need from this.
+   information we need from this object.
 
 現在、 ``r`` と呼ばれる :class:`Response` オブジェクトがあります。
 これから必要な情報を全て取得することができます。
 
-.. Typically, you want to send some sort of data in the urls query string.
-   To do this, simply pass a dictionary to the `params` argument. Your
-   dictionary of data will automatically be encoded when the request is made::
+Requests' simple API means that all forms of HTTP request are as obvious. For
+example, this is how you make an HTTP POST request::
 
-一般的にURLのクエリ文字列のデータの
-これをするためには、 `params` 引数に辞書を渡すだけです。
-データの辞書はリクエストを生成する時に自動的にエンコードされます。
+    >>> r = requests.post("http://httpbin.org/post")
+
+Nice, right? What about the other HTTP request types: PUT, DELETE, HEAD and
+OPTIONS? These are all just as simple::
+
+    >>> r = requests.put("http://httpbin.org/put")
+    >>> r = requests.delete("http://httpbin.org/delete")
+    >>> r = requests.head("http://httpbin.org/get")
+    >>> r = requests.options("http://httpbin.org/get")
+
+That's all well and good, but it's also only the start of what Requests can
+do.
+
+Passing Parameters In URLs
+--------------------------
+
+You often want to send some sort of data in the URL's query string. If
+you were constructing the URL by hand, this data would be given as key/value
+pairs in the URL after a question mark, e.g. ``httpbin.org/get?key=val``.
+Requests allows you to provide these arguments as a dictionary, using the
+``params`` keyword argument. As an example, if you wanted to pass
+``key1=value1`` and ``key2=value2`` to ``httpbin.org/get``, you would use the
+following code::
 
     >>> payload = {'key1': 'value1', 'key2': 'value2'}
     >>> r = requests.get("http://httpbin.org/get", params=payload)
-    >>> print r.text
-    {
-      "origin": "179.13.100.4",
-      "args": {
-        "key2": "value2",
-        "key1": "value1"
-      },
-      "url": "http://httpbin.org/get",
-      "headers": {
-        "Connections": "keep-alive",
-        "Content-Length": "",
-        "Accept-Encoding": "identity, deflate, compress, gzip",
-        "Accept": "*/*",
-        "User-Agent": "python-requests/0.11.0",
-        "Host": httpbin.org",
-        "Content-Type": ""
-      },
-    }
 
+You can see that the URL has been correctly encoded by printing the URL::
+
+    >>> print r.url
+    u'http://httpbin.org/get?key2=value2&key1=value1'
 
 
 .. Response Content
@@ -89,10 +99,13 @@ GitHubのパブリックなタイムラインを取得してみましょう。 :
 レスポンスの内容
 -------------------
 
-.. We can read the content of the server's response::
+.. We can read the content of the server's response. Consider the GitHub timeline
+   again::
 
 サーバーのレスポンスの内容を見ることができます。 ::
 
+    >>> import requests
+    >>> r = requests.get('https://github.com/timeline.json')
     >>> r.text
     '[{"repository":{"open_issues":0,"url":"https://github.com/...
 
@@ -130,7 +143,7 @@ Requestsは、 ``r.text`` にアクセスした時にエンコーディングを
 
 ``gzip`` や ``deflate`` のようなTransfer-Encodingは自動的にデコードされます。
 
-.. For example to create an image from binary data returned by a request, you can
+.. For example, to create an image from binary data returned by a request, you can
    use the following code:
 
 リクエストによって返されたバイナリデータから画像を作成する例として、以下のようなコードになります。 :
@@ -158,66 +171,6 @@ Requestsは、 ``r.text`` にアクセスした時にエンコーディングを
     '\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\x03'
 
 
-
-.. Make a POST Request
-   -------------------
-
-POSTリクエストの生成
---------------------------
-
-.. POST requests are equally simple::
-
-POSTリクエストは、同じくらい簡単です。 ::
-
-    r = requests.post("http://httpbin.org/post")
-
-
-.. Typically, you want to send some form-encoded data — much like an HTML form.
-   To do this, simply pass a dictionary to the `data` argument. Your
-   dictionary of data will automatically be form-encoded when the request is made::
-
-ほとんどのHTMLフォームのように - 通常は、何らかの形でエンコードされたデータを送信します。
-これをするには、 `data` 引数に辞書を渡すだけです。
-データ辞書は、リクエストが作られる時に自動的にエンコードされます。
-
-    >>> payload = {'key1': 'value1', 'key2': 'value2'}
-    >>> r = requests.post("http://httpbin.org/post", data=payload)
-    >>> print r.text
-    {
-      "origin": "179.13.100.4",
-      "files": {},
-      "form": {
-        "key2": "value2",
-        "key1": "value1"
-      },
-      "url": "http://httpbin.org/post",
-      "args": {},
-      "headers": {
-        "Content-Length": "23",
-        "Accept-Encoding": "identity, deflate, compress, gzip",
-        "Accept": "*/*",
-        "User-Agent": "python-requests/0.8.0",
-        "Host": "127.0.0.1:7077",
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      "data": ""
-    }
-
-.. There are many times that you want to send data that is not form-encoded. If you pass in a ``string`` instead of a ``dict``, that data will be posted directly.
-
-エンコードされていないデータを送りたい場合が何度もあると思います。
-``dict`` の代わりに ``string`` を渡した場合、データは直接送信されます。
-
-.. For example, the GitHub API v3 accepts JSON-Encoded POST/PATCH data::
-
-例えば、GitHubのAPI v3はJSONエンコードされたPOST/PATCHデータを受け取ります。 ::
-
-    url = 'https://api.github.com/some/endpoint'
-    payload = {'some': 'data'}
-
-    r = requests.post(url, data=json.dumps(payload))
-
-
 .. Custom Headers
    --------------
 
@@ -229,15 +182,46 @@ POSTリクエストは、同じくらい簡単です。 ::
 
 リクエストにHTTPヘッダーを追加したい場合、 ``headers`` パラメーターに  ``dict`` を渡すだけです。
 
-.. For example, we didn't specify our content-type in the previous example::
+For example, we didn't specify our content-type in the previous example::
 
 例えば、前の例のようにコンテントタイプを指定する必要はありません。 ::
 
-    url = 'https://api.github.com/some/endpoint'
-    payload = {'some': 'data'}
-    headers = {'content-type': 'application/json'}
+    >>> import json
+    >>> url = 'https://api.github.com/some/endpoint'
+    >>> payload = {'some': 'data'}
+    >>> headers = {'content-type': 'application/json'}
 
-    r = requests.post(url, data=json.dumps(payload), headers=headers)
+    >>> r = requests.post(url, data=json.dumps(payload), headers=headers)
+
+
+More complicated POST requests
+------------------------------
+
+Typically, you want to send some form-encoded data — much like an HTML form.
+To do this, simply pass a dictionary to the `data` argument. Your
+dictionary of data will automatically be form-encoded when the request is made::
+
+    >>> payload = {'key1': 'value1', 'key2': 'value2'}
+    >>> r = requests.post("http://httpbin.org/post", data=payload)
+    >>> print r.text
+    {
+      // ...snip... //
+      "form": {
+        "key2": "value2",
+        "key1": "value1"
+      },
+      // ...snip... //
+    }
+
+There are many times that you want to send data that is not form-encoded. If you pass in a ``string`` instead of a ``dict``, that data will be posted directly.
+
+For example, the GitHub API v3 accepts JSON-Encoded POST/PATCH data::
+
+    >>> import json
+    >>> url = 'https://api.github.com/some/endpoint'
+    >>> payload = {'some': 'data'}
+
+    >>> r = requests.post(url, data=json.dumps(payload))
 
 
 .. POST a Multipart-Encoded File
@@ -256,22 +240,41 @@ Requestsはマルチパートでエンコードされたファイルのアップ
     >>> r = requests.post(url, files=files)
     >>> r.text
     {
-      "origin": "179.13.100.4",
+      // ...snip... //
       "files": {
         "report.xls": "<censored...binary...data>"
       },
-      "form": {},
-      "url": "http://httpbin.org/post",
-      "args": {},
-      "headers": {
-        "Content-Length": "3196",
-        "Accept-Encoding": "identity, deflate, compress, gzip",
-        "Accept": "*/*",
-        "User-Agent": "python-requests/0.8.0",
-        "Host": "httpbin.org:80",
-        "Content-Type": "multipart/form-data; boundary=127.0.0.1.502.21746.1321131593.786.1"
+      // ...snip... //
+    }
+
+You can set the filename explicitly::
+
+    >>> url = 'http://httpbin.org/post'
+    >>> files = {'file': ('report.xls', open('report.xls', 'rb'))}
+
+    >>> r = requests.post(url, files=files)
+    >>> r.text
+    {
+      // ...snip... //
+      "files": {
+        "file": "<censored...binary...data>"
       },
-      "data": ""
+      // ...snip... //
+    }
+
+If you want, you can send strings to be received as files::
+
+    >>> url = 'http://httpbin.org/post'
+    >>> files = {'file': ('report.csv', 'some,data,to,send\nanother,row,to,send\n')} 
+
+    >>> r = requests.post(url, files=files)
+    >>> r.text
+    {
+      // ...snip... //
+      "files": {
+        "file": "some,data,to,send\\nanother,row,to,send\\n"
+      },
+      // ...snip... //
     }
 
 .. Setting filename explicitly::
@@ -343,6 +346,7 @@ Requestsはマルチパートでエンコードされたファイルのアップ
 
 レスポンスのステータスコードを確認することができます。 ::
 
+    >>> r = requests.get("http://httpbin.org/get')
     >>> r.status_code
     200
 
@@ -371,7 +375,8 @@ Requestsは簡単に参照できるように、組み込みのステータスコ
         raise self.error
     urllib2.HTTPError: HTTP Error 404: NOT FOUND
 
-.. But, since our ``status_code`` was ``200``, when we call it::
+.. But, since our ``status_code`` for ``r`` was ``200``, when we call
+   ``raise_for_status()`` we get::
 
 しかし呼び出した時は、 ``status_code`` が ``200`` だったので ::
 
@@ -389,8 +394,7 @@ Requestsは簡単に参照できるように、組み込みのステータスコ
 レスポンスヘッダー
 -----------------------
 
-.. We can view the server's response headers with a simple Python dictionary
-   interface::
+.. We can view the server's response headers using a Python dictionary::
 
 Pythonの辞書形式で簡単にサーバーのレスポンスヘッダーを見ることができます。 ::
 
@@ -466,7 +470,7 @@ Pythonの辞書形式で簡単にサーバーのレスポンスヘッダーを�
 ベーシック認証
 -----------------
 
-.. Most web services require authentication. There many different types of
+.. Many web services require authentication. There many different types of
    authentication, but the most common is HTTP Basic Auth.
 
 ほとんどのウェブサービスは認証システムが必要です。
@@ -516,8 +520,10 @@ Requestsはこの認証を手動で行うためのメソッドがあります。
 OAuth認証
 --------------
 
-.. Miguel Araujo's `requests-oauth <http://pypi.python.org/pypi/requests-oauth>`_ project provides a simple interface for
-   establishing OAuth connections. Documentation and examples can be found on the requests-oauth `git repository <https://github.com/maraujop/requests-oauth>`_.
+.. Miguel Araujo's `requests-oauth <http://pypi.python.org/pypi/requests-oauth>`_
+   project provides a simple interface for establishing OAuth connections.
+   Documentation and examples can be found on the requests-oauth
+   `git repository <https://github.com/maraujop/requests-oauth>`_.
 
 Miguel Araujoの `requests-oauth <http://pypi.python.org/pypi/requests-oauth>`_ プロジェクトは
 OAuth接続を確立するための簡単なインターフェースを提供しています。
@@ -529,11 +535,13 @@ OAuth接続を確立するための簡単なインターフェースを提供し
 リダイレクトとヒストリー
 ------------------------------
 
-.. Requests will automatically perform location redirection while using idempotent methods.
+.. Requests will automatically perform location redirection while using the GET
+   and OPTIONS verbs.
 
 Requestsは、冪等メソッドを使っている時に自動的にリダイレクトを行います。
 
-.. GitHub redirects all HTTP requests to HTTPS. Let's see what happens::
+.. GitHub redirects all HTTP requests to HTTPS. We can use the ``history`` method
+   of the Response object to track redirection. Let's see what Github does::
 
 GitHubは全てのHTTPリクエストをHTTPSにリダイレクトします。何が起こるか見てみましょう ::
 
@@ -563,7 +571,8 @@ GET、HEAD、OPTIONSを使う場合、 ``allow_redirects`` パラメーターを
     >>> r.history
     []
 
-.. If you're using POST, PUT, PATCH, *&c*, you can also explicitly enable redirection as well::
+.. If you're using POST, PUT, PATCH, DELETE or HEAD, you can enable
+   redirection as well::
 
 POST、PUT、PATCHを使う場合、明示的にリダイレクトを有効にすることができます。 ::
 
@@ -580,7 +589,8 @@ POST、PUT、PATCHを使う場合、明示的にリダイレクトを有効に�
 タイムアウト
 ------------------
 
-.. You can tell requests to stop waiting for a response after a given number of seconds with the ``timeout`` parameter::
+.. You can tell requests to stop waiting for a response after a given number of
+   seconds with the ``timeout`` parameter::
 
 ``timeout`` パラメーターに秒数を与えると、Requestsに与えた秒数で応答の待機を止めることができます。 ::
 
@@ -591,9 +601,10 @@ POST、PUT、PATCHを使う場合、明示的にリダイレクトを有効に�
 
 .. Note
 
-.. admonition:: 注意
+.. admonition:: 注意:
 
-    .. ``timeout`` only effects the connection process itself, not the downloading of the response body.
+    .. ``timeout`` only effects the connection process itself, not the
+       downloading of the response body.
 
     ``timeout`` は、レスポンスの本文をダウンロードせず接続の処理だけにしか影響しません。
 
@@ -618,7 +629,8 @@ POST、PUT、PATCHを使う場合、明示的にリダイレクトを有効に�
 
 リクエストがタイムアウトした場合、 :class:`Timeout` の例外を発生します。
 
-.. If a request exceeds the configured number of maximum redirections, a :class:`TooManyRedirects` exception is raised.
+.. If a request exceeds the configured number of maximum redirections, a
+   :class:`TooManyRedirects` exception is raised.
 
 リクエストが設定されたリダイレクトの最大数超えた場合、 :class:`TooManyRedirects` の例外を発生します。
 
@@ -627,9 +639,11 @@ POST、PUT、PATCHを使う場合、明示的にリダイレクトを有効に�
 
 全ての例外は、 :class:`requests.exceptions.RequestException` を継承して明示的に発生させます。
 
-.. You can refer to :ref:`Configuration API Docs <configurations>` for immediate raising of :class:`HTTPError` exceptions
-   via the ``danger_mode`` option or have Requests catch the majority of :class:`requests.exceptions.RequestException` exceptions
-   with the ``safe_mode`` option.
+.. You can refer to :ref:`Configuration API Docs <configurations>` for immediate
+   raising of :class:`HTTPError` exceptions via the ``danger_mode`` option or
+   have Requests catch the majority of
+   :class:`requests.exceptions.RequestException` exceptions with the ``safe_mode``
+   option.
 
 ``danger_mode`` オプションにして :class:`HTTPError` の例外をすぐに発生させることや 、
 ``safe_mode`` オプションで :class:`requests.exceptions.RequestException` でRequestsが捕まえる代表的な例外を取得するためには、

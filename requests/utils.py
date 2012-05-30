@@ -439,21 +439,23 @@ UNRESERVED_SET = frozenset(
 
 def unquote_unreserved(uri):
     """Un-escape any percent-escape sequences in a URI that are unreserved
-    characters.
-    This leaves all reserved, illegal and non-ASCII bytes encoded.
+    characters. This leaves all reserved, illegal and non-ASCII bytes encoded.
     """
-    parts = uri.split('%')
-    for i in range(1, len(parts)):
-        h = parts[i][0:2]
-        if len(h) == 2:
-            c = chr(int(h, 16))
-            if c in UNRESERVED_SET:
-                parts[i] = c + parts[i][2:]
+    try:
+        parts = uri.split('%')
+        for i in range(1, len(parts)):
+            h = parts[i][0:2]
+            if len(h) == 2 and h.isalnum():
+                c = chr(int(h, 16))
+                if c in UNRESERVED_SET:
+                    parts[i] = c + parts[i][2:]
+                else:
+                    parts[i] = '%' + parts[i]
             else:
                 parts[i] = '%' + parts[i]
-        else:
-            parts[i] = '%' + parts[i]
-    return ''.join(parts)
+        return ''.join(parts)
+    except ValueError:
+        return uri
 
 
 def requote_uri(uri):

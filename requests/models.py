@@ -64,7 +64,6 @@ class Request(object):
         params=dict(),
         auth=None,
         cookies=None,
-        store_cookies=True,
         timeout=None,
         redirect=False,
         allow_redirects=False,
@@ -122,9 +121,6 @@ class Request(object):
 
         # Dictionary mapping protocol to the URL of the proxy (e.g. {'http': 'foo.bar:3128'})
         self.proxies = dict(proxies or [])
-
-        #param store_cookies: (optional) if ``False``, the received cookies as part of the HTTP response would be ignored.
-        self.store_cookies = store_cookies
 
         # If no proxies are given, allow configuration by environment variables
         # HTTP_PROXY and HTTPS_PROXY.
@@ -221,7 +217,7 @@ class Request(object):
                 response.encoding = get_encoding_from_headers(response.headers)
 
                 # Add new cookies from the server. Don't if configured not to
-                if self.store_cookies:
+                if self.config.get('store_cookies'):
                     extract_cookies_to_jar(self.cookies, self, resp)
 
                 # Save cookies in Response.
@@ -565,9 +561,10 @@ class Request(object):
             self.headers['Content-Type'] = content_type
 
         _p = urlparse(url)
+        no_proxy = filter(lambda x:x.strip(), self.proxies.get('no', '').split(','))
         proxy = self.proxies.get(_p.scheme)
 
-        if proxy:
+        if proxy and not any(map(_p.netloc.endswith, no_proxy)):
             conn = poolmanager.proxy_from_url(proxy)
             _proxy = urlparse(proxy)
             if '@' in _proxy.netloc:
@@ -720,8 +717,8 @@ class Response(object):
         #: エラーが起こった場合のリクエストの :class:`HTTPError` の内容
         self.error = None
 
-        # Encoding to decode with when accessing r.content.
-        #: r.contentにアクセスした時にデコードするためのエンコーディング
+        # Encoding to decode with when accessing r.text.
+        #: r.textにアクセスした時にデコードするためのエンコーディング
         self.encoding = None
 
         # A list of :class:`Response <Response>` objects from

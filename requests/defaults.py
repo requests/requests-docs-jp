@@ -24,6 +24,7 @@ requests.defaults
 .. :pool_connections: The number of active HTTP connection pools to use.
 .. :encode_uri: If true, URIs will automatically be percent-encoded.
 .. :trust_env: If true, the surrouding environment will be trusted (environ, netrc).
+.. :param store_cookies: If false, the received cookies as part of the HTTP response would be ignored.
 
 :base_headers: デフォルトのHTTPヘッダー
 :verbose: リクエストのログを書き込みます。
@@ -37,7 +38,7 @@ requests.defaults
 :pool_connections: 使用するアクティブなHTTPコネクションプールの数
 :encode_uri: trueにすると、URIは自動的にパーセントエンコードされます。
 :trust_env: If true, the surrouding environment will be trusted (environ, netrc).
-
+:param store_cookies: If false, the received cookies as part of the HTTP response would be ignored.
 """
 
 SCHEMAS = ['http', 'https']
@@ -64,4 +65,4 @@ defaults['strict_mode'] = False
 defaults['keep_alive'] = True
 defaults['encode_uri'] = True
 defaults['trust_env'] = True
-
+defaults['store_cookies'] = True
