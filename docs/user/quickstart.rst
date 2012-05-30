@@ -40,14 +40,17 @@
 
 Requestsを使ってリクエストを生成することはとても簡単です。
 
-Begin by importing the Requests module::
+.. Begin by importing the Requests module::
+
+Requestsモジュールをインポートすることから始めます。 ::
 
     >>> import requests
 
 .. Now, let's try to get a webpage. For this example, let's get GitHub's public
    timeline ::
 
-GitHubのパブリックなタイムラインを取得してみましょう。 ::
+ではウェブページを取得してみましょう。
+今回の例では、GitHubのパブリックなタイムラインを取得してみましょう。 ::
 
     >>> r = requests.get('https://github.com/timeline.json')
 
