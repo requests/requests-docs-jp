@@ -65,19 +65,27 @@ example, this is how you make an HTTP POST request::
 
     >>> r = requests.post("http://httpbin.org/post")
 
-Nice, right? What about the other HTTP request types: PUT, DELETE, HEAD and
-OPTIONS? These are all just as simple::
+.. Nice, right? What about the other HTTP request types: PUT, DELETE, HEAD and
+   OPTIONS? These are all just as simple::
+
+いいでしょ?
+PUT、DELETE、HEAD、OPTIONSなどの他のHTTPリクエストについてもとてもシンプルです。 ::
 
     >>> r = requests.put("http://httpbin.org/put")
     >>> r = requests.delete("http://httpbin.org/delete")
     >>> r = requests.head("http://httpbin.org/get")
     >>> r = requests.options("http://httpbin.org/get")
 
-That's all well and good, but it's also only the start of what Requests can
-do.
+.. That's all well and good, but it's also only the start of what Requests can
+   do.
 
-Passing Parameters In URLs
---------------------------
+以上が全てですが、Requestsができることのさわりしか見ていません。
+
+.. Passing Parameters In URLs
+   --------------------------
+
+URLにパラメーターを渡す
+-----------------------------
 
 You often want to send some sort of data in the URL's query string. If
 you were constructing the URL by hand, this data would be given as key/value
@@ -90,7 +98,9 @@ following code::
     >>> payload = {'key1': 'value1', 'key2': 'value2'}
     >>> r = requests.get("http://httpbin.org/get", params=payload)
 
-You can see that the URL has been correctly encoded by printing the URL::
+.. You can see that the URL has been correctly encoded by printing the URL::
+
+URLを表示して、URLが正しくエンコードされたか見ることができます。 ::
 
     >>> print r.url
     u'http://httpbin.org/get?key2=value2&key1=value1'
@@ -185,7 +195,7 @@ Requestsは、 ``r.text`` にアクセスした時にエンコーディングを
 
 リクエストにHTTPヘッダーを追加したい場合、 ``headers`` パラメーターに  ``dict`` を渡すだけです。
 
-For example, we didn't specify our content-type in the previous example::
+.. For example, we didn't specify our content-type in the previous example::
 
 例えば、前の例のようにコンテントタイプを指定する必要はありません。 ::
 
@@ -200,9 +210,13 @@ For example, we didn't specify our content-type in the previous example::
 More complicated POST requests
 ------------------------------
 
-Typically, you want to send some form-encoded data — much like an HTML form.
-To do this, simply pass a dictionary to the `data` argument. Your
-dictionary of data will automatically be form-encoded when the request is made::
+.. Typically, you want to send some form-encoded data — much like an HTML form.
+   To do this, simply pass a dictionary to the `data` argument. Your
+   dictionary of data will automatically be form-encoded when the request is made::
+
+一般的にHTMLのフォームのようにエンコードしたデータを送信したい場合、
+これをするのは簡単で、 `data` 引数に辞書を渡すだけです。
+データの辞書はリクエストを生成する時に自動的にエンコードされます。
 
     >>> payload = {'key1': 'value1', 'key2': 'value2'}
     >>> r = requests.post("http://httpbin.org/post", data=payload)
@@ -216,9 +230,14 @@ dictionary of data will automatically be form-encoded when the request is made::
       // ...snip... //
     }
 
-There are many times that you want to send data that is not form-encoded. If you pass in a ``string`` instead of a ``dict``, that data will be posted directly.
+.. There are many times that you want to send data that is not form-encoded. If you pass in a ``string`` instead of a ``dict``, that data will be posted directly.
 
-For example, the GitHub API v3 accepts JSON-Encoded POST/PATCH data::
+エンコードされていないデータを送りたい場合が何度もあると思います。
+``dict`` の代わりに ``string`` を渡した場合、データは直接送信されます。
+
+.. For example, the GitHub API v3 accepts JSON-Encoded POST/PATCH data::
+
+例えば、GitHubのAPI v3はJSONエンコードされたPOST/PATCHデータを受け取ります。 ::
 
     >>> import json
     >>> url = 'https://api.github.com/some/endpoint'
@@ -235,7 +254,7 @@ For example, the GitHub API v3 accepts JSON-Encoded POST/PATCH data::
 
 .. Requests makes it simple to upload Multipart-encoded files::
 
-Requestsはマルチパートでエンコードされたファイルのアップロードが簡単にできます。 ::
+RequestsはMultipartエンコードのファイルをアップロードすることが簡単にできます。 ::
 
     >>> url = 'http://httpbin.org/post'
     >>> files = {'report.xls': open('report.xls', 'rb')}
@@ -250,7 +269,9 @@ Requestsはマルチパートでエンコードされたファイルのアップ
       // ...snip... //
     }
 
-You can set the filename explicitly::
+.. You can set the filename explicitly::
+
+ファイル名を明示的に指定して下さい。 ::
 
     >>> url = 'http://httpbin.org/post'
     >>> files = {'file': ('report.xls', open('report.xls', 'rb'))}
@@ -265,7 +286,9 @@ You can set the filename explicitly::
       // ...snip... //
     }
 
-If you want, you can send strings to be received as files::
+.. If you want, you can send strings to be received as files::
+
+ファイルとして受け取りたい場合に文字列を送信することができます。 ::
 
     >>> url = 'http://httpbin.org/post'
     >>> files = {'file': ('report.csv', 'some,data,to,send\nanother,row,to,send\n')} 
@@ -282,7 +305,7 @@ If you want, you can send strings to be received as files::
 
 .. Setting filename explicitly::
 
-ファイル名を明示的に設定して下さい。 ::
+ファイル名を明示的に指定して下さい。 ::
 
     >>> url = 'http://httpbin.org/post'
     >>> files = {'file': ('report.xls', open('report.xls', 'rb'))}
