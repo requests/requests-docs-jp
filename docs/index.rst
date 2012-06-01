@@ -23,7 +23,7 @@ Requestsは、人が使いやすいように作られているPythonで書かれ
 
 Pythonの標準の **urllib2** モジュールは、必要とされるほとんどのHTTPの機能を備えていますが、APIがまともに **使えません** 。
 様々なウェブ用に作られていて、何回も修正されてきました。
-簡単なことをするため(メソッドの上書きでさえ)に、かなりの量の作業が必要になります。
+簡単なことをするため(メソッドの上書きでさえ)に、 *かなり* の量の作業が必要になります。
 
 .. Things shouldn’t be this way. Not in Python.
 
@@ -50,7 +50,7 @@ Pythonの標準の **urllib2** モジュールは、必要とされるほとん�
 
 Requestsは、ウェブサーバーとシームレスに統合されたPythonのHTTP/1.1の処理の全てを受け持ちます。
 URLに手動でクエリを入力したり、POSTデータをエンコードしたりする必要はありません。
-Keep-aliveやHTTP接続は、Requestsに `urllib3 <https://github.com/shazow/urllib3>`_ が組み込まれているので、100%自動で行われます。
+Keep-aliveやHTTP接続のプーリングは、Requestsに `urllib3 <https://github.com/shazow/urllib3>`_ が組み込まれているので、100%自動で行われます。
 
 .. Testimonials
    ------------
@@ -75,7 +75,7 @@ Keep-aliveやHTTP接続は、Requestsに `urllib3 <https://github.com/shazow/url
 `Twitter, Inc <http://twitter.com>`_,
 `Readability <http://readability.com>`_,
 Federal US Institutions は内部でRequestsを使っています。
-PyPIから100,000回以上インストールされています。
+PyPIから100,000回以上インストールされました。
 
 **Armin Ronacher**
     .. Requests is the perfect example how beautiful an API can be with the
@@ -93,7 +93,7 @@ PyPIから100,000回以上インストールされています。
     .. Nuked a 1200 LOC spaghetti code library with 10 lines of code thanks to
        @kennethreitz's request library. Today has been AWESOME.
 
-    1200行のスパゲッティーコードのライブラリを10行くらいのコードにしてくれた@kennethreitzのリクエストライブラリに感謝しています。
+    1200行のスパゲッティーコードのライブラリを数10行くらいのコードにしてくれた@kennethreitzのリクエストライブラリに感謝しています。
     今日ではすばらしくなりました。
 
 **Kenny Meyers**

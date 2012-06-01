@@ -29,7 +29,7 @@ Requestsのインストールは、 `pip <http://www.pip-installer.org/>`_ を�
 
 .. But, you really `shouldn't do that <http://www.pip-installer.org/en/latest/other-tools.html#pip-compared-to-easy-install>`_.
 
-しかし、 `そうすべきではない <http://www.pip-installer.org/en/latest/other-tools.html#pip-compared-to-easy-install>`_ 。
+しかし、 `easy_installを使うべきではない <http://www.pip-installer.org/en/latest/other-tools.html#pip-compared-to-easy-install>`_ 。
 
 .. Cheeseshop Mirror
    -----------------
@@ -59,7 +59,7 @@ Requestsは、GitHub上で活発に開発されていて、コードは `いつ�
 
 .. You can either clone the public repository::
 
-公開レポジトリを複製するができます。 ::
+公開レポジトリをクローンすることもできます。 ::
 
     git clone git://github.com/kennethreitz/requests.git
 
@@ -79,7 +79,7 @@ Requestsは、GitHub上で活発に開発されていて、コードは `いつ�
 .. Once you have a copy of the source, you can embed it in your Python package,
    or install it into your site-packages easily::
 
-ソースのコピーを持っていないなら、Pythonパッケージに埋め込んだり、site-packagesに
+ソースのコピーを持っているなら、Pythonのパッケージに埋め込んだり、site-packagesに
 簡単にインストールすることができます。
 
     $ python setup.py install
@@ -95,7 +95,7 @@ Geventをインストールする
 .. If you are using the ``requests.async`` module for making concurrent
    requests, you need to install gevent.
 
-コンカレントリクエストを作成するための ``requests.async`` モジュールを使っているなら、
+コンカレントリクエストを生成するための ``requests.async`` モジュールを使う場合、
 geventをインストールする必要があります。
 
 .. To install gevent, you'll need ``libevent``.
