@@ -75,6 +75,7 @@
 セッション内に含まれている全ての値が直接使用可能です。
 詳しくは :ref:`Session API Docs <sessionapi>` を見て下さい。
 
+
 .. SSL Cert Verification
    ---------------------
 
@@ -153,11 +154,8 @@ Requestsの設定
 これをするには、リクエストかセッションに ``config`` 辞書を渡すことができます。
 さらに知りたい場合は、 :ref:`Configuration API Docs <configurations>` を見て下さい。
 
-.. Keep-Alive
-   ----------
-
-キープアライブ
---------------------
+Keep-Alive
+----------
 
 .. Excellent news — thanks to urllib3, keep-alive is 100% automatic within a session! Any requests that you make within a session will automatically reuse the appropriate connection!
 
@@ -170,7 +168,9 @@ Requestsの設定
 すべての本文のデータが読み込まれた後に接続が一度再利用のためにプールに戻されることに注意してください。
 ``Response`` オブジェクトの ``content`` プロパティを見るか ``prefetch`` を ``True`` にするかして下さい。
 
-If you'd like to disable keep-alive, you can simply set the ``keep_alive`` configuration to ``False``::
+.. If you'd like to disable keep-alive, you can simply set the ``keep_alive`` configuration to ``False``::
+
+Keep-Aliveを無効にしたい場合は、単純に ``keep_alive`` の設定を ``False`` にするだけです。 ::
 
     s = requests.session()
     s.config['keep_alive'] = False
@@ -292,7 +292,9 @@ Requestsにはリクエストの処理やシグナルイベントの処理の一
     http://httpbin.org
     <Response [200]>
 
-Let's hijack some arguments this time with a new callback::
+.. Let's hijack some arguments this time with a new callback::
+
+新しいコールバックを使って、いくつかの引数をハックしてみましょう ::
 
     def hack_headers(args):
         if args.get('headers') is None:
@@ -418,6 +420,7 @@ Verboseロギングをオンにすることができます。
     2011-08-17T03:04:23.380175   GET   http://httpbin.org/headers
     <Response [200]>
 
+
 .. Proxies
    -------
 
@@ -435,8 +438,8 @@ Verboseロギングをオンにすることができます。
     import requests
 
     proxies = {
-      "http": "10.10.1.10:3128"
-      "https": "10.10.1.10:1080"
+      "http": "10.10.1.10:3128",
+      "https": "10.10.1.10:1080",
     }
 
     requests.get("http://example.org", proxies=proxies)
@@ -452,6 +455,17 @@ Verboseロギングをオンにすることができます。
     $ python
     >>> import requests
     >>> requests.get("http://example.org")
+
+.. To use HTTP Basic Auth with your proxy, use the `http://user:password@host/` syntax:
+
+プロキシでベーシック認証を使うためには、 `http://user:password@host/` シンタックスを使います。:
+
+::
+
+    proxies = {
+        "http": "http://user:pass@10.10.1.10:3128/",
+    }
+
 
 HTTP Verbs
 ----------

@@ -109,3 +109,4 @@ Urllib3
 - Justin Barber <barber.justin@gmail.com>
 - Roman Haritonov <@reclosedev>
 - Arup Malakar <amalakar@gmail.com>
+- Danilo Bargen (gwrtheyrn)
