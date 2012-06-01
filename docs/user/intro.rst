@@ -22,7 +22,7 @@ Requestsは、 :pep:`20` 規約に基づいて開発されました。
 .. Complex is better than complicated.
 .. Readability counts.
 
-#. きたないのよりきれいな方がいい
+#. きたないよりきれいな方がいい
 #. ごちゃごちゃ難しいのより、白黒はっきりしてるのがいい
 #. 複雑なものより、シンプルな方がいい
 #. 煩わしいものより複雑なものの方がいい
@@ -42,14 +42,13 @@ ISCライセンス
    While the GPL has its time and place, it should most certainly not be your
    go-to license for your next open source project.
 
-今日、見つかるオープンソースプロジェクトのほとんどが `GPL Licensed`_ です。
-GPLは様々な
-次のオープンソースプロジェクトのライセンスで使用する
+今日見つかるオープンソースプロジェクトのほとんどが `GPL Licensed`_ です。
+GPLは様々な時代と場所で使われてきましたので、次のオープンソースプロジェクトのライセンスで採用するライセンスではきっとありません。
 
 .. A project that is released as GPL cannot be used in any commercial product
    without the product itself also being offered as open source.
 
-GPLでリリースされているプロジェクトは、ソースコードをオープンソースとして公開されていない場合は商用利用はできません。
+GPLでリリースされているプロジェクトは、ソースコードをオープンソースとして公開していない場合は商用利用はできません。
 
 .. The MIT, BSD, ISC, and Apache2 licenses are great alternatives to the GPL
    that allow your open-source software to be used freely in proprietary,
