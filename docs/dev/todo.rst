@@ -17,8 +17,8 @@ Requestsは活発に開発中で、プロジェクトへの貢献はどしどし
 .. Send a pull request and bug the maintainer until it gets merged and published. :)
    Make sure to add yourself to `AUTHORS <https://github.com/kennethreitz/requests/blob/develop/AUTHORS.rst>`_.
 
-#. 公開されているissueの一覧をチェックするか、機能のアイデアやバグに関するディスカッションを開始するために新しいissueを作成して下さい。
-   コントリビューター
+#. 公開されているissueの一覧をチェックするか、機能のアイデアやバグに関するディスカッションをするための新しいissueを作成して下さい。
+   まだコードに精通していない人にとって持って来いのContributor Friendlyタグがあります。
 #. **develop** ブランチ(もしくはそれから派生したブランチ)に修正を加えるために、
    Githubの `リポジトリ <https://github.com/kennethreitz/requests>`_ をフォークして下さい。
 #. 期待している通りに動くか修正したバグが分かるようなテストを書く。
