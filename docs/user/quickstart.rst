@@ -60,8 +60,11 @@ Requestsモジュールをインポートすることから始めます。 ::
 現在、 ``r`` と呼ばれる :class:`Response` オブジェクトがあります。
 これから必要な情報を全て取得することができます。
 
-Requests' simple API means that all forms of HTTP request are as obvious. For
-example, this is how you make an HTTP POST request::
+.. Requests' simple API means that all forms of HTTP request are as obvious. For
+   example, this is how you make an HTTP POST request::
+
+RequestsのシンプルなAPIは、HTTPリクエストの全てのフォームデータであることがわかります。
+例えば、以下の例はHTTPのPOSTリクエストをどうやって作成するかを示しています。 ::
 
     >>> r = requests.post("http://httpbin.org/post")
 
@@ -87,13 +90,20 @@ PUT、DELETE、HEAD、OPTIONSなどの他のHTTPリクエストについても�
 URLにパラメーターを渡す
 -----------------------------
 
-You often want to send some sort of data in the URL's query string. If
-you were constructing the URL by hand, this data would be given as key/value
-pairs in the URL after a question mark, e.g. ``httpbin.org/get?key=val``.
-Requests allows you to provide these arguments as a dictionary, using the
-``params`` keyword argument. As an example, if you wanted to pass
-``key1=value1`` and ``key2=value2`` to ``httpbin.org/get``, you would use the
-following code::
+.. You often want to send some sort of data in the URL's query string. If
+   you were constructing the URL by hand, this data would be given as key/value
+   pairs in the URL after a question mark, e.g. ``httpbin.org/get?key=val``.
+   Requests allows you to provide these arguments as a dictionary, using the
+   ``params`` keyword argument. As an example, if you wanted to pass
+   ``key1=value1`` and ``key2=value2`` to ``httpbin.org/get``, you would use the
+   following code::
+
+しばしばURLのクエリ文字列にある種のデータを追加して送信したい時があるかもしれません。
+手動でURLを作成する場合、このデータはクエスション記号の後のURLにキー/バリューのペアで与えて下さい。
+例: ``httpbin.org/get?key=val`` 。
+Requestsは、 ``params`` キーワード引数を使ってこれらの引数を辞書として渡すことができます。
+例として、 ``key1=value1`` と ``key2=value2`` を ``httpbin.org/get`` に渡したい場合、
+以下のコードでできます。 ::
 
     >>> payload = {'key1': 'value1', 'key2': 'value2'}
     >>> r = requests.get("http://httpbin.org/get", params=payload)
@@ -207,8 +217,11 @@ Requestsは、 ``r.text`` にアクセスした時にエンコーディングを
     >>> r = requests.post(url, data=json.dumps(payload), headers=headers)
 
 
-More complicated POST requests
-------------------------------
+.. More complicated POST requests
+   ------------------------------
+
+さらに複雑なPOSTリクエスト
+---------------------------------
 
 .. Typically, you want to send some form-encoded data — much like an HTML form.
    To do this, simply pass a dictionary to the `data` argument. Your
