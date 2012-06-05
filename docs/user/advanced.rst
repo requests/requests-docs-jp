@@ -65,10 +65,8 @@
 .. admonition:: 辞書パラメーターから値を削除する
 
     時々、辞書パラメーターからセッションレベルのキーを省略したい場合もあるかもしれません。
-    それをするには、キーの値を ``None`` 
+    それをするには、メソッドのパラメーターのキーの値を ``None`` セットするだけです。
     それは自動的に省略されます。
-    Sometimes you'll want to omit session-level keys from a dict parameter.
-    To do this, you simply set that key's value to ``None`` in the method-level parameter. It will automatically be omitted.
 
 .. All values that are contained within a session are directly available to you. See the :ref:`Session API Docs <sessionapi>` to learn more.
 
@@ -182,19 +180,30 @@ Keep-Aliveを無効にしたい場合は、単純に ``keep_alive`` の設定を
 非同期のリクエスト
 ----------------------
 
-Requests has first-class support for concurrent requests, powered by gevent.
-This allows you to send a bunch of HTTP requests at the same time.
+.. Requests has first-class support for concurrent requests, powered by gevent.
+   This allows you to send a bunch of HTTP requests at the same time.
 
-First, let's import the async module. Heads up — if you don't have
-`gevent <http://pypi.python.org/pypi/gevent>`_ this will fail::
+Requestsは、geventで提供されているコンカレントリクエストを扱うためのクラスを持っています。
+これは同時に複数のHTTPリクエストを送ることができます。
+
+.. First, let's import the async module. Heads up — if you don't have
+   `gevent <http://pypi.python.org/pypi/gevent>`_ this will fail::
+
+最初にasyncモジュールをインポートして下さい。
+`gevent <http://pypi.python.org/pypi/gevent>`_ がない場合は失敗するので注意して下さい。 ::
 
     from requests import async
 
-The ``async`` module has the exact same api as ``requests``, except it
-doesn't send the request immediately. Instead, it returns the ``Request``
-object.
+.. The ``async`` module has the exact same api as ``requests``, except it
+   doesn't send the request immediately. Instead, it returns the ``Request``
+   object.
 
-We can build a list of ``Request`` objects easily::
+``async`` モジュールは、リクエストをすぐに送信しないということ以外は、 ``requests`` と同じAPIを持っています。
+その代わり、 ``Request`` オブジェクトを返します。
+
+.. We can build a list of ``Request`` objects easily::
+
+``Request`` オブジェクトのリストを簡単に作成することができます。 ::
 
     urls = [
         'http://python-requests.org',
@@ -205,18 +214,27 @@ We can build a list of ``Request`` objects easily::
 
     rs = [async.get(u) for u in urls]
 
-Now we have a list of ``Request`` objects, ready to be sent. We could send them
-one at a time with ``Request.send()``, but that would take a while.  Instead,
-we'll send them all at the same time with ``async.map()``.  Using ``async.map()``
-will also guarantee execution of the ``response`` hook, described below. ::
+.. Now we have a list of ``Request`` objects, ready to be sent. We could send them
+   one at a time with ``Request.send()``, but that would take a while.  Instead,
+   we'll send them all at the same time with ``async.map()``.  Using ``async.map()``
+   will also guarantee execution of the ``response`` hook, described below. ::
+
+現在 ``Request`` オブジェクトのリストがあって、送信する準備ができています。
+``Request.send()`` で一度に送信することができますが、少しかかるかもしれません。
+代わりに、 ``async.map()`` で同時に送信することができます。
+``async.map()`` を使うことでレスポンスフックの実行が保証されます。以下で説明します。 ::
 
     >>> responses = async.map(rs)
     >>> responses
     [<Response [200]>, <Response [200]>, <Response [200]>, <Response [200]>]
 
-.. admonition:: Throttling
+.. Throttling
 
    The ``map`` function also takes a ``size`` parameter, that specifies the number of connections to make at a time::
+
+.. admonition:: スロットリング
+
+   ``map`` 関数には、一度に接続するコネクション数を指定する ``size`` パラメーターもあります。 ::
 
 
 .. Event Hooks
@@ -467,12 +485,18 @@ Verboseロギングをオンにすることができます。
     }
 
 
-HTTP Verbs
-----------
+.. HTTP Verbs
+   ----------
 
-Requests provides access to almost the full range of HTTP verbs: GET, OPTIONS,
-HEAD, POST, PUT, PATCH and DELETE. The following provides detailed examples of
-using these various verbs in Requests, using the GitHub API.
+HTTPメソッド
+-------------
+
+.. Requests provides access to almost the full range of HTTP verbs: GET, OPTIONS,
+   HEAD, POST, PUT, PATCH and DELETE. The following provides detailed examples of
+   using these various verbs in Requests, using the GitHub API.
+
+Requestsは、GET、OPTIONS、HEAD、POST、PUT、PATCH、DELETEなどのHTTPメソッドのほとんど全てにアクセスすることができます。
+以下に、Requestsのこれらの様々なメソッドを使う詳細サンプルを掲載します。
 
 We will begin with the verb most commonly used: GET. HTTP GET is an idempotent
 method that returns a resource from a given URL. As a result, it is the verb
