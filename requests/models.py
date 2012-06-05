@@ -106,13 +106,16 @@ class Request(object):
         #: バイトか辞書
         self.data = None
 
-        #: Dictionary or byte of querystring data to attach to the
-        #: :class:`Request <Request>`. The dictionary values can be lists for representing
-        #: multivalued query parameters.
+        # Dictionary or byte of querystring data to attach to the
+        # :class:`Request <Request>`. The dictionary values can be lists for representing
+        # multivalued query parameters.
+        #: :class:`Request <Request>` に追加する辞書かクエリ文字列データのバイトです。
+        #: 辞書の値は複数の値をクエリパラメーターに表示できるリストです。
         self.params = None
 
-        #: True if :class:`Request <Request>` is part of a redirect chain (disables history
-        #: and HTTPError storage).
+        # True if :class:`Request <Request>` is part of a redirect chain (disables history
+        # and HTTPError storage).
+        #: :class:`Request <Request>` が一連のリダイレクト(履歴やHTTPエラーの無効化)の一部の場合はTrueにして下さい。
         self.redirect = redirect
 
         # Set to True if full redirects are allowed (e.g. re-POST-ing of data at new ``Location``)
@@ -131,8 +134,10 @@ class Request(object):
         self.params = params
         self.files = files
 
-        #: :class:`Response <Response>` instance, containing
-        #: content and metadata of HTTP Response, once :attr:`sent <send>`.
+        # :class:`Response <Response>` instance, containing
+        # content and metadata of HTTP Response, once :attr:`sent <send>`.
+        #: :class:`Response <Response>` インスタンスは一度でも :attr:`送信 <send>` されると、
+        #: HTTPレスポンスのメタデータや本文が入っています。
         self.response = Response()
 
         # Authentication tuple or object to attach to :class:`Request <Request>`.
