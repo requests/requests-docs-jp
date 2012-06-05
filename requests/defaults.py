@@ -37,8 +37,8 @@ requests.defaults
 :pool_maxsize: HTTPコネクションプールのサイズの最大値
 :pool_connections: 使用するアクティブなHTTPコネクションプールの数
 :encode_uri: trueにすると、URIは自動的にパーセントエンコードされます。
-:trust_env: If true, the surrouding environment will be trusted (environ, netrc).
-:param store_cookies: If false, the received cookies as part of the HTTP response would be ignored.
+:trust_env: trueにすると、環境(environ, netrc)を信頼出来るものとします。
+:param store_cookies: falseにすると、HTTPレスポンスの一部として受け取ったクッキーが無視されます。
 """
 
 SCHEMAS = ['http', 'https']

@@ -80,8 +80,10 @@ class Request(object):
         #: このリクエストの設定が入っている辞書
         self.config = dict(config or [])
 
-        #: Float describes the timeout of the request.
-        #  (Use socket.setdefaulttimeout() as fallback)
+        # Float describes the timeout of the request.
+        # (Use socket.setdefaulttimeout() as fallback)
+        #: リクエストのタイムアウト
+        #: (フォールバックにsocket.setdefaulttimeout()を使って下さい)
         self.timeout = timeout
 
         # Request URL.
