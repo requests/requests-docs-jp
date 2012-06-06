@@ -496,32 +496,48 @@ HTTPメソッド
    using these various verbs in Requests, using the GitHub API.
 
 Requestsは、GET、OPTIONS、HEAD、POST、PUT、PATCH、DELETEなどのHTTPメソッドのほとんど全てにアクセスすることができます。
-以下に、Requestsのこれらの様々なメソッドを使う詳細サンプルを掲載します。
+以下に、GitHubのAPIを使ってRequestsのこれらの様々なメソッドを使う詳細サンプルを掲載します。
 
-We will begin with the verb most commonly used: GET. HTTP GET is an idempotent
-method that returns a resource from a given URL. As a result, it is the verb
-you ought to use when attempting to retrieve data from a web location. An
-example usage would be attempting to get information about a specific commit
-from GitHub. Suppose we wanted commit ``a050faf`` on Requests. We would get it
-like so::
+.. We will begin with the verb most commonly used: GET. HTTP GET is an idempotent
+   method that returns a resource from a given URL. As a result, it is the verb
+   you ought to use when attempting to retrieve data from a web location. An
+   example usage would be attempting to get information about a specific commit
+   from GitHub. Suppose we wanted commit ``a050faf`` on Requests. We would get it
+   like so::
+
+最初に一般的によく使われているメソッドから始めましょう。
+HTTPのGETは、与えられたURLのリソースを返す冪等メソッドです。
+結果としてそれらのメソッドは、ウェブ上の場所からデータを取得しようとする時に使うメソッドです。
+GitHubから特定のコミットに関する情報を取得してみる参考例を紹介します。
+Requestsで ``a050faf`` をコミットしたいと仮定して下さい。以下のようになります。 ::
 
     >>> import requests
     >>> r = requests.get('https://api.github.com/repos/kennethreitz/requests/git/commits/a050faf084662f3a352dd1a941f2c7c9f886d4ad')
 
-We should confirm that GitHub responded correctly. If it has, we want to work
-out what type of content it is. Do this like so::
+.. We should confirm that GitHub responded correctly. If it has, we want to work
+   out what type of content it is. Do this like so::
+
+GitHubが正しく応答したか確認する必要があります。
+応答した場合は、それがどのようなコンテンツタイプかを検証していきます。
+では、やってみます。 ::
 
     >>> if (r.status_code == requests.codes.ok):
     ...     print r.headers['content-type']
     ...
     application/json; charset=utf-8
 
-So, GitHub returns JSON. That's great, we can use the JSON module to turn it
-into Python objects. Because GitHub returned UTF-8, we should use the
-``r.text`` method, not the ``r.content`` method. ``r.content`` returns a
-bytestring, while ``r.text`` returns a Unicode-encoded string. I have no plans
-to perform byte-manipulation on this response, so I want any Unicode code
-points encoded.::
+.. So, GitHub returns JSON. That's great, we can use the JSON module to turn it
+   into Python objects. Because GitHub returned UTF-8, we should use the
+   ``r.text`` method, not the ``r.content`` method. ``r.content`` returns a
+   bytestring, while ``r.text`` returns a Unicode-encoded string. I have no plans
+   to perform byte-manipulation on this response, so I want any Unicode code
+   points encoded.::
+
+そして、GitHubはJSONを返してきました。
+素晴らしい、JSONモジュールを使えるので、Pythonオブジェクトに変換することができます。
+GitHubはUTF-8で返してくるので、 ``r.content`` メソッドではなく、 ``r.text`` メソッドを使って下さい。
+``r.content`` はバイト文字列を返し、 ``r.text`` はユニコードにエンコーディングされた文字列を返します。
+このレスポンスにおいて、バイト操作をするつもりはないので、任意のユニコードのコードはエンコードを示して欲しい。 ::
 
     >>> import json
     >>> commit_data = json.loads(r.text)
@@ -532,20 +548,30 @@ points encoded.::
     >>> print commit_data[u'message']
     makin' history
 
-So far, so simple. Well, let's investigate the GitHub API a little bit. Now,
-we could look at the documentation, but we might have a little more fun if we
-use Requests instead. We can take advantage of the Requests OPTIONS verb to
-see what kinds of HTTP methods are supported on the url we just used.::
+.. So far, so simple. Well, let's investigate the GitHub API a little bit. Now,
+   we could look at the documentation, but we might have a little more fun if we
+   use Requests instead. We can take advantage of the Requests OPTIONS verb to
+   see what kinds of HTTP methods are supported on the url we just used.::
+
+これまでのところ、非常にシンプルです。
+ではGitHubのAPIを少し調べてみましょう。
+ドキュメントで確認することができますが、Requestsを使ってもう少し面白いことができるかもしれません。
+どのようなHTTPメソッド
+RequestsのOPTIONSメソッドを活用することができます。 ::
+我々は、HTTPメソッドの種類は、我々が単に使用されたURLに対してサポートされているかを確認する要求OPTIONS動詞を活用することができます。
 
     >>> verbs = requests.options(r.url)
     >>> verbs.status_code
     500
 
-Uh, what? That's unhelpful! Turns out GitHub, like many API providers, don't
-actually implement the OPTIONS method. This is an annoying oversight, but it's
-OK, we can just use the boring documentation. If GitHub had correctly
-implemented OPTIONS, however, they should return the allowed methods in the
-headers, e.g.::
+.. Uh, what? That's unhelpful! Turns out GitHub, like many API providers, don't
+   actually implement the OPTIONS method. This is an annoying oversight, but it's
+   OK, we can just use the boring documentation. If GitHub had correctly
+   implemented OPTIONS, however, they should return the allowed methods in the
+   headers, e.g.::
+
+ええと、何があったのでしょう? 役立たず!
+ほとんどのAPIプロバイダーと同様に、GitHubはOPTIONSメソッドが実装されていないということが判明しました。
 
     >>> verbs = requests.options('http://a-good-website.com/api/cats')
     >>> print verbs.headers['allow']
@@ -556,8 +582,12 @@ commits is POST, which creates a new commit. As we're using the Requests repo,
 we should probably avoid making ham-handed POSTS to it. Instead, let's play
 with the Issues feature of GitHub.
 
-This documentation was added in response to Issue #482. Given that this issue
-already exists, we will use it as an example. Let's start by getting it.::
+.. This documentation was added in response to Issue #482. Given that this issue
+   already exists, we will use it as an example. Let's start by getting it.::
+
+このドキュメントでは、レスポンスにIssue　#482を追加しました。
+このGithubのissueは存在していて、サンプルのように使うことができます。
+それを取得してみましょう。 ::
 
     >>> r = requests.get('https://api.github.com/repos/kennethreitz/requests/issues/482')
     >>> r.status_code
@@ -568,7 +598,10 @@ already exists, we will use it as an example. Let's start by getting it.::
     >>> print issue[u'comments']
     3
 
-Cool, we have three comments. Let's take a look at the last of them.::
+.. Cool, we have three comments. Let's take a look at the last of them.::
+
+クール、コメントが3つあります。
+最後のコメントを見てみましょう。 ::
 
     >>> r = requests.get(r.url + u'/comments')
     >>> r.status_code
@@ -585,9 +618,12 @@ that he's silly. Who is the poster, anyway?::
     >>> print comments[2][u'user'][u'login']
     kennethreitz
 
-OK, so let's tell this Kenneth guy that we think this example should go in the
-quickstart guide instead. According to the GitHub API doc, the way to do this
-is to POST to the thread. Let's do it.::
+.. OK, so let's tell this Kenneth guy that we think this example should go in the
+   quickstart guide instead. According to the GitHub API doc, the way to do this
+   is to POST to the thread. Let's do it.::
+
+この例は、クリックスタートガイドの代わりになると思うので、このKennethという人と話をしてみましょう。
+GitHubのAPIのドキュメントによると、この方法はスレッドにPOSTすればいいみたいです。やってみましょう。 ::
 
     >>> body = json.dumps({u"body": u"Sounds great! I'll get right on it!"})
     >>> url = u"https://api.github.com/repos/kennethreitz/requests/issues/482/comments"
@@ -595,9 +631,13 @@ is to POST to the thread. Let's do it.::
     >>> r.status_code
     404
 
-Huh, that's weird. We probably need to authenticate. That'll be a pain, right?
-Wrong. Requests makes it easy to use many forms of authentication, including
-the very common Basic Auth.::
+.. Huh, that's weird. We probably need to authenticate. That'll be a pain, right?
+   Wrong. Requests makes it easy to use many forms of authentication, including
+   the very common Basic Auth.::
+
+うーん、奇妙ですね。
+認証が必要なのかもしれません。面倒ではないですか?
+Requestsは、一般的なベーシック認証などの認証のためたくさんのフォームデータを簡単に使うことができます。 ::
 
     >>> from requests.auth import HTTPBasicAuth
     >>> auth = HTTPBasicAuth('fake@example.com', 'not_a_real_password')
@@ -608,10 +648,16 @@ the very common Basic Auth.::
     >>> print content[u'body']
     Sounds great! I'll get right on it.
 
-Brilliant. Oh, wait, no! I meant to add that it would take me a while, because
-I had to go feed my cat. If only I could edit this comment! Happily, GitHub
-allows us to use another HTTP verb, PATCH, to edit this comment. Let's do
-that.::
+.. Brilliant. Oh, wait, no! I meant to add that it would take me a while, because
+   I had to go feed my cat. If only I could edit this comment! Happily, GitHub
+   allows us to use another HTTP verb, PATCH, to edit this comment. Let's do
+   that.::
+
+素晴らしい。
+でもちょっと待った!
+追加するために、しばらく時間がかかるかもしれません。なぜなら、I had to go feed my catだからです。
+GitHubは、このコメントを編集するために、PATCHという別のHTTPメソッドを使うことができます。
+やってみましょう。 ::
 
     >>> print content[u"id"]
     5804413
@@ -621,10 +667,16 @@ that.::
     >>> r.status_code
     200
 
-Excellent. Now, just to torture this Kenneth guy, I've decided to let him
-sweat and not tell him that I'm working on this. That means I want to delete
-this comment. GitHub lets us delete comments using the incredibly aptly named
-DELETE method. Let's get rid of it.::
+.. Excellent. Now, just to torture this Kenneth guy, I've decided to let him
+   sweat and not tell him that I'm working on this. That means I want to delete
+   this comment. GitHub lets us delete comments using the incredibly aptly named
+   DELETE method. Let's get rid of it.::
+
+いいですね。
+今丁度このKennethという男を悩ませるために、彼に汗をかかせて、彼にこれを取り組んでいることを教えないようにしました。
+このコメントを削除したいということです。
+GitHubは、信じられないくらい適切な名前のDELETEというメソッドを使ってコメントを削除することができます。
+では削除してみましょう。 ::
 
     >>> r = requests.delete(url=url, auth=auth)
     >>> r.status_code
@@ -632,10 +684,14 @@ DELETE method. Let's get rid of it.::
     >>> r.headers['status']
     '204 No Content'
 
-Excellent. All gone. The last thing I want to know is how much of my ratelimit
-I've used. Let's find out. GitHub sends that information in the headers, so
-rather than download the whole page I'll send a HEAD request to get the
-headers.::
+.. Excellent. All gone. The last thing I want to know is how much of my ratelimit
+   I've used. Let's find out. GitHub sends that information in the headers, so
+   rather than download the whole page I'll send a HEAD request to get the
+   headers.::
+
+いいですね。
+全て完了しました。ratelimitがどのくらいあるかということことを最後に知っておきたいので、調べてみましょう。
+GitHubはヘッダーを取得するためにHEADリクエストを送るとページ全体をダウンロードせずに、ヘッダーの情報を送信してくれます。
 
     >>> r = requests.head(url=url, auth=auth)
     >>> print r.headers
@@ -644,5 +700,7 @@ headers.::
     'x-ratelimit-limit': '5000'
     // ...snip... //
 
-Excellent. Time to write a Python program that abuses the GitHub API in all
-kinds of exciting ways, 4995 more times.
+.. Excellent. Time to write a Python program that abuses the GitHub API in all
+   kinds of exciting ways, 4995 more times.
+
+いいですね。
