@@ -31,13 +31,17 @@ Pythonの標準の **urllib2** モジュールは、必要とされるほとん�
 
 ::
 
-    >>> r = requests.get('https://api.github.com', auth=('user', 'pass'))
+    >>> r = requests.get('https://api.github.com/user', auth=('user', 'pass'))
     >>> r.status_code
-    204
+    200
     >>> r.headers['content-type']
-    'application/json'
+    'application/json; charset=utf8'
+    >>> r.encoding
+    'utf-8'
     >>> r.text
-    ...
+    u'{"type":"User"...'
+    >>> r.json
+    {u'private_gists': 419, u'total_private_repos': 77, ...}
 
 .. See `the same code, without Requests <https://gist.github.com/973705>`_.
 

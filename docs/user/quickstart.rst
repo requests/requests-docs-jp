@@ -176,6 +176,23 @@ Requestsは、 ``r.text`` にアクセスした時にエンコーディングを
     >>> i = Image.open(StringIO(r.content))
 
 
+JSON Response Content
+---------------------
+
+.. There's also a builtin JSON decoder, in case you're dealing with JSON data::
+
+JSONデータを扱う場合に、JSONをデコードする機能もあります。 ::
+
+    >>> import requests
+    >>> r = requests.get('https://github.com/timeline.json')
+    >>> r.json
+    [{u'repository': {u'open_issues': 0, u'url': 'https://github.com/...
+
+.. In case the JSON decoding fails, ``r.json`` simply returns ``None``.
+
+JSONのデコードに失敗した場合、 ``r.json`` は単純に ``None`` を返します。
+
+
 .. Raw Response Content
    --------------------
 
