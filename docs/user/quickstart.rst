@@ -176,8 +176,11 @@ Requestsは、 ``r.text`` にアクセスした時にエンコーディングを
     >>> i = Image.open(StringIO(r.content))
 
 
-JSON Response Content
----------------------
+.. JSON Response Content
+   ---------------------
+
+JSONのレスポンスの内容
+------------------------
 
 .. There's also a builtin JSON decoder, in case you're dealing with JSON data::
 
