@@ -110,3 +110,4 @@ Urllib3
 - Roman Haritonov <@reclosedev>
 - Arup Malakar <amalakar@gmail.com>
 - Danilo Bargen (gwrtheyrn)
+- Torsten Landschoff
