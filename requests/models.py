@@ -102,10 +102,10 @@ class Request(object):
         #: 使用するHTTPメソッド
         self.method = method
 
-        # Dictionary or byte of request body data to attach to the
+        # Dictionary, bytes or file stream of request body data to attach to the
         # :class:`Request <Request>`.
         #: :class:`Request <Request>` に添付するためのリクエストの本文データの
-        #: バイトか辞書
+        #: 辞書かバイトかファイルストリーム
         self.data = None
 
         # Dictionary or byte of querystring data to attach to the
@@ -350,6 +350,8 @@ class Request(object):
             return data
         if isinstance(data, str):
             return data
+        elif hasattr(data, 'read'):
+            return data
         elif hasattr(data, '__iter__'):
             try:
                 dict(data)
@@ -558,7 +560,7 @@ class Request(object):
             if self.data:
 
                 body = self._encode_params(self.data)
-                if isinstance(self.data, str):
+                if isinstance(self.data, str) or hasattr(self.data, 'read'):
                     content_type = None
                 else:
                     content_type = 'application/x-www-form-urlencoded'
@@ -871,6 +873,9 @@ class Response(object):
         # Try charset from content-type
         content = None
         encoding = self.encoding
+
+        if not self.content:
+            return str('')
 
         # Fallback to auto-detected encoding.
         if self.encoding is None:
