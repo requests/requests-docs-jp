@@ -111,3 +111,4 @@ Urllib3
 - Arup Malakar <amalakar@gmail.com>
 - Danilo Bargen (gwrtheyrn)
 - Torsten Landschoff
+- Michael Holler (apotheos)
