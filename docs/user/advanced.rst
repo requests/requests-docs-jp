@@ -73,20 +73,31 @@
 セッション内に含まれている全ての値が直接使用可能です。
 詳しくは :ref:`Session API Docs <sessionapi>` を見て下さい。
 
-Request and Response Objects
-----------------------------
+.. Request and Response Objects
+   ----------------------------
 
-Whenever a call is made to requests.*() you are doing two major things. First,
-you are constructing a ``Request`` object which will be sent of to a server
-to request or query some resource. Second, a ``Response`` object is generated
-once ``requests`` gets a response back from the server. The response object
-contains all of the information returned by the server and also contains the
-``Request`` object you created originally. Here is a simple request to get some
-very important information from Wikipedia's servers::
+リクエストオブジェクトとレスポンスオブジェクト
+----------------------------------------------
+
+.. Whenever a call is made to requests.*() you are doing two major things. First,
+   you are constructing a ``Request`` object which will be sent of to a server
+   to request or query some resource. Second, a ``Response`` object is generated
+   once ``requests`` gets a response back from the server. The response object
+   contains all of the information returned by the server and also contains the
+   ``Request`` object you created originally. Here is a simple request to get some
+   very important information from Wikipedia's servers::
+
+requests.*() が呼ばれるたびに2つの主要なことをやっています。
+一番目が ``リクエスト`` オブジェクトが作成され、これがいくつかのリソースを要求したり、照会するサーバーに送信したりします。
+二番目が　``requests``　がサーバーから返されたレスポンスを取得した時に ``レスポンス`` オブジェクトが生成されます。
+レスポンスオブジェクトはサーバーによって返された全ての情報を持っていて、作成した ``リクエスト`` オブジェクトも含まれています。
+Wikipediaのサーバーからとても重要な情報をいくつか取得するための簡単なリクエストを送信する処理は以下のとおりです。 ::
 
     >>> response = requests.get('http://en.wikipedia.org/wiki/Monty_Python')
 
-If we want to access the headers the server sent back to us, we do this::
+.. If we want to access the headers the server sent back to us, we do this::
+
+サーバーが送り返してきたヘッダーにアクセスするには以下のようにします。 ::
 
     >>> response.headers
     {'content-length': '56170', 'x-content-type-options': 'nosniff', 'x-cache':
@@ -98,8 +109,10 @@ If we want to access the headers the server sent back to us, we do this::
     'text/html; charset=UTF-8', 'x-cache-lookup': 'HIT from cp1006.eqiad.wmnet:3128,
     MISS from cp1010.eqiad.wmnet:80'}
 
-However, if we want to get the headers we sent the server, we simply access the
-request, and then the request's headers::
+.. However, if we want to get the headers we sent the server, we simply access the
+   request, and then the request's headers::
+
+しかしながら、サーバーに送信したヘッダーを取得したい場合は、単純にリクエストにアクセスしてリクエストのヘッダーを取得して下さい。 ::
 
     >>> response.request.headers
     {'Accept-Encoding': 'identity, deflate, compress, gzip',
@@ -337,15 +350,25 @@ Requestsにはリクエストの処理やシグナルイベントの処理の一
 
 Requestsは認証システムを好きなものを使うことができます。
 
-Any callable which is passed as the ``auth`` argument to a request method will
-have the opportunity to modify the request before it is dispatched.
+.. Any callable which is passed as the ``auth`` argument to a request method will
+   have the opportunity to modify the request before it is dispatched.
 
-Authentication implementations are subclasses of ``requests.auth.AuthBase``,
-and are easy to define. Requests provides two common authentication scheme
-implementations in ``requests.auth``: ``HTTPBasicAuth`` and ``HTTPDigestAuth``.
+リクエストメソッドの ``auth`` 引数に渡された任意の呼び出し可能なオブジェクトは、
+リクエストが処理される前に修正されるタイミングがあります。
 
-Let's pretend that we have a web service that will only respond if the
-``X-Pizza`` header is set to a password value. Unlikely, but just go with it.
+.. Authentication implementations are subclasses of ``requests.auth.AuthBase``,
+   and are easy to define. Requests provides two common authentication scheme
+   implementations in ``requests.auth``: ``HTTPBasicAuth`` and ``HTTPDigestAuth``.
+
+認証の実装は ``requests.auth.AuthBase`` のサブクラスで、定義は簡単です。
+Requestsは ``requests.auth`` で ``HTTPBasicAuth`` と ``HTTPDigestAuth``
+という2つの一般的な認証スキームの実装を備えています。
+
+.. Let's pretend that we have a web service that will only respond if the
+   ``X-Pizza`` header is set to a password value. Unlikely, but just go with it.
+
+``X-Pizza`` ヘッダーにパスワードの値が設定されている場合にのみ応答するウェブサービスがあるので設定しているふりをしてみましょう。
+以下のようにするだけです。
 
 ::
 
