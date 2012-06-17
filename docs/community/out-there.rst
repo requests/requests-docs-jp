@@ -15,7 +15,7 @@
 .. `daikon <https://github.com/neogenix/daikon>`_, a CLI for ElasticSearch.
 
 - `requests-oauth <https://github.com/maraujop/requests-oauth>`_ - RequestsにOAuth機能を追加します。
-- `rauth <https://github.com/litl/rauth>`_, an alternative to requests-oauth, supports OAuth versions 1.0 and 2.0.
+- `rauth <https://github.com/litl/rauth>`_, - OAuthのバージョン1.0と2.0をサポートしているrequests-oauthとは別のライブラリです。
 - `FacePy <https://github.com/jgorset/facepy>`_ - Facebook APIのPythonラッパーです。
 - `robotframework-requests <https://github.com/bulkan/robotframework-requests>`_ - Robot Framework のAPIラッパーです。
 - `fullerene <https://github.com/bitprophet/fullerene>`_ - グラファイトダッシュボード。
