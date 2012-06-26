@@ -405,7 +405,7 @@ RequestsはMultipartエンコードのファイルをアップロードするこ
 
 レスポンスのステータスコードを確認することができます。 ::
 
-    >>> r = requests.get("http://httpbin.org/get')
+    >>> r = requests.get('http://httpbin.org/get')
     >>> r.status_code
     200
 
