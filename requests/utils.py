@@ -25,8 +25,8 @@ _hush_pyflakes = (RequestsCookieJar,)
 CERTIFI_BUNDLE_PATH = None
 try:
     # see if requests's own CA certificate bundle is installed
-    import certifi
-    CERTIFI_BUNDLE_PATH = certifi.where()
+    from . import certs
+    CERTIFI_BUNDLE_PATH = certs.where()
 except ImportError:
     pass
 
@@ -40,6 +40,10 @@ POSSIBLE_CA_BUNDLE_PATHS = [
         '/etc/ssl/certs/ca-certificates.crt',
         # FreeBSD (provided by the ca_root_nss package):
         '/usr/local/share/certs/ca-root-nss.crt',
+        # openSUSE (provided by the ca-certificates package), the 'certs' directory is the
+        # preferred way but may not be supported by the SSL module, thus it has 'ca-bundle.pem'
+        # as a fallback (which is generated from pem files in the 'certs' directory):
+        '/etc/ssl/ca-bundle.pem',
 ]
 
 def get_os_ca_bundle_path():

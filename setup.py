@@ -1,19 +1,13 @@
 #!/usr/bin/env python
 
-"""
-distutils/setuptools install script. See inline comments for packaging documentation.
-"""
-
 import os
 import sys
 
 import requests
-from requests.compat import is_py3
+from requests.compat import is_py2
 
 try:
     from setuptools import setup
-    # hush pyflakes
-    setup
 except ImportError:
     from distutils.core import setup
 
@@ -26,28 +20,22 @@ packages = [
     'requests.packages',
     'requests.packages.urllib3',
     'requests.packages.urllib3.packages',
-    'requests.packages.urllib3.packages.ssl_match_hostname',
+    'requests.packages.urllib3.packages.ssl_match_hostname'
 ]
 
-requires = []
-
-# certifi is a Python package containing a CA certificate bundle for SSL
-# verification.  On certain supported platforms (e.g., Red Hat / Debian /
-# FreeBSD), Requests can use the system CA bundle instead; see `requests.utils`
-# for details.
-if not requests.utils.get_os_ca_bundle_path():
-    requires.append('certifi>=0.0.7')
-
-# chardet is used to optimally guess the encodings of pages that don't declare one.
-# At this time, chardet is not a required dependency. However, it's sufficiently
-# important that pip/setuptools should install it when it's unavailable.
-if is_py3:
-    chardet_package = 'chardet2'
+if is_py2:
+    packages.extend([
+        'requests.packages.oauthlib',
+        'requests.packages.oauthlib.oauth1',
+        'requests.packages.oauthlib.oauth1.rfc5849',
+        'requests.packages.oauthlib.oauth2',
+        'requests.packages.oauthlib.oauth2.draft25',
+        'requests.packages.chardet',
+    ])
 else:
-    chardet_package = 'chardet>=1.0.0'
-    requires.append('oauthlib>=0.1.0,<0.2.0')
+    packages.append('requests.packages.chardet2')
 
-requires.append(chardet_package)
+requires = []
 
 setup(
     name='requests',
@@ -59,10 +47,11 @@ setup(
     author_email='me@kennethreitz.com',
     url='http://python-requests.org',
     packages=packages,
-    package_data={'': ['LICENSE', 'NOTICE']},
+    package_data={'': ['LICENSE', 'NOTICE'], 'requests': ['*.pem']},
+    package_dir={'requests': 'requests'},
     include_package_data=True,
     install_requires=requires,
-    license=open("LICENSE").read(),
+    license=open('LICENSE').read(),
     classifiers=(
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
