@@ -62,7 +62,8 @@ Keep-aliveやHTTP接続のプーリングは、Requestsに `urllib3 <https://git
 推薦文
 ------------
 
-.. `Heroku <http://heroku.com>`_,
+.. `Kippt <http://kippt.com>`_,
+   `Heroku <http://heroku.com>`_,
    `PayPal <https://www.paypal.com/>`_,
    `Transifex <https://www.transifex.net/>`_,
    `Native Instruments <http://www.native-instruments.com/>`_, `The Washington Post <http://www.washingtonpost.com/>`_,
@@ -71,11 +72,9 @@ Keep-aliveやHTTP接続のプーリングは、Requestsに `urllib3 <https://git
    Federal US Institutions
    use Requests internally. It has been installed over 100,000 times from PyPI.
 
-`Heroku <http://heroku.com>`_, 
-`PayPal <https://www.paypal.com/>`_,
+`Kippt <http://kippt.com>`_, `Heroku <http://heroku.com>`_, `PayPal <https://www.paypal.com/>`_,
 `Transifex <https://www.transifex.net/>`_,
-`Native Instruments <http://www.native-instruments.com/>`_,
-`The Washington Post <http://www.washingtonpost.com/>`_,
+`Native Instruments <http://www.native-instruments.com/>`_, `The Washington Post <http://www.washingtonpost.com/>`_,
 `Twitter, Inc <http://twitter.com>`_,
 `Readability <http://readability.com>`_,
 Federal US Institutions は内部でRequestsを使っています。

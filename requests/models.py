@@ -7,7 +7,6 @@ requests.models
 This module contains the primary objects that power Requests.
 """
 
-import json
 import os
 from datetime import datetime
 
@@ -32,7 +31,7 @@ from .utils import (
     DEFAULT_CA_BUNDLE_PATH)
 from .compat import (
     cookielib, urlparse, urlunparse, urljoin, urlsplit, urlencode, str, bytes,
-    StringIO, is_py2, chardet)
+    StringIO, is_py2, chardet, json)
 
 REDIRECT_STATI = (codes.moved, codes.found, codes.other, codes.temporary_moved)
 CONTENT_CHUNK_SIZE = 10 * 1024

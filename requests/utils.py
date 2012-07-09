@@ -12,10 +12,13 @@ that are also useful for external consumption.
 import cgi
 import codecs
 import os
+import platform
 import re
+import sys
 import zlib
 from netrc import netrc, NetrcParseError
 
+from . import __version__
 from .compat import parse_http_list as _parse_list_header
 from .compat import quote, urlparse, basestring, bytes, str
 from .cookies import RequestsCookieJar, cookiejar_from_dict
@@ -251,14 +254,9 @@ def header_expand(headers):
 
 
 def dict_from_cookiejar(cj):
-    """
-    .. Returns a key/value dictionary from a CookieJar.
+    """Returns a key/value dictionary from a CookieJar.
 
-    CookieJarからキー/バリューの辞書を返します。
-
-    .. :param cj: CookieJar object to extract cookies from.
-
-    :param cj: クッキーを取得するためのCookieJarオブジェクト
+    :param cj: CookieJar object to extract cookies from.
     """
 
     cookie_dict = {}
@@ -273,15 +271,10 @@ def dict_from_cookiejar(cj):
 
 
 def add_dict_to_cookiejar(cj, cookie_dict):
-    """
-    .. Returns a CookieJar from a key/value dictionary.
+    """Returns a CookieJar from a key/value dictionary.
 
-    キー/バリューの辞書からCookieJarを返します。
-
-    .. :param cj: CookieJar to insert cookies into.
-    .. :param cookie_dict: Dict of key/values to insert into CookieJar.
-    :param cj: クッキーに追加するためのCookieJar
-    :param cookie_dict: CookieJarに追加するためのキー/バリューの辞書
+    :param cj: CookieJar to insert cookies into.
+    :param cookie_dict: Dict of key/values to insert into CookieJar.
     """
 
     cj2 = cookiejar_from_dict(cookie_dict)
@@ -291,13 +284,9 @@ def add_dict_to_cookiejar(cj, cookie_dict):
 
 
 def get_encodings_from_content(content):
-    """
-    .. Returns encodings from given content string.
+    """Returns encodings from given content string.
 
-    contentに与えられた文字列からエンコードを返します。
-
-    .. :param content: bytestring to extract encodings from.
-    :param content: エンコードを取得するためのバイト文字列
+    :param content: bytestring to extract encodings from.
     """
 
     charset_re = re.compile(r'<meta.*?charset=["\']*(.+?)["\'>]', flags=re.I)
@@ -306,13 +295,9 @@ def get_encodings_from_content(content):
 
 
 def get_encoding_from_headers(headers):
-    """
-    .. Returns encodings from given HTTP Header Dict.
+    """Returns encodings from given HTTP Header Dict.
 
-    与えられたHTTPヘッダーの辞書からエンコードを返します。
-
-    .. :param headers: dictionary to extract encoding from.
-    :param headers: エンコードを取得するための辞書
+    :param headers: dictionary to extract encoding from.
     """
 
     content_type = headers.get('content-type')
@@ -348,30 +333,17 @@ def stream_decode_response_unicode(iterator, r):
 
 
 def get_unicode_from_response(r):
-    """
-    .. Returns the requested content back in unicode.
+    """Returns the requested content back in unicode.
 
-    要求されたコンテンツをユニコードにして返します。
+    :param r: Response object to get unicode content from.
 
-    .. :param r: Response object to get unicode content from.
+    Tried:
 
-    :param r: ユニコードのコンテンツを取得するためのレスポンスオブジェクト
+    1. charset from content-type
 
-    .. Tried:
+    2. every encodings from ``<meta ... charset=XXX>``
 
-    以下の事を試みます。 :
-
-    .. charset from content-type
-
-    1. content-typeのcharsetを見ます
-
-    .. every encodings from ``<meta ... charset=XXX>``
-
-    2. ``<meta ... charset=XXX>`` のエンコードを見ます。
-
-    .. fall back and replace all unicode characters
-
-    3. 全ての文字列をユニコード文字列に置き換えます。
+    3. fall back and replace all unicode characters
 
     """
 
@@ -488,3 +460,31 @@ def get_environ_proxies():
     get_proxy = lambda k: os.environ.get(k) or os.environ.get(k.upper())
     proxies = [(key, get_proxy(key + '_proxy')) for key in proxy_keys]
     return dict([(key, val) for (key, val) in proxies if val])
+
+
+def default_user_agent():
+    """Return a string representing the default user agent."""
+    _implementation = platform.python_implementation()
+
+    if _implementation == 'CPython':
+        _implementation_version = platform.python_version()
+    elif _implementation == 'PyPy':
+        _implementation_version = '%s.%s.%s' % (
+                                                sys.pypy_version_info.major,
+                                                sys.pypy_version_info.minor,
+                                                sys.pypy_version_info.micro
+                                            )
+        if sys.pypy_version_info.releaselevel != 'final':
+            _implementation_version = ''.join([_implementation_version, sys.pypy_version_info.releaselevel])
+    elif _implementation == 'Jython':
+        _implementation_version = platform.python_version()  # Complete Guess
+    elif _implementation == 'IronPython':
+        _implementation_version = platform.python_version()  # Complete Guess
+    else:
+        _implementation_version = 'Unknown'
+
+    return " ".join([
+            'python-requests/%s' % __version__,
+            '%s/%s' % (_implementation, _implementation_version),
+            '%s/%s' % (platform.system(), platform.release()),
+        ])
