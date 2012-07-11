@@ -112,3 +112,7 @@ Urllib3
 - Danilo Bargen (gwrtheyrn)
 - Torsten Landschoff
 - Michael Holler (apotheos)
+- Timnit Gebru
+- Sarah Gonzalez
+- Victoria Mo
+- Leila Muhtasib

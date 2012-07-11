@@ -146,6 +146,33 @@ RequestsはウェブブラウザのようにHTTPSリクエストのSSL証明書�
 プライベート証明書用のCA_BUNDLEファイルのパスを ``verify`` に渡すこともできます。
 ``REQUESTS_CA_BUNDLE`` 環境変数を設定することもできます。
 
+.. Requests can also ignore verifying the SSL certficate if you set ``verify`` to False. ::
+
+``verify`` をFalseにした場合、RequestsはがSSL証明書の検証を無視するようにすることもできます。 ::
+
+    >>> requests.get('https://kennethreitz.com', verify=False)
+    <Response [200]>
+
+.. By default, ``verify`` is set to True. Option ``verify`` only applies to host certs.
+
+デフォルトで、 ``verify`` はTrueに設定されています。
+``verify`` は、証明書をホスト提供するためだけのオプションです。
+
+.. You can also specify the local cert file either as a path or key value pair::
+
+ローカルのパスやキーとバリューのペアのどちらかを証明書として指定することもできます。 ::
+
+    >>> requests.get('https://kennethreitz.com', cert=('/path/server.crt', '/path/key'))
+    <Response [200]>
+
+.. If you specify a wrong path or an invalid cert::
+
+もし間違ったパスや不正な証明書を指定した場合 ::
+
+    >>> requests.get('https://kennethreitz.com', cert='/wrong_path/server.pem')
+    SSLError: [Errno 336265225] _ssl.c:347: error:140B0009:SSL routines:SSL_CTX_use_PrivateKey_file:PEM lib
+
+
 .. Body Content Workflow
    ---------------------
 
