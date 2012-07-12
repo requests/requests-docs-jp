@@ -607,10 +607,14 @@ RequestsのOPTIONSメソッドを活用することができます。 ::
     >>> print verbs.headers['allow']
     GET,HEAD,POST,OPTIONS
 
-Turning to the documentation, we see that the only other method allowed for
-commits is POST, which creates a new commit. As we're using the Requests repo,
-we should probably avoid making ham-handed POSTS to it. Instead, let's play
-with the Issues feature of GitHub.
+.. Turning to the documentation, we see that the only other method allowed for
+   commits is POST, which creates a new commit. As we're using the Requests repo,
+   we should probably avoid making ham-handed POSTS to it. Instead, let's play
+   with the Issues feature of GitHub.
+
+ドキュメントを見てみると、
+新しいコミットを作成するためのコミットするための許されている他のメソッドはPOSTしかないということがわかります。
+
 
 .. This documentation was added in response to Issue #482. Given that this issue
    already exists, we will use it as an example. Let's start by getting it.::
@@ -642,8 +646,12 @@ with the Issues feature of GitHub.
     >>> print comments[2][u'body']
     Probably in the "advanced" section
 
-Well, that seems like a silly place. Let's post a comment telling the poster
-that he's silly. Who is the poster, anyway?::
+.. Well, that seems like a silly place. Let's post a comment telling the poster
+   that he's silly. Who is the poster, anyway?::
+
+まあ、それは愚かな場所のように思える。
+投稿者を伝えるコメントを投稿してみましょう。
+だれが投稿者か見てみましょう?
 
     >>> print comments[2][u'user'][u'login']
     kennethreitz

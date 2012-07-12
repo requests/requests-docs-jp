@@ -30,7 +30,7 @@ Requestsは、 :pep:`20` 規約に基づいて開発されました。
 
 .. All contributions to Requests should keep these important rules in mind.
 
-Requestsへの全ての貢献はこれらの重要なルールに基づかなければいけません。
+Requestsに対する貢献の全ては、これらの重要なルールに基づいていなければいけません。
 
 .. ISC License
    -----------
@@ -43,7 +43,7 @@ ISCライセンス
    go-to license for your next open source project.
 
 今日見つかるオープンソースプロジェクトのほとんどが `GPL Licensed`_ です。
-GPLは様々な時代と場所で使われてきましたので、次のオープンソースプロジェクトのライセンスで採用するライセンスではきっとありません。
+GPLは様々な時代と場所で使われてきましたが、次のオープンソースプロジェクトのライセンスで採用するライセンスではきっとありません。
 
 .. A project that is released as GPL cannot be used in any commercial product
    without the product itself also being offered as open source.
@@ -55,6 +55,7 @@ GPLでリリースされているプロジェクトは、ソースコードを�
    closed-source software.
 
 MIT、BSD、ISC、Apache2のライセンスは、GPLとは違った素晴らしいライセンスです。
+自由に使うことができて、ソースを公開する必要がありません。
 
 .. Requests is released under terms of `The ISC License`_.
 
