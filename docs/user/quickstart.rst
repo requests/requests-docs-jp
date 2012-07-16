@@ -324,7 +324,7 @@ RequestsはMultipartエンコードのファイルをアップロードするこ
 ファイルとして受け取りたい場合に文字列を送信することができます。 ::
 
     >>> url = 'http://httpbin.org/post'
-    >>> files = {'file': ('report.csv', 'some,data,to,send\nanother,row,to,send\n')} 
+    >>> files = {'file': ('report.csv', 'some,data,to,send\nanother,row,to,send\n')}
 
     >>> r = requests.post(url, files=files)
     >>> r.text
@@ -613,10 +613,11 @@ GitHubは全てのHTTPリクエストをHTTPSにリダイレクトします。�
     [<Response [301]>]
 
 .. The :class:`Response.history` list contains a list of the
-   :class:`Request` objects that were created in order to complete the request.
+   :class:`Request` objects that were created in order to complete the request. The list is sorted from the oldest to the most recent request.
 
-:class:`Response.history` は、リクエストが完了したときに作られる :class:`Request` オブジェクトが
-リストとして入っています。
+:class:`Response.history` は、
+リクエストが完了したときに作られる :class:`Request` オブジェクトがリストとして入っています。
+リストはリクエストの古いものから最も新しいものの順に並べ替えられます。
 
 .. If you're using GET, HEAD, or OPTIONS, you can disable redirection
    handling with the ``allow_redirects`` parameter::

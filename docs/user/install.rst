@@ -83,35 +83,3 @@ Requestsは、GitHub上で活発に開発されていて、コードは `いつ�
 簡単にインストールすることができます。
 
     $ python setup.py install
-
-.. _gevent:
-
-Geventをインストールする
---------------------------------
-
-.. Installing Gevent
-   -----------------
-
-.. If you are using the ``requests.async`` module for making concurrent
-   requests, you need to install gevent.
-
-コンカレントリクエストを生成するための ``requests.async`` モジュールを使う場合、
-geventをインストールする必要があります。
-
-.. To install gevent, you'll need ``libevent``.
-
-geventをインストールするためには、 ``libevent`` が必要です。
-
-OSX::
-
-    $ brew install libevent
-
-Ubuntu::
-
-    $ apt-get install libevent-dev
-
-.. Once you have ``libevent``, you can install ``gevent`` with ``pip``::
-
-``libevent`` がインストールされたら、 ``pip`` で ``gevent`` をインストールできます。 ::
-
-    $ pip install gevent

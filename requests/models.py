@@ -427,14 +427,14 @@ class Request(object):
             if isinstance(fragment, str):
                 fragment = fragment.encode('utf-8')
 
-        url = (urlunparse([scheme, netloc, path, params, query, fragment]))
-
         enc_params = self._encode_params(self.params)
         if enc_params:
-            if urlparse(url).query:
-                url = '%s&%s' % (url, enc_params)
+            if query:
+                query = '%s&%s' % (query, enc_params)
             else:
-                url = '%s?%s' % (url, enc_params)
+                query = enc_params
+
+        url = (urlunparse([scheme, netloc, path, params, query, fragment]))
 
         if self.config.get('encode_uri', True):
             url = requote_uri(url)
@@ -726,9 +726,10 @@ class Response(object):
 
         # A list of :class:`Response <Response>` objects from
         # the history of the Request. Any redirect responses will end
-        # up here.
+        # up here. The list is sorted from the oldest to the most recent request.
         #: Requestsのhistoryから :class:`Response <Response>` オブジェクトがリストで入っています。
         #: リダイレクトレスポンスはここで終了します。
+        #: リストはリクエストの古いものから最も新しいものの順に並べ替えられます。
         self.history = []
 
         # The :class:`Request <Request>` that created the Response.

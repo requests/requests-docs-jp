@@ -116,3 +116,4 @@ Urllib3
 - Sarah Gonzalez
 - Victoria Mo
 - Leila Muhtasib
+- Matthias Rahlf <matthias@webding.de>

@@ -3,7 +3,14 @@
 History
 -------
 
+0.13.3 (2012-07-12)
++++++++++++++++++++
+
 - Use simplejson if available.
+- Do not hide SSLErrors behind Timeouts.
+- Fixed param handling with urls containing fragments.
+- Significantly improved information in User Agent.
+- client certificates are ignored when verify=False
 
 0.13.2 (2012-06-28)
 +++++++++++++++++++
