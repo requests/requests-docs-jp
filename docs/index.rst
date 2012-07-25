@@ -96,7 +96,7 @@ PyPIから100,000回以上インストールされました。
     .. Nuked a 1200 LOC spaghetti code library with 10 lines of code thanks to
        @kennethreitz's request library. Today has been AWESOME.
 
-    1200行のスパゲッティーコードのライブラリを数10行くらいのコードにしてくれた@kennethreitzのリクエストライブラリに感謝しています。
+    1200行のスパゲッティーコードのライブラリを10数行くらいのコードにしてくれた@kennethreitzのリクエストライブラリに感謝しています。
     今日ではすばらしくなりました。
 
 **Kenny Meyers**
@@ -172,7 +172,7 @@ Requestsは現在のウェブに欠かせない機能を持っています。
 .. This part of the documentation, which is mostly prose, details the
    Requests ecosystem and community.
 
-ドキュメントのこの章は、Requestsのエコシステムやコミュニティについて書いています。
+ドキュメントのこの章は、Requestsのエコシステムやコミュニティについて紹介します。
 
 .. toctree::
    :maxdepth: 1
@@ -191,7 +191,7 @@ APIドキュメント
 .. If you are looking for information on a specific function, class or method,
    this part of the documentation is for you.
 
-特定の関数やクラスやメソッドの情報を探している場合、ドキュメントのこの章を見て下さい。
+特定の関数やクラスやメソッドの情報を探しているなら、ドキュメントのこの章を見て下さい。
 
 .. toctree::
    :maxdepth: 2
@@ -208,7 +208,7 @@ APIドキュメント
 .. If you want to contribute to the project, this part of the documentation is for
    you.
 
-プロジェクトに貢献したい場合、ドキュメントのこの章を見て下さい。
+プロジェクトに貢献したいなら、ドキュメントのこの章を見て下さい。
 
 .. toctree::
    :maxdepth: 1
