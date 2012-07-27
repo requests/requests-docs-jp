@@ -3,6 +3,15 @@
 History
 -------
 
+0.13.4 (2012-07-27)
++++++++++++++++++++
+
+- GSSAPI/Kerberos authentication!
+- App Engine 2.7 Fixes!
+- Fix leaking connections (from urllib3 update)
+- OAuthlib path hack fix
+- OAuthlib URL parameters fix.
+
 0.13.3 (2012-07-12)
 +++++++++++++++++++
 
