@@ -21,5 +21,4 @@ except ImportError:
     sys.path.insert(0, path)
     from oauthlib.oauth1 import rfc5849
     from oauthlib.common import extract_params
-
     from oauthlib.oauth1.rfc5849 import (Client, SIGNATURE_HMAC, SIGNATURE_TYPE_AUTH_HEADER)
