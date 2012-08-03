@@ -290,14 +290,14 @@ JSONのデコードに失敗した場合、 ``r.json`` は単純に ``None`` を
 RequestsはMultipartエンコードのファイルをアップロードすることが簡単にできます。 ::
 
     >>> url = 'http://httpbin.org/post'
-    >>> files = {'report.xls': open('report.xls', 'rb')}
+    >>> files = {'file': open('report.xls', 'rb')}
 
     >>> r = requests.post(url, files=files)
     >>> r.text
     {
       // ...snip... //
       "files": {
-        "report.xls": "<censored...binary...data>"
+        "file": "<censored...binary...data>"
       },
       // ...snip... //
     }

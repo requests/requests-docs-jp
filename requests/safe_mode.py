@@ -21,14 +21,15 @@ def catch_exceptions_if_in_safe_mode(function):
     and then return a blank Response object with the error field filled. This decorator
     wraps request() in api.py.
     """
-    
+
     def wrapped(method, url, **kwargs):
         # if save_mode, we catch exceptions and fill error field
-        if (kwargs.get('config') and kwargs.get('config').get('safe_mode')) or (kwargs.get('session') 
+        if (kwargs.get('config') and kwargs.get('config').get('safe_mode')) or (kwargs.get('session')
                                             and kwargs.get('session').config.get('safe_mode')):
             try:
                 return function(method, url, **kwargs)
-            except (RequestException, ConnectionError, HTTPError, socket.timeout) as e:
+            except (RequestException, ConnectionError, HTTPError,
+                    socket.timeout, socket.gaierror) as e:
                 r = Response()
                 r.error = e
                 r.raw = HTTPResponse() # otherwise, tests fail
