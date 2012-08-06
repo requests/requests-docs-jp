@@ -70,7 +70,7 @@ class Session(object):
         hooks=None,
         params=None,
         config=None,
-        prefetch=False,
+        prefetch=True,
         verify=True,
         cert=None):
 
@@ -109,7 +109,15 @@ class Session(object):
         return self
 
     def __exit__(self, *args):
-        pass
+        self.close()
+
+    def close(self):
+        """Dispose of any internal state.
+
+        Currently, this just closes the PoolManager, which closes pooled
+        connections.
+        """
+        self.poolmanager.clear()
 
     def request(self, method, url,
         params=None,
@@ -124,7 +132,7 @@ class Session(object):
         hooks=None,
         return_response=True,
         config=None,
-        prefetch=False,
+        prefetch=None,
         verify=None,
         cert=None):
 
@@ -148,7 +156,7 @@ class Session(object):
         .. :param proxies: (optional) Dictionary mapping protocol to the URL of the proxy.
         .. :param return_response: (optional) If False, an un-sent Request object will returned.
         .. :param config: (optional) A configuration dictionary.
-        .. :param prefetch: (optional) if ``True``, the response content will be immediately downloaded.
+        .. :param prefetch: (optional) whether to immediately download the response content. Defaults to ``True``.
         .. :param verify: (optional) if ``True``, the SSL cert will be verified. A CA_BUNDLE path can also be provided.
         .. :param cert: (optional) if String, path to ssl client cert file (.pem). If Tuple, ('cert', 'key') pair.
         :param method: 新しい :class:`Request` オブジェクトのメソッド
@@ -164,7 +172,7 @@ class Session(object):
         :param proxies: プロキシのURLにプロトコルをマッピングする辞書(任意)
         :param return_response: Falseにすると、送信されていないリクエストオブジェクトが返ってきます。(任意)
         :param config: コンフィグレーションの辞書(任意)
-        :param prefetch: ``True`` にすると、レスポンスの本文はすぐにダウンロードされます。(任意)
+        :param prefetch: レスポンスの本文がすぐにダウンロードされるかどうかセットします(任意)。デフォルトは ``True`` です。
         :param verify: ``True`` にすると、SSL証明書が検証されます。CA_BUNDLEへのパスもあります。(任意)
         :param cert: 文字列の場合、SSLクライアントの証明書ファイル(.pem)へのパス。タプルの場合、('cert', 'key')のペア。(任意)
         """
@@ -177,7 +185,7 @@ class Session(object):
         headers = {} if headers is None else headers
         params = {} if params is None else params
         hooks = {} if hooks is None else hooks
-        prefetch = self.prefetch or prefetch
+        prefetch = prefetch if prefetch is not None else self.prefetch
 
         # use session's hooks as defaults
         for key, cb in list(self.hooks.items()):
