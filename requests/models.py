@@ -32,7 +32,7 @@ from .utils import (
     DEFAULT_CA_BUNDLE_PATH)
 from .compat import (
     cookielib, urlparse, urlunparse, urljoin, urlsplit, urlencode, str, bytes,
-    StringIO, is_py2, chardet, json, builtin_str)
+    StringIO, is_py2, chardet, json, builtin_str, numeric_types)
 
 REDIRECT_STATI = (codes.moved, codes.found, codes.other, codes.temporary_moved)
 CONTENT_CHUNK_SIZE = 10 * 1024
@@ -318,7 +318,8 @@ class Request(object):
                     proxies=self.proxies,
                     verify=self.verify,
                     session=self.session,
-                    cert=self.cert
+                    cert=self.cert,
+                    prefetch=self.prefetch,
                 )
 
                 request.send()
@@ -383,7 +384,7 @@ class Request(object):
             fields.update({k: (fn, fp.read())})
 
         for field in fields:
-            if isinstance(fields[field], float):
+            if isinstance(fields[field], numeric_types):
                 fields[field] = str(fields[field])
             if isinstance(fields[field], list):
                 newvalue = ', '.join(fields[field])
@@ -501,7 +502,7 @@ class Request(object):
         except ValueError:
             return False
 
-    def send(self, anyway=False, prefetch=True):
+    def send(self, anyway=False, prefetch=None):
         """
         .. Sends the request. Returns True if successful, False if not.
            If there was an HTTPError during transmission,
@@ -516,8 +517,12 @@ class Request(object):
         リクエストの送信に成功したら、 `sent` はTrueになります。
 
         .. :param anyway: If True, request will be sent, even if it has
-        already been sent.
+           already been sent.
         :param anyway: Trueにすると、既に送信されていたとしても、リクエストは送信されます。
+
+        .. :param prefetch: If not None, will override the request's own setting
+           for prefetch.
+        :param prefetch: Noneではない場合、プリフェッチするためにRequestの設定を上書きします。
         """
 
         # Build the URL
@@ -676,7 +681,9 @@ class Request(object):
             self.__dict__.update(r.__dict__)
 
             # If prefetch is True, mark content as consumed.
-            if prefetch or self.prefetch:
+            if prefetch is None:
+                prefetch = self.prefetch
+            if prefetch:
                 # Save the response.
                 self.response.content
 
