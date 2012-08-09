@@ -8,6 +8,7 @@ This module contains the primary objects that power Requests.
 """
 
 import os
+import socket
 from datetime import datetime
 
 from .hooks import dispatch_hook, HOOKS
@@ -79,8 +80,16 @@ class Request(object):
         self.timeout = timeout
 
         # Request URL.
+        # Accept objects that have string representations.
         #: リクエストのURL
-        self.url = url
+        #: 文字列表現を持つオブジェクトを受け入れます。
+        try:
+            self.url = unicode(url)
+        except NameError:
+            # We're on Python 3.
+            self.url = str(url)
+        except UnicodeDecodeError:
+            self.url = url
 
         # Dictionary of HTTP Headers to attach to the :class:`Request <Request>`.
         #: :class:`Request <Request>` に添付するHTTPヘッダーの辞書
@@ -658,6 +667,9 @@ class Request(object):
                     timeout=self.timeout,
                 )
                 self.sent = True
+
+            except socket.error as sockerr:
+                raise ConnectionError(sockerr)
 
             except MaxRetryError as e:
                 raise ConnectionError(e)
