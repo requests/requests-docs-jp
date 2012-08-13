@@ -117,3 +117,4 @@ Urllib3
 - Victoria Mo
 - Leila Muhtasib
 - Matthias Rahlf <matthias@webding.de>
+- Jakub Roztocil <jakub@roztocil.name>

@@ -138,16 +138,30 @@ URLを表示して、URLが正しくエンコードされたか見ることが�
 Requestsはサーバーからの内容を自動的にデコードします。
 ほとんどのユニコード文字はシームレスにデコードされます。
 
-.. When you make a request, ``r.encoding`` is set, based on the HTTP headers.
-   Requests will use that encoding when you access ``r.text``.  If ``r.encoding``
-   is ``None``, Requests will make an extremely educated guess of the encoding
-   of the response body. You can manually set ``r.encoding`` to any encoding
-   you'd like, and that charset will be used.
+.. When you make a request, Requests makes educated guesses about the encoding of
+   the response based on the HTTP headers. The text encoding guessed by Requests
+   is used when you access ``r.text``. You can find out what encoding Requests is
+   using, and change it, using the ``r.encoding`` property::
 
-リクエストを行う時に、HTTPヘッダーに基づいて、 ``r.encoding`` はセットされます。
-Requestsは、 ``r.text`` にアクセスした時にエンコーディングを使います。
-もし ``r.encoding`` が ``None`` の場合、Requestsはレスポンスボディーのエンコードから推測します。
-``r.encoding`` を好きなエンコードに手動で設定することができ、そのエンコードの文字列が使われます。
+リクエストを作成した時、RequestsはHTTPヘッダーに基づいたレスポンスのエンコーディングについて推測する
+``r.text`` にアクセスした時に、Requestsで使われているテキストのエンコーディングは推測されます。
+Requestsで使われているエンコーディングは調べることができ、 ``r.encoding`` プロパティを使って変更することができます。
+
+    >>> r.encoding
+    'utf-8'
+    >>> r.encoding = 'ISO-8859-1'
+
+.. If you change the encoding, Requests will use the new value of ``r.encoding``
+   whenever you call ``r.text``.
+
+エンコーディングを変更した場合、Requestsは
+
+.. Requests will also use custom encodings in the event that you need them. If
+   you have created your own encoding and registered it with the ``codecs``
+   module, you can simply use the codec name as the value of ``r.encoding`` and
+   Requests will handle the decoding for you.
+
+Requests
 
 .. Binary Response Content
    -----------------------

@@ -10,7 +10,7 @@ pylint.txt
 toy.py
 violations.pyflakes.txt
 cover/
-docs/_build
+docs/_build/*
 requests.egg-info/
 *.pyc
 *.swp
