@@ -1,7 +1,7 @@
 .. _faq:
 
 よくある質問
-=====================
+=============================
 
 .. Frequently Asked Questions
    ==========================
@@ -19,7 +19,8 @@
 .. Requests automatically decompresses gzip-encoded responses, and does
    its best to decode response content to unicode when possible.
 
-Requestsは自動的にgzipエンコードされたレスポンスを解凍します。そして、可能ならレスポンスの本文をユニコードにしてデコードします。
+Requestsは自動的にgzipエンコードされたレスポンスを解凍します。
+そして、可能ならレスポンスの本文をユニコードにするためにデコードします。
 
 .. You can get direct access to the raw response (and even the socket),
    if needed as well.
@@ -46,7 +47,9 @@ Requestsは、他の任意のHTTPヘッダーとともにユーザーエージ�
 .. Chris Adams gave an excellent summary on
    `Hacker News <http://news.ycombinator.com/item?id=2884406>`_:
 
-Chris Adamsさんは、 `Hacker News <http://news.ycombinator.com/item?id=2884406>`_ ですばらいい見解を与えてくれました。
+Chris Adamsさんは、
+`Hacker News <http://news.ycombinator.com/item?id=2884406>`_ で、
+すばらしい見解を与えてくれました。
 
     .. httplib2 is part of why you should use requests: it's far more respectable
        as a client but not as well documented and it still takes way too much code
@@ -57,21 +60,30 @@ Chris Adamsさんは、 `Hacker News <http://news.ycombinator.com/item?id=288440
        whereas httplib2 feels more like an academic exercise than something
        people should use to build production systems[1].
 
-    httplib2はrequestsを
-    
+    httplib2はRequestsをなぜ使うべきかという理由の一部しか満たしていません。
+    クライアントとしてはとても立派ですがドキュメント化があまりされていません。
+    そして、基本的な操作をするためにたくさんのコードが必要になります。
+    httplib2がやろうとしていることに感謝していますが、実際は、代わりにRequestsを使っています。
+    モダンなHTTPクライアントを構築するためにローレベルの不満がたくさんあるので
+    私は現代のHTTPクライアントを構築するためのハードの低レベルの不快感のトンがあることを、やろうとしているかhttplib2の感謝が、実際に、だけではなく、リクエストを使用しています。
+    Kenneth Reitzはモチベーションが高く、人々が本番環境のシステムを構築するために使うべき
+    ケネス·ライツは、非常にやる気であり、彼はhttplib2のより多くのものよりも学術的な運動のような人々は生産システム[1]を構築するために使用する必要があります感じている一方、単純な物事が単純であるべき程度を取得します。
 
     .. Disclosure: I'm listed in the requests AUTHORS file but can claim credit
        for, oh, about 0.0001% of the awesomeness.
 
     : requestsのAUTHORSファイルにリストされていますが、
 
-    1. http://code.google.com/p/httplib2/issues/detail?id=96 is a good example:
-    an annoying bug which affect many people, there was a fix available for
-    months, which worked great when I applied it in a fork and pounded a couple
-    TB of data through it, but it took over a year to make it into trunk and
-    even longer to make it onto PyPI where any other project which required "
-    httplib2" would get the working version.
+    .. http://code.google.com/p/httplib2/issues/detail?id=96 is a good example:
+       an annoying bug which affect many people, there was a fix available for
+       months, which worked great when I applied it in a fork and pounded a couple
+       TB of data through it, but it took over a year to make it into trunk and
+       even longer to make it onto PyPI where any other project which required "
+       httplib2" would get the working version.
 
+    1. http://code.google.com/p/httplib2/issues/detail?id=96は良い例です。:
+    たくさんの人に影響がある迷惑なバグは、
+    多くの人々に影響を与える迷惑なバグは、私はフォークでそれを適用し、それを介してデータのカップルTBを打ち砕いたときに素晴らしい仕事を数ヶ月のために利用可能な修正が、ありましたが、それはさらに長くトランクにそれを作るために年を引き継ぎ、PyPIにそれを作るためにここで "httplib2の"作業バージョンになるだろう必要な他のプロジェクト。
 
 .. Python 3 Support?
    -----------------

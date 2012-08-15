@@ -254,9 +254,14 @@ def header_expand(headers):
 
 
 def dict_from_cookiejar(cj):
-    """Returns a key/value dictionary from a CookieJar.
+    """
+    .. Returns a key/value dictionary from a CookieJar.
 
-    :param cj: CookieJar object to extract cookies from.
+    CookieJarのkey/valueの辞書を返します。
+
+    .. :param cj: CookieJar object to extract cookies from.
+
+    :param cj: CookieJarのオブジェクトからクッキーを抽出する。
     """
 
     cookie_dict = {}
@@ -271,10 +276,16 @@ def dict_from_cookiejar(cj):
 
 
 def add_dict_to_cookiejar(cj, cookie_dict):
-    """Returns a CookieJar from a key/value dictionary.
+    """
+    .. Returns a CookieJar from a key/value dictionary.
 
-    :param cj: CookieJar to insert cookies into.
-    :param cookie_dict: Dict of key/values to insert into CookieJar.
+    key/valueの辞書からCookieJarを返します。
+
+    .. :param cj: CookieJar to insert cookies into.
+    .. :param cookie_dict: Dict of key/values to insert into CookieJar.
+
+    :param cj: クッキーに挿入するCookieJar。
+    :param cookie_dict: CookieJarに挿入するためのkey/valuesの辞書。
     """
 
     cj2 = cookiejar_from_dict(cookie_dict)
@@ -284,9 +295,14 @@ def add_dict_to_cookiejar(cj, cookie_dict):
 
 
 def get_encodings_from_content(content):
-    """Returns encodings from given content string.
+    """
+    .. Returns encodings from given content string.
 
-    :param content: bytestring to extract encodings from.
+    与えられたコンテンツの文字のエンコーディングを返します。
+
+    .. :param content: bytestring to extract encodings from.
+
+    :param content: エンコーディングを取り出すための文字列。
     """
 
     charset_re = re.compile(r'<meta.*?charset=["\']*(.+?)["\'>]', flags=re.I)
@@ -295,9 +311,14 @@ def get_encodings_from_content(content):
 
 
 def get_encoding_from_headers(headers):
-    """Returns encodings from given HTTP Header Dict.
+    """
+    .. Returns encodings from given HTTP Header Dict.
 
-    :param headers: dictionary to extract encoding from.
+    与えられたHTTPヘッダーの辞書からエンコーディングを返します。
+
+    .. :param headers: dictionary to extract encoding from.
+
+    :param headers: エンコーディングを取り出すための辞書。
     """
 
     content_type = headers.get('content-type')
@@ -333,17 +354,30 @@ def stream_decode_response_unicode(iterator, r):
 
 
 def get_unicode_from_response(r):
-    """Returns the requested content back in unicode.
+    """
+    .. Returns the requested content back in unicode.
 
-    :param r: Response object to get unicode content from.
+    リクエストされたコンテンツの返却にユニコードで返します。
 
-    Tried:
+    .. :param r: Response object to get unicode content from.
 
-    1. charset from content-type
+    :param r: ユニコードのコンテンツで取得するためのレスポンスオブジェクト。
 
-    2. every encodings from ``<meta ... charset=XXX>``
+    .. Tried:
 
-    3. fall back and replace all unicode characters
+    以下のことを試みます。
+
+    .. charset from content-type
+
+    .. every encodings from ``<meta ... charset=XXX>``
+
+    .. fall back and replace all unicode characters
+
+    1. Content-Typeからの文字コード
+
+    2. ``<meta ... charset=XXX>`` からエンコーディング
+
+    3. フォールバックして、全てのユニコードの文字列を置き換えます。
 
     """
 
