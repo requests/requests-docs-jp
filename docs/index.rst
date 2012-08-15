@@ -15,7 +15,7 @@ Requests: 人間のためのHTTP
 
 .. Requests is an :ref:`ISC Licensed <isc>` HTTP library, written in Python, for human beings.
 
-Requestsは、人が使いやすいように作られているPythonで書かれた :ref:`ISC Licensed <isc>` ベースのHTTPライブラリです。
+Requestsは、人が使いやすいように設計されているPythonで書かれた :ref:`ISC Licensed <isc>` ベースのHTTPライブラリです。
 
 .. Python's standard **urllib2** module provides most of
    the HTTP capabilities you need, but the API is thoroughly **broken**.

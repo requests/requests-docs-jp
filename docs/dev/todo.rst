@@ -2,7 +2,7 @@
    ===========
 
 サポート方法
-==============
+=================
 
 .. Requests is under active development, and contributions are more than welcome!
 
@@ -29,12 +29,13 @@ Requestsは活発に開発中で、プロジェクトへの貢献はどしどし
    ------------------------
 
 開発の際の依存関係
--------------------------
+---------------------------
 
 .. You'll need to install ``gunicorn`` and ``httpbin`` and various other dependencies in
    order to run requests' test suite::
 
-requestsのテストスイートを実行するために、 ``gunicorn`` や ``httpbin`` や他の依存するものをインストールする必要があります。 ::
+requestsのテストスイートを実行するために、
+``gunicorn`` や ``httpbin`` や他の依存するものをインストールする必要があります。 ::
 
     $ virtualenv env
     $ . env/bin/activate
@@ -43,13 +44,13 @@ requestsのテストスイートを実行するために、 ``gunicorn`` や ``h
 
 .. The ``Makefile`` has various useful targets for testing.
 
-``Makefile`` はテストをするために便利な対象があります。
+``Makefile`` は、様々なテスト用の便利なツールがあります。
 
 .. What Needs to be Done
    ---------------------
 
 やらなければいけないこと
------------------------------
+-------------------------------
 
 .. Documentation needs a roadmap.
 
