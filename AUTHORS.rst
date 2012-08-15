@@ -1,13 +1,14 @@
 .. Requests is written and maintained by Kenneth Reitz and
    various contributors:
 
-Requestsは、Kenneth Reitzやたくさんのコントリビューターによって作成してメンテナンスされています。 :
+Requestsは、Kenneth Reitzやたくさんのコントリビューターによって書かれていて、
+メンテナンスされています。 :
 
 .. Development Lead
    ````````````````
 
 メイン開発者
-````````````````
+```````````````````
 
 - Kenneth Reitz <me@kennethreitz.com>
 
@@ -22,7 +23,7 @@ Urllib3
    ```````````````````````
 
 パッチと提案
-``````````````````
+``````````````````````````
 
 - Various Pocoo Members
 - Chris Adams
