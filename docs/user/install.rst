@@ -9,7 +9,7 @@
 .. This part of the documentation covers the installation of Requests.
    The first step to using any software package is getting it properly installed.
 
-ドキュメントのこの章はRequestsのインストール方法をカバーしています。
+ドキュメントのこの章はRequestsのインストール方法を紹介しています。
 パッケージを使うための最初のステップは適切にインストールすることです。
 
 Distribute & Pip

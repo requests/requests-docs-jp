@@ -15,14 +15,14 @@ Requests: 人間のためのHTTP
 
 .. Requests is an :ref:`ISC Licensed <isc>` HTTP library, written in Python, for human beings.
 
-Requestsは、人が使いやすいように設計されているPythonで書かれた :ref:`ISC Licensed <isc>` ベースのHTTPライブラリです。
+Requestsは、人が使いやすいように設計されていて、Pythonで書かれている :ref:`ISC Licensed <isc>` ベースのHTTPライブラリです。
 
 .. Python's standard **urllib2** module provides most of
    the HTTP capabilities you need, but the API is thoroughly **broken**.
    It was built for a different time — and a different web. It requires an *enormous* amount of work (even method overrides) to perform the simplest of tasks.
 
-Pythonの標準の **urllib2** モジュールは、必要とされるほとんどのHTTPの機能を備えていますが、APIがまともに **使えません** 。
-様々なウェブ用に作られていて、何回も修正されてきました。
+Pythonの標準の **urllib2** モジュールは、必要とされるHTTPの機能のほとんどを備えていますが、APIがまともに **使えません** 。
+様々なウェブ用途に合わせて作られていて、何回も修正されてきました。
 簡単なことをするため(メソッドの上書きでさえ)に、 *かなり* の量の作業が必要になります。
 
 .. Things shouldn’t be this way. Not in Python.
@@ -97,7 +97,7 @@ PyPIから100,000回以上インストールされました。
        @kennethreitz's request library. Today has been AWESOME.
 
     1200行のスパゲッティーコードのライブラリを10数行くらいのコードにしてくれた@kennethreitzのリクエストライブラリに感謝しています。
-    今日ではすばらしくなりました。
+    すばらしくなりました。
 
 **Kenny Meyers**
     .. Python HTTP: When in doubt, or when not in doubt, use Requests. Beautiful,
@@ -131,15 +131,15 @@ Requestsは現在のウェブに欠かせない機能を持っています。
 - ドメインとURLの国際化
 - Keep-Aliveとコネクションプーリング
 - Cookieによるセッションの永続化
-- ブラウザのようなSSL接続
+- ブラウザのようなSSLによる接続
 - ベーシック/ダイジェスト認証
-- キー/バリューが整理されたCookie
+- エレガントなキー/バリューによるCookie
 - 圧縮の自動的な展開
 - レスポンスの本文のユニコード化
-- 複数のファイルアップロード
+- マルチパートファイルのアップロード
 - コネクションのタイムアウト
 - ``.netrc`` のサポート
-- スレッドセーフ.
+- スレッドセーフ
 
 .. User Guide
    ----------
@@ -152,7 +152,7 @@ Requestsは現在のウェブに欠かせない機能を持っています。
    instructions for getting the most out of Requests.
 
 ドキュメントのこの章は、Requestsに関するいくつかの背景を説明することから始めます。
-それから、Requestsを有効に使うための説明をステップバイステップで紹介します。
+それから、Requestsを最大限に使うための説明をステップバイステップで紹介します。
 
 .. toctree::
    :maxdepth: 2
