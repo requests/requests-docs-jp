@@ -438,11 +438,11 @@ Requestsは簡単に参照できるように、組み込みのステータスコ
 不正なリクエスト(200以外のレスポンス)を作りたい場合は、
 :class:`Response.raise_for_status()` で例外を発生させることができます。 ::
 
-    >>> _r = requests.get('http://httpbin.org/status/404')
-    >>> _r.status_code
+    >>> r = requests.get('http://httpbin.org/status/404')
+    >>> r.status_code
     404
 
-    >>> _r.raise_for_status()
+    >>> r.raise_for_status()
     Traceback (most recent call last):
       File "requests/models.py", line 832, in raise_for_status
         raise http_error
@@ -543,7 +543,7 @@ Pythonの辞書形式で簡単にサーバーのレスポンスヘッダーを�
 ベーシック認証
 -----------------
 
-.. Many web services require authentication. There many different types of
+.. Many web services require authentication. There are many different types of
    authentication, but the most common is HTTP Basic Auth.
 
 ほとんどのウェブサービスは認証システムが必要です。

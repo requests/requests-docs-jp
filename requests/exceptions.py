@@ -8,6 +8,7 @@ This module contains the set of Requests' exceptions.
 
 """
 
+
 class RequestException(RuntimeError):
     """
     .. There was an ambiguous exception that occurred while handling your
@@ -15,6 +16,7 @@ class RequestException(RuntimeError):
 
     リクエストを処理している時に発生した不明瞭な例外がある時
     """
+
 
 class HTTPError(RequestException):
     """
@@ -24,6 +26,7 @@ class HTTPError(RequestException):
     """
     response = None
 
+
 class ConnectionError(RequestException):
     """
     .. A Connection error occurred.
@@ -31,11 +34,14 @@ class ConnectionError(RequestException):
     コネクションエラーが発生した時
     """
 
+
 class SSLError(ConnectionError):
     """An SSL error occurred."""
 
+
 class Timeout(RequestException):
     """The request timed out."""
+
 
 class URLRequired(RequestException):
     """
@@ -44,6 +50,7 @@ class URLRequired(RequestException):
     リクエストを作成するために正しいURLを要求する時
     """
 
+
 class TooManyRedirects(RequestException):
     """
     .. Too many redirects.
@@ -51,11 +58,14 @@ class TooManyRedirects(RequestException):
     リダイレクトの回数が多い時
     """
 
+
 class MissingSchema(RequestException, ValueError):
     """The URL schema (e.g. http or https) is missing."""
 
+
 class InvalidSchema(RequestException, ValueError):
     """See defaults.py for valid schemas."""
+
 
 class InvalidURL(RequestException, ValueError):
     """ The URL provided was somehow invalid. """

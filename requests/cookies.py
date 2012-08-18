@@ -16,6 +16,7 @@ try:
 except ImportError:
     import dummy_threading as threading
 
+
 class MockRequest(object):
     """Wraps a `requests.Request` to mimic a `urllib2.Request`.
 
@@ -68,6 +69,7 @@ class MockRequest(object):
     def get_new_headers(self):
         return self._new_headers
 
+
 class MockResponse(object):
     """Wraps a `httplib.HTTPMessage` to mimic a `urllib.addinfourl`.
 
@@ -88,6 +90,7 @@ class MockResponse(object):
     def getheaders(self, name):
         self._headers.getheaders(name)
 
+
 def extract_cookies_to_jar(jar, request, response):
     """Extract the cookies from the response into a CookieJar.
 
@@ -101,11 +104,13 @@ def extract_cookies_to_jar(jar, request, response):
     res = MockResponse(response._original_response.msg)
     jar.extract_cookies(res, req)
 
+
 def get_cookie_header(jar, request):
     """Produce an appropriate Cookie header string to be sent with `request`, or None."""
     r = MockRequest(request)
     jar.add_cookie_header(r)
     return r.get_new_headers().get('Cookie')
+
 
 def remove_cookie_by_name(cookiejar, name, domain=None, path=None):
     """Unsets a cookie by name, by default over all domains and paths.
@@ -122,9 +127,11 @@ def remove_cookie_by_name(cookiejar, name, domain=None, path=None):
     for domain, path, name in clearables:
         cookiejar.clear(domain, path, name)
 
+
 class CookieConflictError(RuntimeError):
-    """There are two cookies that meet the criteria specified in the cookie jar. 
+    """There are two cookies that meet the criteria specified in the cookie jar.
     Use .get and .set and include domain and path args in order to be more specific."""
+
 
 class CookieConflictError(RuntimeError):
     """There are two cookies that meet the criteria specified in the cookie jar. 
@@ -250,7 +257,7 @@ class RequestsCookieJar(cookielib.CookieJar, collections.MutableMapping):
         remove_cookie_by_name(self, name)
 
     def _find(self, name, domain=None, path=None):
-        """Requests uses this method internally to get cookie values. Takes as args name 
+        """Requests uses this method internally to get cookie values. Takes as args name
         and optional domain and path. Returns a cookie.value. If there are conflicting cookies,
         _find arbitrarily chooses one. See _find_no_duplicates if you want an exception thrown
         if there are conflicting cookies."""
@@ -263,9 +270,9 @@ class RequestsCookieJar(cookielib.CookieJar, collections.MutableMapping):
         raise KeyError('name=%r, domain=%r, path=%r' % (name, domain, path))
 
     def _find_no_duplicates(self, name, domain=None, path=None):
-        """__get_item__ and get call _find_no_duplicates -- never used in Requests internally. 
-        Takes as args name and optional domain and path. Returns a cookie.value. 
-        Throws KeyError if cookie is not found and CookieConflictError if there are 
+        """__get_item__ and get call _find_no_duplicates -- never used in Requests internally.
+        Takes as args name and optional domain and path. Returns a cookie.value.
+        Throws KeyError if cookie is not found and CookieConflictError if there are
         multiple cookies that match name and optionally domain and path."""
         toReturn = None
         for cookie in iter(self):
@@ -296,6 +303,7 @@ class RequestsCookieJar(cookielib.CookieJar, collections.MutableMapping):
     def copy(self):
         """This is not implemented. Calling this will throw an exception."""
         raise NotImplementedError
+
 
 def create_cookie(name, value, **kwargs):
     """Make a cookie from underspecified parameters.
