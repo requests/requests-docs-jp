@@ -31,7 +31,7 @@ from .exceptions import (
 from .utils import (
     get_encoding_from_headers, stream_untransfer, guess_filename, requote_uri,
     stream_decode_response_unicode, get_netrc_auth, get_environ_proxies,
-    DEFAULT_CA_BUNDLE_PATH)
+    to_key_val_list, DEFAULT_CA_BUNDLE_PATH)
 from .compat import (
     cookielib, urlparse, urlunparse, urljoin, urlsplit, urlencode, str, bytes,
     StringIO, is_py2, chardet, json, builtin_str, numeric_types)
@@ -42,8 +42,8 @@ CONTENT_CHUNK_SIZE = 10 * 1024
 
 class Request(object):
     """
-    .. The :class:`Request <Request>` object. It carries out all functionality of
-       Requests. Recommended interface is with the Requests functions.
+    .. The :class:`Request <Request>` object. It carries out all functionality
+       of Requests. Recommended interface is with the Requests functions.
 
     :class:`Request <Request>` オブジェクトです。
     Requestsの全ての機能を担います。
@@ -350,21 +350,13 @@ class Request(object):
         if parameters are supplied as a dict.
         """
 
-        if isinstance(data, bytes):
-            return data
-        if isinstance(data, str):
+        if isinstance(data, (str, bytes)):
             return data
         elif hasattr(data, 'read'):
             return data
         elif hasattr(data, '__iter__'):
-            try:
-                dict(data)
-            except ValueError:
-                raise ValueError('Unable to encode lists with elements that are not 2-tuples.')
-
-            params = list(data.items() if isinstance(data, dict) else data)
             result = []
-            for k, vs in params:
+            for k, vs in to_key_val_list(data):
                 for v in isinstance(vs, list) and vs or [vs]:
                     result.append(
                         (k.encode('utf-8') if isinstance(k, str) else k,
@@ -597,7 +589,7 @@ class Request(object):
         no_proxy = filter(lambda x: x.strip(), self.proxies.get('no', '').split(','))
         proxy = self.proxies.get(_p.scheme)
 
-        if proxy and not any(map(_p.netloc.endswith, no_proxy)):
+        if proxy and not any(map(_p.hostname.endswith, no_proxy)):
             conn = poolmanager.proxy_from_url(proxy)
             _proxy = urlparse(proxy)
             if '@' in _proxy.netloc:
