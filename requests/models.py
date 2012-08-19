@@ -384,23 +384,11 @@ class Request(object):
         if (not files) or isinstance(self.data, str):
             return None
 
-        def tuples(obj):
-            """Ensure 2-tuples. A dict or a 2-tuples list can be supplied."""
-            if isinstance(obj, dict):
-                return list(obj.items())
-            elif hasattr(obj, '__iter__'):
-                try:
-                    dict(obj)
-                except ValueError:
-                    pass
-                else:
-                    return obj
-            raise ValueError('A dict or a list of 2-tuples required.')
+        new_fields = []
+        fields = to_key_val_list(self.data)
+        files = to_key_val_list(files)
 
-        # 2-tuples containing both file and data fields.
-        fields = []
-
-        for k, v in tuples(files):
+        for (k, v) in files:
             # support for explicit filename
             if isinstance(v, (tuple, list)):
                 fn, fp = v
@@ -411,16 +399,15 @@ class Request(object):
                 fp = StringIO(fp)
             if isinstance(fp, bytes):
                 fp = BytesIO(fp)
-            fields.append((k, (fn, fp.read())))
+            new_fields.append((k, (fn, fp.read())))
 
-        for k, vs in tuples(self.data):
-            if isinstance(vs, list):
-                for v in vs:
-                    fields.append((k, str(v)))
+        for field, val in fields:
+            if isinstance(val, list):
+                for v in val:
+                    new_fields.append((k, str(v)))
             else:
-                fields.append((k, str(vs)))
-
-        body, content_type = encode_multipart_formdata(fields)
+                new_fields.append((field, str(val)))
+        body, content_type = encode_multipart_formdata(new_fields)
 
         return body, content_type
 

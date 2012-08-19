@@ -20,7 +20,7 @@
    its best to decode response content to unicode when possible.
 
 Requestsは自動的にgzipエンコードされたレスポンスを解凍します。
-そして、可能ならレスポンスの本文をユニコードにするためにデコードします。
+そして、可能ならユニコード化するためにレスポンスの本文をデコードします。
 
 .. You can get direct access to the raw response (and even the socket),
    if needed as well.
@@ -48,8 +48,7 @@ Requestsは、他の任意のHTTPヘッダーとともにユーザーエージ�
    `Hacker News <http://news.ycombinator.com/item?id=2884406>`_:
 
 Chris Adamsさんは、
-`Hacker News <http://news.ycombinator.com/item?id=2884406>`_ で、
-すばらしい見解を与えてくれました。
+`Hacker News <http://news.ycombinator.com/item?id=2884406>`_ で、すばらしい見解を与えてくれました。
 
     .. httplib2 is part of why you should use requests: it's far more respectable
        as a client but not as well documented and it still takes way too much code
@@ -82,8 +81,7 @@ Chris Adamsさんは、
        httplib2" would get the working version.
 
     1. http://code.google.com/p/httplib2/issues/detail?id=96は良い例です。:
-    たくさんの人に影響がある迷惑なバグは、
-    多くの人々に影響を与える迷惑なバグは、私はフォークでそれを適用し、それを介してデータのカップルTBを打ち砕いたときに素晴らしい仕事を数ヶ月のために利用可能な修正が、ありましたが、それはさらに長くトランクにそれを作るために年を引き継ぎ、PyPIにそれを作るためにここで "httplib2の"作業バージョンになるだろう必要な他のプロジェクト。
+    たくさんの人に影響がある迷惑なバグは、私はフォークでそれを適用し、それを介してデータのカップルTBを打ち砕いたときに素晴らしい仕事を数ヶ月のために利用可能な修正が、ありましたが、それはさらに長くトランクにそれを作るために年を引き継ぎ、PyPIにそれを作るためにここで "httplib2の"作業バージョンになるだろう必要な他のプロジェクト。
 
 .. Python 3 Support?
    -----------------
