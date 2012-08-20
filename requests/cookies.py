@@ -366,6 +366,7 @@ def cookiejar_from_dict(cookie_dict, cookiejar=None):
     キー/バリューの辞書からCookieJarを返します。
 
     .. :param cookie_dict: Dict of key/values to insert into CookieJar.
+
     :param cookie_dict: CookieJarに追加するためのキー/バリューの辞書。
     """
     if cookiejar is None:
