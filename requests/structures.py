@@ -52,7 +52,7 @@ class LookupDict(dict):
     """
     .. Dictionary lookup object.
 
-    ルックアップオブジェクトの辞書
+    ルックアップオブジェクトの辞書。
     """
 
     def __init__(self, name=None):

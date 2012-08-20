@@ -10,7 +10,7 @@ requests.defaults
 
 .. Configurations:
 
-コンフィグレーション:
+設定の一覧:
 
 .. :base_headers: Default HTTP headers.
 .. :verbose: Stream to write request logging to.
@@ -26,18 +26,18 @@ requests.defaults
 .. :trust_env: If true, the surrouding environment will be trusted (environ, netrc).
 .. :param store_cookies: If false, the received cookies as part of the HTTP response would be ignored.
 
-:base_headers: デフォルトのHTTPヘッダー
-:verbose: リクエストのログを書き込みます。
-:max_redirects: request.sにおいて、リダイレクトしてもいい回数の最大値
-:keep_alive: HTTP接続の維持
-:max_retries: リクエストがコネクションに失敗した時にリトライする回数の最大値
+:base_headers: デフォルトのHTTPヘッダー。
+:verbose: リクエストのログを書き込むストリーム。
+:max_redirects: request.sにおいて、リダイレクトしてもいい回数の最大値。
+:keep_alive: HTTPコネクションを維持するかどうか。
+:max_retries: リクエストがコネクションに失敗した時にリトライする回数の最大値。
 :danger_mode: trueにすると、Requestsはすぐにエラーを発生させます。
 :safe_mode: trueにすると、全てのエラーをキャッチします。
-:strict_mode: trueにすると、RequestsはRFCsに準拠します(例えば、POSTのリダイレクト)。
-:pool_maxsize: HTTPコネクションプールのサイズの最大値
-:pool_connections: 使用するアクティブなHTTPコネクションプールの数
+:strict_mode: trueにすると、RequestsはRFCsに準拠するように試みます(例えば、POSTのリダイレクト)。
+:pool_maxsize: HTTPコネクションプールのサイズの最大値。
+:pool_connections: 使用するアクティブなHTTPコネクションプールの数。
 :encode_uri: trueにすると、URIは自動的にパーセントエンコードされます。
-:trust_env: trueにすると、環境(environ, netrc)を信頼出来るものとします。
+:trust_env: trueにすると、環境全体(environ, netrc)を信頼出来るものとします。
 :param store_cookies: falseにすると、HTTPレスポンスの一部として受け取ったクッキーが無視されます。
 """
 

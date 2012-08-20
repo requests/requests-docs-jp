@@ -114,6 +114,33 @@ def guess_filename(obj):
         return name
 
 
+def to_key_val_list(value):
+    """Take an object and test to see if it can be represented as a
+    dictionary. Unless it can not be represented as such, return a list of
+    tuples, e.g.,:
+
+    >>> to_key_val_list([('key', 'val')])
+    [('key', 'val')]
+    >>> to_key_val_list('string')
+    ValueError: ...
+    >>> to_key_val_list({'key': 'val'})
+    [('key', 'val')]
+    """
+    if value is None:
+        return None
+
+    try:
+        dict(value)
+    except ValueError:
+        raise ValueError('Unable to encode lists with elements that are not '
+                '2-tuples.')
+
+    if isinstance(value, dict) or hasattr(value, 'items'):
+        value = value.items()
+
+    return list(value)
+
+
 # From mitsuhiko/werkzeug (used with permission).
 def parse_list_header(value):
     """Parse lists as described by RFC 2068 Section 2.
@@ -263,7 +290,7 @@ def dict_from_cookiejar(cj):
 
     .. :param cj: CookieJar object to extract cookies from.
 
-    :param cj: CookieJarのオブジェクトからクッキーを抽出する。
+    :param cj: CookieJarオブジェクトからクッキーを取り出します。
     """
 
     cookie_dict = {}
@@ -304,7 +331,7 @@ def get_encodings_from_content(content):
 
     .. :param content: bytestring to extract encodings from.
 
-    :param content: エンコーディングを取り出すための文字列。
+    :param content: エンコーディングを取り出すためのバイト文字列。
     """
 
     charset_re = re.compile(r'<meta.*?charset=["\']*(.+?)["\'>]', flags=re.I)
@@ -359,15 +386,15 @@ def get_unicode_from_response(r):
     """
     .. Returns the requested content back in unicode.
 
-    リクエストされたコンテンツの返却にユニコードで返します。
+    リクエストされたコンテンツをユニコードで返します。
 
     .. :param r: Response object to get unicode content from.
 
-    :param r: ユニコードのコンテンツで取得するためのレスポンスオブジェクト。
+    :param r: ユニコードのコンテンツを取得するためのレスポンスオブジェクト。
 
     .. Tried:
 
-    以下のことを試みます。
+    以下のことを試みます。 :
 
     .. charset from content-type
 
@@ -375,9 +402,9 @@ def get_unicode_from_response(r):
 
     .. fall back and replace all unicode characters
 
-    1. Content-Typeからの文字コード
+    1. Content-Typeからの文字コードを取得。
 
-    2. ``<meta ... charset=XXX>`` からエンコーディング
+    2. ``<meta ... charset=XXX>`` からエンコーディング。
 
     3. フォールバックして、全てのユニコードの文字列を置き換えます。
 

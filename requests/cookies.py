@@ -1,5 +1,3 @@
-#-*- coding: utf-8 -*-
-
 """
 Compatibility code to be able to use `cookielib.CookieJar` with requests.
 
@@ -133,10 +131,6 @@ class CookieConflictError(RuntimeError):
     Use .get and .set and include domain and path args in order to be more specific."""
 
 
-class CookieConflictError(RuntimeError):
-    """There are two cookies that meet the criteria specified in the cookie jar. 
-    Use .get and .set and include domain and path args in order to be more specific."""
-
 class RequestsCookieJar(cookielib.CookieJar, collections.MutableMapping):
     """Compatibility class; is a cookielib.CookieJar, but exposes a dict interface.
 
@@ -192,7 +186,7 @@ class RequestsCookieJar(cookielib.CookieJar, collections.MutableMapping):
         See keys() and items()."""
         values = []
         for cookie in iter(self):
-            values.append(cookie.values)
+            values.append(cookie.value)
         return values
 
     def items(self):
@@ -228,7 +222,7 @@ class RequestsCookieJar(cookielib.CookieJar, collections.MutableMapping):
             if cookie.domain is not None and cookie.domain in domains:
                 return True
             domains.append(cookie.domain)
-        return False # there is only one domain in jar
+        return False  # there is only one domain in jar
 
     def get_dict(self, domain=None, path=None):
         """Takes as an argument an optional domain and path and returns a plain old
@@ -279,9 +273,9 @@ class RequestsCookieJar(cookielib.CookieJar, collections.MutableMapping):
             if cookie.name == name:
                 if domain is None or cookie.domain == domain:
                     if path is None or cookie.path == path:
-                        if toReturn != None: # if there are multiple cookies that meet passed in criteria
+                        if toReturn != None:  # if there are multiple cookies that meet passed in criteria
                             raise CookieConflictError('There are multiple cookies with name, %r' % (name))
-                        toReturn = cookie.value # we will eventually return this as long as no cookie conflict
+                        toReturn = cookie.value  # we will eventually return this as long as no cookie conflict
 
         if toReturn:
             return toReturn
@@ -340,6 +334,7 @@ def create_cookie(name, value, **kwargs):
 
     return cookielib.Cookie(**result)
 
+
 def morsel_to_cookie(morsel):
     """Convert a Morsel object into a Cookie containing the one k/v pair."""
     c = create_cookie(
@@ -362,6 +357,7 @@ def morsel_to_cookie(morsel):
         rfc2109=False,
         )
     return c
+
 
 def cookiejar_from_dict(cookie_dict, cookiejar=None):
     """

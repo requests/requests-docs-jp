@@ -47,7 +47,7 @@ class Request(object):
 
     :class:`Request <Request>` オブジェクトです。
     Requestsの全ての機能を担います。
-    推奨されるインターフェイスは、Requestsの機能を使用することです。
+    推奨されるインターフェイスは、Requestsの機能と同じです。
     """
 
     def __init__(self,
@@ -72,19 +72,19 @@ class Request(object):
         cert=None):
 
         # Dictionary of configurations for this request.
-        #: このリクエストの設定が入っている辞書
+        #: このリクエストの設定が入っている辞書。
         self.config = dict(config or [])
 
         # Float describes the timeout of the request.
         # (Use socket.setdefaulttimeout() as fallback)
-        #: リクエストのタイムアウト
-        #: (フォールバックにsocket.setdefaulttimeout()を使って下さい)
+        #: リクエストのタイムアウト記述したfloat型データ。
+        #: (フォールバックとして、socket.setdefaulttimeout()を使って下さい)
         self.timeout = timeout
 
         # Request URL.
         # Accept objects that have string representations.
-        #: リクエストのURL
-        #: 文字列表現を持つオブジェクトを受け入れます。
+        #: リクエストのURL。
+        #: 文字列のオブジェクトを受け取ります。
         try:
             self.url = unicode(url)
         except NameError:
@@ -94,27 +94,27 @@ class Request(object):
             self.url = url
 
         # Dictionary of HTTP Headers to attach to the :class:`Request <Request>`.
-        #: :class:`Request <Request>` に添付するHTTPヘッダーの辞書
+        #: :class:`Request <Request>` に添付するHTTPヘッダーの辞書。
         self.headers = dict(headers or [])
 
         # Dictionary of files to multipart upload (``{filename: content}``).
-        #: マルチパートアップロードするファイルの辞書 (``{filename: content}``)
+        #: マルチパートをアップロードするためのファイルの辞書。 (``{filename: content}``)
         self.files = None
 
         # HTTP Method to use.
-        #: 使用するHTTPメソッド
+        #: 使用するHTTPメソッド。
         self.method = method
 
         # Dictionary, bytes or file stream of request body data to attach to the
         # :class:`Request <Request>`.
         #: :class:`Request <Request>` に添付するためのリクエストの本文データの
-        #: 辞書かバイトかファイルストリーム
+        #: 辞書かバイトかファイルストリーム。
         self.data = None
 
         # Dictionary or byte of querystring data to attach to the
         # :class:`Request <Request>`. The dictionary values can be lists for representing
         # multivalued query parameters.
-        #: :class:`Request <Request>` に追加する辞書かクエリ文字列データのバイトです。
+        #: :class:`Request <Request>` に追加する辞書、もしくはクエリ文字列のデータです。
         #: 辞書の値は複数の値をクエリパラメーターに表示できるリストです。
         self.params = None
 
@@ -124,7 +124,7 @@ class Request(object):
         self.redirect = redirect
 
         # Set to True if full redirects are allowed (e.g. re-POST-ing of data at new ``Location``)
-        #: 全てのリダイレクトを許可する場合はTrueにして下さい。(例: 新しい ``Location`` にデータを再POSTする)
+        #: 全てのリダイレクトを許可する場合はTrueにして下さい。 (例: 新しい ``Location`` にデータを再POSTする)
         self.allow_redirects = allow_redirects
 
         # Dictionary mapping protocol to the URL of the proxy (e.g. {'http': 'foo.bar:3128'})
@@ -146,7 +146,7 @@ class Request(object):
         self.response = Response()
 
         # Authentication tuple or object to attach to :class:`Request <Request>`.
-        #: :class:`Request <Request>` に添付する認証タプルかオブジェクト
+        #: :class:`Request <Request>` に添付する認可情報を持ったタプル、もしくはオブジェクト。
         self.auth = auth
 
         #: CookieJar to attach to :class:`Request <Request>`.
@@ -160,7 +160,7 @@ class Request(object):
         self.sent = False
 
         # Event-handling hooks.
-        #: フックのイベント処理
+        #: フックのイベント処理。
         self.hooks = {}
 
         for event in HOOKS:
@@ -172,19 +172,19 @@ class Request(object):
             self.register_hook(event=k, hook=v)
 
         # Session.
-        #: セッション
+        #: セッション。
         self.session = session
 
         # SSL Verification.
-        #: SSL検証
+        #: SSL検証。
         self.verify = verify
 
         # SSL Certificate
-        #: SSL証明書
+        #: SSL証明書。
         self.cert = cert
 
         # Prefetch response content
-        #: レスポンス本文のプリフェッチ
+        #: レスポンス本文のプリフェッチ。
         self.prefetch = prefetch
 
         if headers:
@@ -380,6 +380,13 @@ class Request(object):
         fields = to_key_val_list(self.data)
         files = to_key_val_list(files)
 
+        for field, val in fields:
+            if isinstance(val, list):
+                for v in val:
+                    new_fields.append((field, str(v)))
+            else:
+                new_fields.append((field, str(val)))
+
         for (k, v) in files:
             # support for explicit filename
             if isinstance(v, (tuple, list)):
@@ -393,12 +400,6 @@ class Request(object):
                 fp = BytesIO(fp)
             new_fields.append((k, (fn, fp.read())))
 
-        for field, val in fields:
-            if isinstance(val, list):
-                for v in val:
-                    new_fields.append((k, str(v)))
-            else:
-                new_fields.append((field, str(val)))
         body, content_type = encode_multipart_formdata(new_fields)
 
         return body, content_type
@@ -494,7 +495,7 @@ class Request(object):
         """
         .. Properly register a hook.
 
-        フックを登録します。
+        フックを適切に登録します。
         """
 
         self.hooks[event].append(hook)
@@ -504,7 +505,7 @@ class Request(object):
         .. Deregister a previously registered hook.
            Returns True if the hook existed, False if not.
 
-        登録されているフックの登録を解除する。
+        以前に登録したフックの登録を解除する。
         フックが既にある場合はTrueを返します。そうではない場合はFalseを返します。
         """
 
@@ -522,7 +523,7 @@ class Request(object):
 
         リクエストを送信します。
         成功したらTrueを返し、そうではない場合Falseを返します。
-        通信中にHTTPErrorが発生したら、self.response.status_codeにHTTPErrorのコードが挿入されます。
+        通信中にHTTPErrorが発生したら、self.response.status_codeにHTTPErrorのコードが入れられます。
 
         .. Once a request is successfully sent, `sent` will equal True.
 
@@ -655,6 +656,7 @@ class Request(object):
             r = dispatch_hook('pre_send', self.hooks, self)
             self.__dict__.update(r.__dict__)
 
+            # catch urllib3 exceptions and throw Requests exceptions
             try:
                 # Send the request.
                 r = conn.urlopen(
@@ -717,7 +719,7 @@ class Response(object):
 
     コアとなる :class:`Response <Response>` オブジェクトです。
     全ての :class:`Request <Request>` オブジェクトは
-    このクラスのインスタンス :class:`response <Response>` アトリビュートを持っています。
+    このクラスのインスタンスである :class:`response <Response>` アトリビュートを持っています。
     """
 
     def __init__(self):
@@ -738,15 +740,15 @@ class Response(object):
         self.headers = CaseInsensitiveDict()
 
         # File-like object representation of response (for advanced usage).
-        #: レスポンスのファイルのようなオブジェクト (高度な使い方)
+        #: レスポンスのファイルのようなオブジェクト。 (高度な使い方)
         self.raw = None
 
         # Final URL location of Response.
-        #: レスポンスの最終的なURL
+        #: レスポンスの最終的なURL。
         self.url = None
 
         # Resulting :class:`HTTPError` of request, if one occurred.
-        #: エラーが起こった場合のリクエストの :class:`HTTPError` の内容
+        #: エラーが起こった場合、リクエストの :class:`HTTPError` の結果が入っています。
         self.error = None
 
         # Encoding to decode with when accessing r.text.
@@ -756,21 +758,21 @@ class Response(object):
         # A list of :class:`Response <Response>` objects from
         # the history of the Request. Any redirect responses will end
         # up here. The list is sorted from the oldest to the most recent request.
-        #: Requestsのhistoryから :class:`Response <Response>` オブジェクトがリストで入っています。
+        #: Requestのhistoryから :class:`Response <Response>` オブジェクトがリストで入っています。
         #: リダイレクトレスポンスはここで終了します。
         #: リストはリクエストの古いものから最も新しいものの順に並べ替えられます。
         self.history = []
 
         # The :class:`Request <Request>` that created the Response.
-        #: レスポンスが作られる時の :class:`Request <Request>` クラス
+        #: レスポンスを生成する :class:`Request <Request>` クラス。
         self.request = None
 
         # A CookieJar of Cookies the server sent back.
-        #: サーバーが送り返してくるクッキーのCookieJar
+        #: サーバーが送り返してくるクッキーのCookieJar。
         self.cookies = None
 
         # Dictionary of configurations for this request.
-        #: このリクエストの設定が入っている辞書
+        #: このリクエストの設定が入っている辞書。
         self.config = {}
 
     def __repr__(self):
@@ -800,7 +802,7 @@ class Response(object):
            length of each item returned as decoding can take place.
 
         レスポンスデータを反復処理します。
-        これはメモリにある大きなレスポンスの内容を一度に読みに行かないためです。
+        これは大きなレスポンスに対して、メモリにあるコンテンツを一度に読みに行かないようにするためです。
         チャンクサイズはメモリに読み込ませるバイト数です。
         これは分割されたデータがデコードを行うことができるようなデータサイズである必要はありません。
         """
@@ -831,7 +833,7 @@ class Response(object):
            responses.
 
         レスポンスデータを一度に一行ずつ反復処理します。
-        これはメモリにある大きなレスポンスの内容を一度に読みに行かないためです。
+        これは大きなレスポンスに対して、メモリにあるコンテンツを一度に読みに行かないようにするためです。
         """
 
         pending = None
@@ -860,7 +862,7 @@ class Response(object):
         """
         .. Content of the response, in bytes.
 
-        レスポンスの本文、バイトで返します。
+        レスポンスのコンテンツをデータで返します。
         """
 
         if self._content is False:
@@ -888,12 +890,12 @@ class Response(object):
         """
         .. Content of the response, in unicode.
 
-           if Response.encoding is None and chardet module is available, encoding
+        レスポンスのコンテンツをユニコードで返します。
+
+        .. if Response.encoding is None and chardet module is available, encoding
            will be guessed.
 
-        レスポンスの本文をユニコードで返します。
-
-        Response.encodingがNoneでchardetモジュールが有効ならエンコーディングは推測されます。
+        Response.encodingがNoneで、chardetモジュールが有効になっている場合、エンコーディングは推測されます。
         """
 
         # Try charset from content-type
@@ -925,18 +927,23 @@ class Response(object):
         """
         .. Returns the json-encoded content of a request, if any.
 
-        リクエストの本文を任意でJSONエンコードして返します。
+        任意でリクエストのJSONエンコードされたコンテンツを返します。
         """
         try:
             return json.loads(self.text or self.content)
         except ValueError:
             return None
 
+    @property
+    def reason(self):
+        """The HTTP Reason for the response."""
+        return self.raw.reason
+
     def raise_for_status(self, allow_redirects=True):
         """
         .. Raises stored :class:`HTTPError` or :class:`URLError`, if one occurred.
 
-        保管されている :class:`HTTPError` か :class:`URLError` のどちらかが発生した時、例外を発生させます。
+        保管されている :class:`HTTPError` か :class:`URLError` のどちらかのエラーが発生した時、例外を投げます。
         """
 
         if self.error:

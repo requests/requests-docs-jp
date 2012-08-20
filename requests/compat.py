@@ -77,7 +77,6 @@ try:
 except ImportError:
     import json
 
-
 # ---------
 # Specifics
 # ---------
@@ -97,6 +96,7 @@ if is_py2:
     str = unicode
     basestring = basestring
     numeric_types = (int, long, float)
+
 
 
 elif is_py3:
