@@ -361,13 +361,9 @@ def morsel_to_cookie(morsel):
 
 def cookiejar_from_dict(cookie_dict, cookiejar=None):
     """
-    .. Returns a CookieJar from a key/value dictionary.
+    Returns a CookieJar from a key/value dictionary.
 
-    キー/バリューの辞書からCookieJarを返します。
-
-    .. :param cookie_dict: Dict of key/values to insert into CookieJar.
-
-    :param cookie_dict: CookieJarに追加するためのキー/バリューの辞書。
+    :param cookie_dict: Dict of key/values to insert into CookieJar.
     """
     if cookiejar is None:
         cookiejar = RequestsCookieJar()
