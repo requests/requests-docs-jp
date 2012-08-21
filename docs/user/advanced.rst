@@ -29,7 +29,7 @@
 
 .. Let's persist some cookies across requests::
 
-リクエスト間でいくつかのクッキーを保持してみましょう ::
+リクエスト間でいくつかのクッキーを保持してみましょう。 ::
 
     s = requests.session()
 
@@ -42,7 +42,7 @@
 
 .. Sessions can also be used to provide default data to the request methods::
 
-セッションは、リクエストのメソッドにデフォルトのデータを提供するために使用することができます ::
+セッションは、リクエストのメソッドにデフォルトのデータを提供するために使用することができます。 ::
 
     headers = {'x-test': 'true'}
     auth = ('user', 'pass')
@@ -228,8 +228,11 @@ Requestsの設定
 これをするには、リクエストかセッションに ``config`` 辞書を渡すことができます。
 さらに知りたい場合は、 :ref:`Configuration API Docs <configurations>` を見て下さい。
 
-Keep-Alive
-----------
+.. Keep-Alive
+   ----------
+
+キープアライブ
+--------------------
 
 .. Excellent news — thanks to urllib3, keep-alive is 100% automatic within a session! Any requests that you make within a session will automatically reuse the appropriate connection!
 
@@ -280,22 +283,22 @@ Requestsにはリクエストの処理やシグナルイベントの処理の一
 ``args``:
     .. A dictionary of the arguments being sent to Request().
 
-    Request()に送られる引数の辞書
+    Request()に送られる引数の辞書。
 
 ``pre_request``:
     .. The Request object, directly before being sent.
 
-    リクエストオブジェクト、
+    リクエストオブジェクト、送信される前のもの。
 
 ``post_request``:
     .. The Request object, directly after being sent.
 
-    リクエストオブジェクト、
+    リクエストオブジェクト、送信された後のもの。
 
 ``response``:
     .. The response generated from a Request.
 
-    リクエストから生成されたレスポンス
+    リクエストから生成されたレスポンス。
 
 .. You can assign a hook function on a per-request basis by passing a
    ``{hook_name: callback_function}`` dictionary to the ``hooks`` request
@@ -329,7 +332,7 @@ Requestsにはリクエストの処理やシグナルイベントの処理の一
 
 .. Let's print some request method arguments at runtime::
 
-ランタイムにリクエストメソッドの引数を表示させてみましょう ::
+ランタイムにリクエストメソッドの引数を表示させてみましょう。 ::
 
     >>> requests.get('http://httpbin.org', hooks=dict(args=print_url))
     http://httpbin.org
@@ -337,7 +340,7 @@ Requestsにはリクエストの処理やシグナルイベントの処理の一
 
 .. Let's hijack some arguments this time with a new callback::
 
-新しいコールバックを使って、いくつかの引数をハックしてみましょう ::
+新しいコールバックを使って、いくつかの引数をハックしてみましょう。 ::
 
     def hack_headers(args):
         if args.get('headers') is None:
@@ -352,7 +355,7 @@ Requestsにはリクエストの処理やシグナルイベントの処理の一
 
 .. And give it a try::
 
-試してみて下さい ::
+試してみて下さい。 ::
 
     >>> requests.get('http://httpbin.org/headers', hooks=hooks, headers=headers)
     {
@@ -445,8 +448,8 @@ Requestsは ``requests.auth`` で ``HTTPBasicAuth`` と ``HTTPDigestAuth``
         data={'track': 'requests'}, auth=('username', 'password'))
 
     for line in r.iter_lines():
-	    if line: # filter out keep-alive new lines
-		    print json.loads(line)
+      if line: # filter out keep-alive new lines
+        print json.loads(line)
 
 
 .. Verbose Logging

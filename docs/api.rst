@@ -9,7 +9,7 @@ API
    parts where Requests depends on external libraries, we document the most
    important right here and provide links to the canonical documentation.
 
-ドキュメントのこの章は、Requestsのインターフェースを全てカバーしています。 
+ドキュメントのこの章は、Requestsのインターフェースを全てカバーしています。
 Requestsが外部ライブラリに依存している部分については、大事な部分だけをここでは取り上げ、
 その他はドキュメントのリンクを載せます。
 
@@ -147,15 +147,18 @@ Async
 .. autofunction:: decode_gzip
 
 
-Internals
----------
+.. Internals
+   ---------
+
+内部のコンポーネント
+--------------------------
 
 .. These items are an internal component to Requests, and should never be
    seen by the end user (developer). This part of the API documentation
    exists for those who are extending the functionality of Requests.
 
 これらはRequestsの内部のコンポーネントで、作業者(開発者)の側から参照すべきではありません。
-APIのドキュメントのこの章は、Requestsの機能を拡張剃る方法があります。
+APIのドキュメントのこの章は、Requestsの機能を拡張する方法について紹介します。
 
 .. Classes
    ~~~~~~~
