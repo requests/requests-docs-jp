@@ -31,7 +31,7 @@ from .exceptions import (
 from .utils import (
     get_encoding_from_headers, stream_untransfer, guess_filename, requote_uri,
     stream_decode_response_unicode, get_netrc_auth, get_environ_proxies,
-    to_key_val_list, DEFAULT_CA_BUNDLE_PATH)
+    to_key_val_list, DEFAULT_CA_BUNDLE_PATH, parse_header_links)
 from .compat import (
     cookielib, urlparse, urlunparse, urljoin, urlsplit, urlencode, str, bytes,
     StringIO, is_py2, chardet, json, builtin_str, numeric_types)
@@ -925,14 +925,32 @@ class Response(object):
     @property
     def json(self):
         """
-        .. Returns the json-encoded content of a request, if any.
+        .. Returns the json-encoded content of a response, if any.
 
-        任意でリクエストのJSONエンコードされたコンテンツを返します。
+        任意でレスポンスのJSONエンコードされたコンテンツを返します。
         """
         try:
             return json.loads(self.text or self.content)
         except ValueError:
             return None
+
+    @property
+    def links(self):
+        """Returns the parsed header links of the response, if any."""
+
+        header = self.headers['link']
+
+        # l = MultiDict()
+        l = {}
+
+        if header:
+            links = parse_header_links(header)
+
+            for link in links:
+                key = link.get('rel') or link.get('url')
+                l[key] = link
+
+        return l
 
     @property
     def reason(self):

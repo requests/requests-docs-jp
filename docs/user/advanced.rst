@@ -146,9 +146,11 @@ RequestsはウェブブラウザのようにHTTPSリクエストのSSL証明書�
 プライベート証明書用のCA_BUNDLEファイルのパスを ``verify`` に渡すこともできます。
 ``REQUESTS_CA_BUNDLE`` 環境変数を設定することもできます。
 
-.. Requests can also ignore verifying the SSL certficate if you set ``verify`` to False. ::
+.. Requests can also ignore verifying the SSL certficate if you set ``verify`` to False.
 
-``verify`` をFalseにした場合、RequestsはがSSL証明書の検証を無視するようにすることもできます。 ::
+``verify`` をFalseにした場合、RequestsはがSSL証明書の検証を無視するようにすることもできます。
+
+::
 
     >>> requests.get('https://kennethreitz.com', verify=False)
     <Response [200]>
@@ -192,10 +194,12 @@ RequestsはウェブブラウザのようにHTTPSリクエストのSSL証明書�
     tarball_url = 'https://github.com/kennethreitz/requests/tarball/master'
     r = requests.get(tarball_url)
 
-.. The request has been made, but the connection is still open. The response body has not been downloaded yet. ::
+.. The request has been made, but the connection is still open. The response body has not been downloaded yet.
 
 リクエストが作成されましたがまだ接続されたままです。
-レスポンスボディはまだダウンロードされていません。 ::
+レスポンスボディはまだダウンロードされていません。
+
+::
 
     r.content
 
@@ -430,11 +434,9 @@ Requestsは ``requests.auth`` で ``HTTPBasicAuth`` と ``HTTPDigestAuth``
 ``requests.Response.iter_lines()`` で、 `Twitter Streaming API <https://dev.twitter.com/docs/streaming-api>`_
 のようなストリーミングAPIから簡単に反復処理をすることができます。
 
-.. To use the Twitter Streaming API to track the keyword "requests":
+.. To use the Twitter Streaming API to track the keyword "requests"::
 
-"requests"というキーワードをトラッキングするためにTwitterのストリーミングAPIを使うには :
-
-::
+"requests"というキーワードをトラッキングするためにTwitterのストリーミングAPIを使うには ::
 
     import requests
     import json
@@ -476,12 +478,10 @@ Verboseロギングをオンにすることができます。
 ------------
 
 .. If you need to use a proxy, you can configure individual requests with the
-   ``proxies`` argument to any request method:
+   ``proxies`` argument to any request method::
 
 プロキシを使う必要があるなら、 ``proxies`` 引数に任意のリクエストメソッドを渡して個々のリクエストを
-設定することができます。
-
-::
+設定することができます。 ::
 
     import requests
 
@@ -504,11 +504,9 @@ Verboseロギングをオンにすることができます。
     >>> import requests
     >>> requests.get("http://example.org")
 
-.. To use HTTP Basic Auth with your proxy, use the `http://user:password@host/` syntax:
+.. To use HTTP Basic Auth with your proxy, use the `http://user:password@host/` syntax::
 
-プロキシでベーシック認証を使うためには、 `http://user:password@host/` シンタックスを使います。:
-
-::
+プロキシでベーシック認証を使うためには、 `http://user:password@host/` シンタックスを使います。 ::
 
     proxies = {
         "http": "http://user:pass@10.10.1.10:3128/",
@@ -606,7 +604,9 @@ GitHubが正しく応答したか確認する必要があります。
 素晴らしい、JSONモジュールを使えるので、Pythonオブジェクトに変換することができます。
 GitHubはUTF-8で返してくるので、 ``r.content`` メソッドではなく、 ``r.text`` メソッドを使って下さい。
 ``r.content`` はバイト文字列を返し、 ``r.text`` はユニコードにエンコーディングされた文字列を返します。
-このレスポンスにおいて、バイト操作をするつもりはないので、任意のユニコードのコードはエンコードを示して欲しい。 ::
+このレスポンスにおいて、バイト操作をするつもりはないので、任意のユニコードのコードはエンコードを示して欲しい。
+
+::
 
     >>> import json
     >>> commit_data = json.loads(r.text)
@@ -626,8 +626,9 @@ GitHubはUTF-8で返してくるので、 ``r.content`` メソッドではなく
 ではGitHubのAPIを少し調べてみましょう。
 ドキュメントで確認することができますが、Requestsを使ってもう少し面白いことができるかもしれません。
 どのようなHTTPメソッド
-RequestsのOPTIONSメソッドを活用することができます。 ::
-我々は、HTTPメソッドの種類は、我々が単に使用されたURLに対してサポートされているかを確認する要求OPTIONS動詞を活用することができます。
+RequestsのOPTIONSメソッドを活用することができます。
+
+::
 
     >>> verbs = requests.options(r.url)
     >>> verbs.status_code
@@ -641,6 +642,8 @@ RequestsのOPTIONSメソッドを活用することができます。 ::
 
 ええと、何があったのでしょう? 役立たず!
 ほとんどのAPIプロバイダーと同様に、GitHubはOPTIONSメソッドが実装されていないということが判明しました。
+
+::
 
     >>> verbs = requests.options('http://a-good-website.com/api/cats')
     >>> print verbs.headers['allow']
@@ -660,7 +663,9 @@ RequestsのOPTIONSメソッドを活用することができます。 ::
 
 このドキュメントでは、レスポンスにIssue　#482を追加しました。
 このGithubのissueは存在していて、サンプルのように使うことができます。
-それを取得してみましょう。 ::
+それを取得してみましょう。
+
+::
 
     >>> r = requests.get('https://api.github.com/repos/kennethreitz/requests/issues/482')
     >>> r.status_code
@@ -674,7 +679,9 @@ RequestsのOPTIONSメソッドを活用することができます。 ::
 .. Cool, we have three comments. Let's take a look at the last of them.::
 
 クール、コメントが3つあります。
-最後のコメントを見てみましょう。 ::
+最後のコメントを見てみましょう。
+
+::
 
     >>> r = requests.get(r.url + u'/comments')
     >>> r.status_code
@@ -692,6 +699,8 @@ RequestsのOPTIONSメソッドを活用することができます。 ::
 投稿者を伝えるコメントを投稿してみましょう。
 だれが投稿者か見てみましょう?
 
+::
+
     >>> print comments[2][u'user'][u'login']
     kennethreitz
 
@@ -700,7 +709,9 @@ RequestsのOPTIONSメソッドを活用することができます。 ::
    is to POST to the thread. Let's do it.::
 
 この例は、クリックスタートガイドの代わりになると思うので、このKennethという人と話をしてみましょう。
-GitHubのAPIのドキュメントによると、この方法はスレッドにPOSTすればいいみたいです。やってみましょう。 ::
+GitHubのAPIのドキュメントによると、この方法はスレッドにPOSTすればいいみたいです。やってみましょう。
+
+::
 
     >>> body = json.dumps({u"body": u"Sounds great! I'll get right on it!"})
     >>> url = u"https://api.github.com/repos/kennethreitz/requests/issues/482/comments"
@@ -714,7 +725,9 @@ GitHubのAPIのドキュメントによると、この方法はスレッドにPO
 
 うーん、奇妙ですね。
 認証が必要なのかもしれません。面倒ではないですか?
-Requestsは、一般的なベーシック認証などの認証のためたくさんのフォームデータを簡単に使うことができます。 ::
+Requestsは、一般的なベーシック認証などの認証のためたくさんのフォームデータを簡単に使うことができます。
+
+::
 
     >>> from requests.auth import HTTPBasicAuth
     >>> auth = HTTPBasicAuth('fake@example.com', 'not_a_real_password')
@@ -734,7 +747,9 @@ Requestsは、一般的なベーシック認証などの認証のためたくさ
 でもちょっと待った!
 追加するために、しばらく時間がかかるかもしれません。なぜなら、I had to go feed my catだからです。
 GitHubは、このコメントを編集するために、PATCHという別のHTTPメソッドを使うことができます。
-やってみましょう。 ::
+やってみましょう。
+
+::
 
     >>> print content[u"id"]
     5804413
@@ -753,7 +768,9 @@ GitHubは、このコメントを編集するために、PATCHという別のHTT
 今丁度このKennethという男を悩ませるために、彼に汗をかかせて、彼にこれを取り組んでいることを教えないようにしました。
 このコメントを削除したいということです。
 GitHubは、信じられないくらい適切な名前のDELETEというメソッドを使ってコメントを削除することができます。
-では削除してみましょう。 ::
+では削除してみましょう。
+
+::
 
     >>> r = requests.delete(url=url, auth=auth)
     >>> r.status_code
@@ -772,12 +789,32 @@ GitHubはヘッダーを取得するためにHEADリクエストを送るとペ�
 
     >>> r = requests.head(url=url, auth=auth)
     >>> print r.headers
-    // ...snip... //
+    ...
     'x-ratelimit-remaining': '4995'
     'x-ratelimit-limit': '5000'
-    // ...snip... //
+    ...
 
 .. Excellent. Time to write a Python program that abuses the GitHub API in all
    kinds of exciting ways, 4995 more times.
 
 いいですね。
+
+Link Headers
+------------
+
+Many HTTP APIs feature Link headers. They make APIs more self describing and discoverable.
+
+GitHub uses these for `pagination <http://developer.github.com/v3/#pagination>`_ in their API, for example::
+
+    >>> url = 'https://api.github.com/users/kennethreitz/repos?page=1&per_page=10'
+    >>> r = requests.head(url=url)
+    >>> r.headers['link']
+    '<https://api.github.com/users/kennethreitz/repos?page=2&per_page=10>; rel="next", <https://api.github.com/users/kennethreitz/repos?page=6&per_page=10>; rel="last"'
+
+Requests will automatically parse these link headers and make them easily consumable::
+
+    >>> r.links['next']
+    'https://api.github.com/users/kennethreitz/repos?page=2&per_page=10'
+
+    >>> r.links['last']
+    'https://api.github.com/users/kennethreitz/repos?page=6&per_page=10'
