@@ -12,9 +12,9 @@
    with Requests. This assumes you already have Requests installed. If you do not,
    head over to the :ref:`Installation <install>` section.
 
-はじめましょうか?
-このページはRequestsを使い方の紹介をします。ここではRequestsはインストールされているものとします。
-まだの場合は、 :ref:`Installation <install>` の章を見て下さい。
+それでははじめましょう。
+このページはRequestsを使い方の紹介をします。ここではRequestsは既にインストールされているものとします。
+インストールしていない場合は、 :ref:`インストールする方法 <install>` の章を見て下さい。
 
 .. First, make sure that:
 
@@ -28,7 +28,7 @@
 
 .. Let's get started with some simple examples.
 
-いくつかの簡単な例をやってみましょう。
+いくつかの簡単な例でやってみましょう。
 
 .. Make a Request
    ------------------
@@ -50,7 +50,7 @@ Requestsモジュールをインポートすることから始めます。 ::
    timeline ::
 
 ではウェブページを取得してみましょう。
-今回の例では、GitHubのパブリックなタイムラインを取得してみましょう。 ::
+今回の例では、GitHubの公開されているタイムラインを取得してみましょう。 ::
 
     >>> r = requests.get('https://github.com/timeline.json')
 
@@ -58,12 +58,12 @@ Requestsモジュールをインポートすることから始めます。 ::
    information we need from this object.
 
 現在、 ``r`` と呼ばれる :class:`Response` オブジェクトがあります。
-これから必要な情報を全て取得することができます。
+このオブジェクトから必要な情報の全て取得することができます。
 
 .. Requests' simple API means that all forms of HTTP request are as obvious. For
    example, this is how you make an HTTP POST request::
 
-RequestsのシンプルなAPIは、HTTPリクエストの全てのフォームデータであることがわかります。
+RequestsのシンプルなAPIは、HTTPリクエストの全てのフォームデータを示していることがわかります。
 例えば、以下の例はHTTPのPOSTリクエストをどうやって作成するかを示しています。 ::
 
     >>> r = requests.post("http://httpbin.org/post")
@@ -72,7 +72,7 @@ RequestsのシンプルなAPIは、HTTPリクエストの全てのフォーム�
    OPTIONS? These are all just as simple::
 
 いいでしょ?
-PUT、DELETE、HEAD、OPTIONSなどの他のHTTPリクエストについてもとてもシンプルです。 ::
+PUT、DELETE、HEAD、OPTIONSなどの他のHTTPリクエストについても本当にとてもシンプルです。 ::
 
     >>> r = requests.put("http://httpbin.org/put")
     >>> r = requests.delete("http://httpbin.org/delete")
@@ -82,7 +82,7 @@ PUT、DELETE、HEAD、OPTIONSなどの他のHTTPリクエストについても�
 .. That's all well and good, but it's also only the start of what Requests can
    do.
 
-以上が全てですが、Requestsができることのさわりしか見ていません。
+これはこれでいいのですが、Requestsができることのさわりしか紹介していません。
 
 .. Passing Parameters In URLs
    --------------------------
@@ -98,10 +98,10 @@ URLにパラメーターを渡す
    ``key1=value1`` and ``key2=value2`` to ``httpbin.org/get``, you would use the
    following code::
 
-しばしばURLのクエリ文字列にある種のデータを追加して送信したい時があるかもしれません。
+しばしばURLのクエリ文字列として、あるデータを追加して送信したい時があるかもしれません。
 手動でURLを作成する場合、このデータはクエスション記号の後のURLにキー/バリューのペアで与えて下さい。
 例: ``httpbin.org/get?key=val`` 。
-Requestsは、 ``params`` キーワード引数を使ってこれらの引数を辞書として渡すことができます。
+Requestsは、 ``params`` キーワード引数を使って、辞書としてこれらの引数を渡すことができます。
 例として、 ``key1=value1`` と ``key2=value2`` を ``httpbin.org/get`` に渡したい場合、
 以下のコードでできます。 ::
 
@@ -125,7 +125,8 @@ URLを表示して、URLが正しくエンコードされたか見ることが�
 .. We can read the content of the server's response. Consider the GitHub timeline
    again::
 
-サーバーのレスポンスの内容を見ることができます。 ::
+サーバーからのレスポンスの内容を見ることができます。
+Githubのタイムラインを使って見てみましょう ::
 
     >>> import requests
     >>> r = requests.get('https://github.com/timeline.json')
@@ -135,7 +136,7 @@ URLを表示して、URLが正しくエンコードされたか見ることが�
 .. Requests will automatically decode content from the server. Most unicode
    charsets are seamlessly decoded.
 
-Requestsはサーバーからの内容を自動的にデコードします。
+Requestsは、サーバーからの内容を自動的にデコードします。
 ほとんどのユニコード文字はシームレスにデコードされます。
 
 .. When you make a request, Requests makes educated guesses about the encoding of
@@ -143,9 +144,10 @@ Requestsはサーバーからの内容を自動的にデコードします。
    is used when you access ``r.text``. You can find out what encoding Requests is
    using, and change it, using the ``r.encoding`` property::
 
-リクエストを作成した時、RequestsはHTTPヘッダーに基づいたレスポンスのエンコーディングについて推測する
-``r.text`` にアクセスした時に、Requestsで使われているテキストのエンコーディングは推測されます。
-Requestsで使われているエンコーディングは調べることができ、 ``r.encoding`` プロパティを使って変更することができます。
+リクエストを作成した時、RequestsはHTTPヘッダーに基づてレスポンスのエンコーディングについて推測しようとします。
+Requestsによって推測されたテキストエンコーディングは、 ``r.text`` にアクセスした時に使われます。
+Requestsで使われているエンコーディングは調べることができ、
+``r.encoding`` プロパティを使って調べたり、変更することができます。
 
     >>> r.encoding
     'utf-8'
@@ -154,14 +156,17 @@ Requestsで使われているエンコーディングは調べることができ
 .. If you change the encoding, Requests will use the new value of ``r.encoding``
    whenever you call ``r.text``.
 
-エンコーディングを変更した場合、Requestsは
+エンコーディングを変更した場合、
+Requestsは ``r.text`` を呼び出すたびに ``r.encoding`` の新しい値を使います。
 
 .. Requests will also use custom encodings in the event that you need them. If
    you have created your own encoding and registered it with the ``codecs``
    module, you can simply use the codec name as the value of ``r.encoding`` and
    Requests will handle the decoding for you.
 
-Requests
+Requestsは、必要としているイベントにおいてもカスタムエンコーディングを使います。
+オリジナルのエンコーディングを作成したり、 ``codecs`` モジュールに登録されているものを使う場合、
+単純に ``r.encoding`` の値としてコーデックの名前を使うことができ、Requestsはデコードの処理をしてくれます。
 
 .. Binary Response Content
    -----------------------
@@ -171,7 +176,7 @@ Requests
 
 .. You can also access the response body as bytes, for non-text requests::
 
-テキスト以外のリクエストに、バイトとしてレスポンスボディにアクセスできます。 ::
+テキスト以外のリクエストに、データとしてレスポンスの本文にアクセスできます。 ::
 
     >>> r.content
     b'[{"repository":{"open_issues":0,"url":"https://github.com/...
