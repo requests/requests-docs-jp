@@ -3,6 +3,18 @@
 History
 -------
 
+0.13.9 (2012-08-25)
++++++++++++++++++++
+
+- Fix for OAuth + POSTs
+- Remove exception eating from dispatch_hook
+- General bugfixes
+
+0.13.8 (2012-08-21)
++++++++++++++++++++
+
+- Incredible Link header support :)
+
 0.13.7 (2012-08-19)
 +++++++++++++++++++
 
