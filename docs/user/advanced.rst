@@ -801,20 +801,33 @@ GitHubはヘッダーを取得するためにHEADリクエストを送るとペ�
    kinds of exciting ways, 4995 more times.
 
 いいですね。
+Pythonプログラムを書く時間
+GitHubのAPIにエキサイティングな悪いことをする回数が4995回以上もあります。
 
-Link Headers
-------------
+.. Link Headers
+   ------------
 
-Many HTTP APIs feature Link headers. They make APIs more self describing and discoverable.
+Linkヘッダー
+------------------------
 
-GitHub uses these for `pagination <http://developer.github.com/v3/#pagination>`_ in their API, for example::
+.. Many HTTP APIs feature Link headers. They make APIs more self describing and discoverable.
+
+ほとんどのHTTPのAPIはLinkヘッダーの機能を備えています。
+LinkヘッダーはAPIを発見しやすく、自己記述可能なものにします。
+
+.. GitHub uses these for `pagination <http://developer.github.com/v3/#pagination>`_ in their API, for example::
+
+GitHubは、APIの `ページネーション <http://developer.github.com/v3/#pagination>`_ でそれらを使っています。
+例として ::
 
     >>> url = 'https://api.github.com/users/kennethreitz/repos?page=1&per_page=10'
     >>> r = requests.head(url=url)
     >>> r.headers['link']
     '<https://api.github.com/users/kennethreitz/repos?page=2&per_page=10>; rel="next", <https://api.github.com/users/kennethreitz/repos?page=6&per_page=10>; rel="last"'
 
-Requests will automatically parse these link headers and make them easily consumable::
+.. Requests will automatically parse these link headers and make them easily consumable::
+
+Requestsは、これらのLinkヘッダーを自動的にパースして、簡単に使えるようにします。 ::
 
     >>> r.links['next']
     'https://api.github.com/users/kennethreitz/repos?page=2&per_page=10'

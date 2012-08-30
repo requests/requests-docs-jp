@@ -47,8 +47,7 @@ Requestsは、他の任意のHTTPヘッダーとともにユーザーエージ�
 .. Chris Adams gave an excellent summary on
    `Hacker News <http://news.ycombinator.com/item?id=2884406>`_:
 
-Chris Adamsさんは、
-`Hacker News <http://news.ycombinator.com/item?id=2884406>`_ で、すばらしい見解を与えてくれました。
+Chris Adamsさんは、 `Hacker News <http://news.ycombinator.com/item?id=2884406>`_ という投稿で、すばらしい見解を与えてくれました。
 
     .. httplib2 is part of why you should use requests: it's far more respectable
        as a client but not as well documented and it still takes way too much code
@@ -59,19 +58,18 @@ Chris Adamsさんは、
        whereas httplib2 feels more like an academic exercise than something
        people should use to build production systems[1].
 
-    httplib2はRequestsをなぜ使うべきかという理由の一部しか満たしていません。
+    httplib2はRequestsをなぜ使うべきかという理由の一部でしかありません。
     クライアントとしてはとても立派ですがドキュメント化があまりされていません。
-    そして、基本的な操作をするためにたくさんのコードが必要になります。
-    httplib2がやろうとしていることに感謝していますが、実際は、代わりにRequestsを使っています。
-    モダンなHTTPクライアントを構築するためにローレベルの不満がたくさんあるので
-    私は現代のHTTPクライアントを構築するためのハードの低レベルの不快感のトンがあることを、やろうとしているかhttplib2の感謝が、実際に、だけではなく、リクエストを使用しています。
-    Kenneth Reitzはモチベーションが高く、人々が本番環境のシステムを構築するために使うべき
-    ケネス·ライツは、非常にやる気であり、彼はhttplib2のより多くのものよりも学術的な運動のような人々は生産システム[1]を構築するために使用する必要があります感じている一方、単純な物事が単純であるべき程度を取得します。
+    そして、基本的な操作をするためにたくさんのコードを書く必要があります。
+    httplib2がやろうとしていることに感謝していますが、モダンなHTTPクライアントを作成するために低レベルの部分で不満がたくさんあるので、
+    実際はhttplib2の代わりにRequestsを使っています。
+    Kenneth Reitzはモチベーションが高く、本番環境のシステム[1]を作るために使うものよりはhttplib2は学校の勉強のような感じがするので、
+    簡単なことは簡単にできるようにしようとしています。
 
     .. Disclosure: I'm listed in the requests AUTHORS file but can claim credit
        for, oh, about 0.0001% of the awesomeness.
 
-    : requestsのAUTHORSファイルにリストされていますが、
+    ディスクロージャー: RequestsのAUTHORSファイルにリストされていますが、クレジットにクレームを付けることができます。
 
     .. http://code.google.com/p/httplib2/issues/detail?id=96 is a good example:
        an annoying bug which affect many people, there was a fix available for
@@ -80,8 +78,9 @@ Chris Adamsさんは、
        even longer to make it onto PyPI where any other project which required "
        httplib2" would get the working version.
 
-    1. http://code.google.com/p/httplib2/issues/detail?id=96は良い例です。:
-    たくさんの人に影響がある迷惑なバグは、私はフォークでそれを適用し、それを介してデータのカップルTBを打ち砕いたときに素晴らしい仕事を数ヶ月のために利用可能な修正が、ありましたが、それはさらに長くトランクにそれを作るために年を引き継ぎ、PyPIにそれを作るためにここで "httplib2の"作業バージョンになるだろう必要な他のプロジェクト。
+    1. http://code.google.com/p/httplib2/issues/detail?id=96は良い例です。 :
+    たくさんの人に影響のある迷惑なバグは、そのバグによって数テラバイトものデータを解析してフォークしてそれを適用した時に数ヶ月も解決するために作業しなければいけなくなりますが、
+    キチンと動くバージョンの"httplib2"が必要となる他のプロジェクトでtrunkにそれを作るために一年かけて引き継いで、PyPIでそれをつくるために長い期間がかかります。
 
 .. Python 3 Support?
    -----------------
@@ -122,12 +121,15 @@ Keep-aliveはサポートしていますか?
 
 .. You bet!
 
-もちろん!
+そのとおりです!
 
-SSL Verification?
------------------
+.. SSL Verification?
+   -----------------
+
+SSLの検証はしますか?
+----------------------------------
 
 .. Absolutely.
 
-そのとおりです。
+もちろん。
 

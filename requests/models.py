@@ -937,7 +937,11 @@ class Response(object):
 
     @property
     def links(self):
-        """Returns the parsed header links of the response, if any."""
+        """
+        .. Returns the parsed header links of the response, if any.
+
+        任意でレスポンスのLinkヘッダーをパースして返します。
+        """
 
         header = self.headers['link']
 
@@ -955,7 +959,11 @@ class Response(object):
 
     @property
     def reason(self):
-        """The HTTP Reason for the response."""
+        """
+        .. The HTTP Reason for the response.
+
+        レスポンスのHTTP Reasonヘッダーの内容を返します。
+        """
         return self.raw.reason
 
     def raise_for_status(self, allow_redirects=True):
