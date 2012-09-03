@@ -181,39 +181,32 @@ RequestsはウェブブラウザのようにHTTPSリクエストのSSL証明書�
 本文のワークフロー
 ---------------------
 
-.. By default, when you make a request, the body of the response isn't downloaded immediately. The response headers are downloaded when you make a request, but the content isn't downloaded until you access the :class:`Response.content` attribute.
+.. By default, when you make a request, the body of the response is downloaded immediately. You can override this behavior and defer downloading the response body until you access the :class:`Response.content` attribute with the ``prefetch`` parameter::
 
-リクエストを作成する時にデフォルトで、レスポンスボディをすぐにダウンロードしません。
-リクエストを作成する時にレスポンスヘッダーがダウンロードされますが、本文は :class:`Response.content`
-アトリビュートにアクセスするまでダウンロードされません。
-
-.. Let's walk through it::
-
-ではやってみましょう ::
+リクエストを作成する時にデフォルトで、レスポンスの本文をすぐにダウンロードします。
+この振る舞いを上書きすることができ、 :class:`Response.content` アトリビュートに
+``prefetch`` パラメーターを指定してアクセスするまでレスポンスボディのダウンロードを遅らせることができます。
 
     tarball_url = 'https://github.com/kennethreitz/requests/tarball/master'
-    r = requests.get(tarball_url)
+    r = requests.get(tarball_url, prefetch=False)
 
-.. The request has been made, but the connection is still open. The response body has not been downloaded yet.
+.. At this point only the response headers have been downloaded and the connection remains open, hence allowing us to make content retrieval conditional::
 
-リクエストが作成されましたがまだ接続されたままです。
-レスポンスボディはまだダウンロードされていません。
+この時点ではレスポンスヘッダーのみをダウンロードし、接続はしたままになっています。
 
-::
+    if int(r.headers['content-length']) < TOO_LONG:
+      content = r.content
+      ...
 
-    r.content
+.. You can further control the workflow by use of the :class:`Response.iter_content` and :class:`Response.iter_lines` methods, or reading from the underlying urllib3 :class:`urllib3.HTTPResponse` at :class:`Response.raw`.
 
-.. The content has been downloaded and cached.
+:class:`Response.iter_content` と :class:`Response.iter_lines` メソッドを使うことや、
+:class:`Response.raw` で urllib3の :class:`urllib3.HTTPResponse` を基礎としているものから読み込むことで、
+ワークフローを管理することができ
 
-コンテンツがダウンロードされ、キャッシュされました。
+.. Note that in versions prior to 0.13.6 the ``prefetch`` default was set to ``False``.
 
-.. You can override this default behavior with the ``prefetch`` parameter::
-
-``prefetch`` パラメーターでデフォルトのこの振る舞いを上書きすることができます。 ::
-
-    r = requests.get(tarball_url, prefetch=True)
-    # Blocks until all of request body has been downloaded.
-
+バージョンの0.13.6から ``prefetch`` はデフォルトで ``False`` になっているので注意して下さい。
 
 .. Configuring Requests
    --------------------
