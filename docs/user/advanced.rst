@@ -438,7 +438,7 @@ Requestsは ``requests.auth`` で ``HTTPBasicAuth`` と ``HTTPDigestAuth``
     import json
 
     r = requests.post('https://stream.twitter.com/1/statuses/filter.json',
-        data={'track': 'requests'}, auth=('username', 'password'))
+        data={'track': 'requests'}, auth=('username', 'password'), prefetch=False)
 
     for line in r.iter_lines():
       if line: # filter out keep-alive new lines
