@@ -122,3 +122,4 @@ Urllib3
 - Jakub Roztocil <jakub@roztocil.name>
 - Ian Cordasco <graffatcolmingov@gmail.com> @sigmavirus24
 - Rhys Elsmore
+- André Graf (dergraf)
