@@ -13,7 +13,7 @@
    head over to the :ref:`Installation <install>` section.
 
 それでははじめましょう。
-このページはRequestsを使い方法についての紹介をします。
+このページはRequestsの使い方についての紹介をします。
 ここではRequestsは既にインストールされているものとします。
 インストールしていない場合は、 :ref:`インストールする方法 <install>` の章を見て下さい。
 
