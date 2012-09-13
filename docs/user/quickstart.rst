@@ -13,7 +13,8 @@
    head over to the :ref:`Installation <install>` section.
 
 それでははじめましょう。
-このページはRequestsを使い方の紹介をします。ここではRequestsは既にインストールされているものとします。
+このページはRequestsを使い方法についての紹介をします。
+ここではRequestsは既にインストールされているものとします。
 インストールしていない場合は、 :ref:`インストールする方法 <install>` の章を見て下さい。
 
 .. First, make sure that:
@@ -28,7 +29,7 @@
 
 .. Let's get started with some simple examples.
 
-いくつかの簡単な例でやってみましょう。
+いくつかの簡単な例を使ってやってみましょう。
 
 .. Make a Request
    ------------------
@@ -58,7 +59,7 @@ Requestsモジュールをインポートすることから始めます。 ::
    information we need from this object.
 
 現在、 ``r`` と呼ばれる :class:`Response` オブジェクトがあります。
-このオブジェクトから必要な情報の全て取得することができます。
+このオブジェクトから必要な情報を全て取得することができます。
 
 .. Requests' simple API means that all forms of HTTP request are as obvious. For
    example, this is how you make an HTTP POST request::
@@ -82,7 +83,7 @@ PUT、DELETE、HEAD、OPTIONSなどの他のHTTPリクエストについても�
 .. That's all well and good, but it's also only the start of what Requests can
    do.
 
-これはこれでいいのですが、Requestsができることのさわりしか紹介していません。
+これはこれでいいのですが、Requestsができることのほんの少ししか紹介していません。
 
 .. Passing Parameters In URLs
    --------------------------
