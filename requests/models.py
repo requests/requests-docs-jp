@@ -46,8 +46,7 @@ class Request(object):
        of Requests. Recommended interface is with the Requests functions.
 
     :class:`Request <Request>` オブジェクトです。
-    Requestsの全ての機能を担います。
-    推奨されるインターフェイスは、Requestsの機能と同じです。
+    Requestsの全ての機能を担います。推奨されるインターフェイスは、Requestsの機能と同じです。
     """
 
     def __init__(self,
@@ -78,13 +77,12 @@ class Request(object):
         # Float describes the timeout of the request.
         # (Use socket.setdefaulttimeout() as fallback)
         #: リクエストのタイムアウト記述したfloat型データ。
-        #: (フォールバックとして、socket.setdefaulttimeout()を使って下さい)
+        #  (フォールバックとして、socket.setdefaulttimeout()を使って下さい)
         self.timeout = timeout
 
         # Request URL.
         # Accept objects that have string representations.
-        #: リクエストのURL。
-        #: 文字列のオブジェクトを受け取ります。
+        #: リクエストのURL。文字列のオブジェクトを受け取ります。
         try:
             self.url = unicode(url)
         except NameError:
@@ -98,7 +96,7 @@ class Request(object):
         self.headers = dict(headers or [])
 
         # Dictionary of files to multipart upload (``{filename: content}``).
-        #: マルチパートをアップロードするためのファイルの辞書。 (``{filename: content}``)
+        #: マルチパートでアップロードするためのファイルの辞書。 (``{filename: content}``)
         self.files = None
 
         # HTTP Method to use.
@@ -502,15 +500,17 @@ class Request(object):
 
         フックを適切に登録します。
         """
-
-        self.hooks[event].append(hook)
+        if isinstance(hook, (list, tuple, set)):
+            self.hooks[event].extend(hook)
+        else:
+            self.hooks[event].append(hook)
 
     def deregister_hook(self, event, hook):
         """
         .. Deregister a previously registered hook.
            Returns True if the hook existed, False if not.
 
-        以前に登録したフックの登録を解除する。
+        登録済みのフックの登録を解除します。
         フックが既にある場合はTrueを返します。そうではない場合はFalseを返します。
         """
 
@@ -528,7 +528,7 @@ class Request(object):
 
         リクエストを送信します。
         成功したらTrueを返し、そうではない場合Falseを返します。
-        通信中にHTTPErrorが発生したら、self.response.status_codeにHTTPErrorのコードが入れられます。
+        通信中にHTTPErrorが発生したら、self.response.status_codeにHTTPErrorのコードが挿入されます。
 
         .. Once a request is successfully sent, `sent` will equal True.
 
@@ -536,10 +536,12 @@ class Request(object):
 
         .. :param anyway: If True, request will be sent, even if it has
            already been sent.
+
         :param anyway: Trueにすると、既に送信されていたとしても、リクエストは送信されます。
 
         .. :param prefetch: If not None, will override the request's own setting
            for prefetch.
+
         :param prefetch: Noneではない場合、プリフェッチするためにRequestの設定を上書きします。
         """
 
@@ -723,8 +725,8 @@ class Response(object):
        of this class.
 
     コアとなる :class:`Response <Response>` オブジェクトです。
-    全ての :class:`Request <Request>` オブジェクトは
-    このクラスのインスタンスである :class:`response <Response>` アトリビュートを持っています。
+    全ての :class:`Request <Request>` オブジェクトはこのクラスのインスタンスである
+    :class:`response <Response>` アトリビュートを持っています。
     """
 
     def __init__(self):
@@ -757,7 +759,7 @@ class Response(object):
         self.error = None
 
         # Encoding to decode with when accessing r.text.
-        #: r.textにアクセスした時にデコードするためのエンコーディング
+        #: r.textにアクセスした時にデコードするためのエンコーディング。
         self.encoding = None
 
         # A list of :class:`Response <Response>` objects from

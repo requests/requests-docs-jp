@@ -49,7 +49,7 @@ defaults = dict()
 
 defaults['base_headers'] = {
     'User-Agent': default_user_agent(),
-    'Accept-Encoding': ', '.join(('identity', 'deflate', 'compress', 'gzip')),
+    'Accept-Encoding': ', '.join(('gzip', 'deflate', 'compress')),
     'Accept': '*/*'
 }
 

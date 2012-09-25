@@ -62,23 +62,10 @@ Keep-aliveやHTTP接続のプーリングは、Requestsに `urllib3 <https://git
 推薦文
 ------------
 
-.. `Kippt <http://kippt.com>`_,
-   `Heroku <http://heroku.com>`_,
-   `PayPal <https://www.paypal.com/>`_,
-   `Transifex <https://www.transifex.net/>`_,
-   `Native Instruments <http://www.native-instruments.com/>`_, `The Washington Post <http://www.washingtonpost.com/>`_,
-   `Twitter, Inc <http://twitter.com>`_,
-   `Readability <http://readability.com>`_, and
-   Federal US Institutions
-   use Requests internally. It has been installed over 100,000 times from PyPI.
+.. Amazon, Google, Mozilla, Heroku, PayPal, Transifex, Native Instruments, The Washington Post, Twitter, Kippt, Readability, and Federal US Institutions use Requests internally. It has been downloaded over 1,000,000 times from PyPI.
 
-`Kippt <http://kippt.com>`_, `Heroku <http://heroku.com>`_, `PayPal <https://www.paypal.com/>`_,
-`Transifex <https://www.transifex.net/>`_,
-`Native Instruments <http://www.native-instruments.com/>`_, `The Washington Post <http://www.washingtonpost.com/>`_,
-`Twitter, Inc <http://twitter.com>`_,
-`Readability <http://readability.com>`_,
-Federal US Institutions は内部でRequestsを使っています。
-PyPIから100,000回以上インストールされました。
+Amazon、Google、Mozilla、Heroku、PayPal、Transifex、Native Instruments、The Washington Post、Twitter、Kippt、Readability、Federal US Institutions
+は内部でRequestsを使っています。PyPIから1,000,000回以上インストールされました。
 
 **Armin Ronacher**
     .. Requests is the perfect example how beautiful an API can be with the

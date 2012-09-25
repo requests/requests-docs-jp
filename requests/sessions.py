@@ -122,7 +122,6 @@ class Session(object):
 
         .. Currently, this just closes the PoolManager, which closes pooled
            connections.
-
         現在、これはプールされたコネクションを終了させるPoolManagerを終了させます。
         """
         self.poolmanager.clear()
