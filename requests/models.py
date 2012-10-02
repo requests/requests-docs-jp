@@ -500,10 +500,10 @@ class Request(object):
 
         フックを適切に登録します。
         """
-        if isinstance(hook, (list, tuple, set)):
-            self.hooks[event].extend(hook)
-        else:
+        if callable(hook):
             self.hooks[event].append(hook)
+        elif hasattr(hook, '__iter__'):
+            self.hooks[event].extend(h for h in hook if callable(h))
 
     def deregister_hook(self, event, hook):
         """
@@ -919,9 +919,11 @@ class Response(object):
         # Decode unicode from given encoding.
         try:
             content = str(self.content, encoding, errors='replace')
-        except LookupError:
+        except (LookupError, TypeError):
             # A LookupError is raised if the encoding was not found which could
             # indicate a misspelling or similar mistake.
+            #
+            # A TypeError can be raised if encoding is None
             #
             # So we try blindly encoding.
             content = str(self.content, errors='replace')
