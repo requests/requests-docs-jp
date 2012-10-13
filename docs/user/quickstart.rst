@@ -599,14 +599,53 @@ Requestsはこの認証を手動で行うためのメソッドがあります。
 OAuth認証
 --------------
 
-.. Miguel Araujo's `requests-oauth <http://pypi.python.org/pypi/requests-oauth>`_
-   project provides a simple interface for establishing OAuth connections.
-   Documentation and examples can be found on the requests-oauth
-   `git repository <https://github.com/maraujop/requests-oauth>`_.
+.. Requests features robust, built-in OAuth support!
 
-Miguel Araujoの `requests-oauth <http://pypi.python.org/pypi/requests-oauth>`_ プロジェクトは
-OAuth接続を確立するための簡単なインターフェースを提供しています。
-ドキュメントとサンプルは、requests-oauthの `git repository <https://github.com/maraujop/requests-oauth>`_ にあります。
+Requestsは堅牢にするため、OAuthの機能が組み込まれています。
+
+.. OAuth takes many forms, so let's take a look at a few different forms::
+
+OAuthはたくさんの形式があり、その中からいくつかの形式を見てみましょう。 ::
+
+    import requests
+    from requests.auth import OAuth1
+
+    url = u'https://api.twitter.com/1/account/settings.json'
+
+    client_key = u'...'
+    client_secret = u'...'
+    resource_owner_key = u'...'
+    resource_owner_secret = u'...'
+
+
+.. Query signing::
+
+クエリ署名 ::
+
+    queryoauth = OAuth1(client_key, client_secret,
+                        resource_owner_key, resource_owner_secret,
+                        signature_type='query')
+    r = requests.get(url, auth=queryoauth)
+
+.. Header signing::
+
+ヘッダー署名 ::
+
+    headeroauth = OAuth1(client_key, client_secret,
+                         resource_owner_key, resource_owner_secret,
+                         signature_type='auth_header')
+    r = requests.get(url, auth=headeroauth)
+
+.. Body signing::
+
+本文署名 ::
+
+    bodyoauth = OAuth1(client_key, client_secret,
+                       resource_owner_key, resource_owner_secret,
+                       signature_type='body')
+
+    r = requests.post(url, auth=bodyoauth)
+
 
 .. Redirection and History
    -----------------------
