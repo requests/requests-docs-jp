@@ -29,7 +29,7 @@
 
 .. Let's persist some cookies across requests::
 
-リクエスト間でいくつかのクッキーを保持してみましょう。 ::
+リクエスト間でクッキーを保持してみましょう。 ::
 
     s = requests.session()
 
@@ -42,7 +42,7 @@
 
 .. Sessions can also be used to provide default data to the request methods::
 
-セッションは、リクエストのメソッドにデフォルトのデータを提供するために使用することができます。 ::
+セッションは、リクエストメソッドにデフォルトのデータを提供するために使用することができます。 ::
 
     headers = {'x-test': 'true'}
     auth = ('user', 'pass')
@@ -202,7 +202,7 @@ RequestsはウェブブラウザのようにHTTPSリクエストのSSL証明書�
 
 :class:`Response.iter_content` と :class:`Response.iter_lines` メソッドを使うことや、
 :class:`Response.raw` で urllib3の :class:`urllib3.HTTPResponse` を基礎としているものから読み込むことで、
-ワークフローを管理することができ
+一連の処理を管理することができます。
 
 .. Note that in versions prior to 0.13.6 the ``prefetch`` default was set to ``False``.
 
@@ -255,7 +255,7 @@ Keep-Aliveを無効にしたい場合は、単純に ``keep_alive`` の設定を
 .. ``requests.async`` has been removed from requests and is now its own repository named `GRequests <https://github.com/kennethreitz/grequests>`_.
 
 ``requests.async`` はRequestsから削除しました。
-そして現在は、それ単体で `GRequests <https://github.com/kennethreitz/grequests>`_ にレポジトリがあります。
+そして現在は、それ単体で `GRequests <https://github.com/kennethreitz/grequests>`_ にリポジトリがあります。
 
 
 .. Event Hooks
