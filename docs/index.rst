@@ -62,9 +62,9 @@ Keep-aliveやHTTP接続のプーリングは、Requestsに `urllib3 <https://git
 推薦文
 ------------
 
-.. Amazon, Google, Mozilla, Heroku, PayPal, Transifex, Native Instruments, The Washington Post, Twitter, Kippt, Readability, and Federal US Institutions use Requests internally. It has been downloaded over 1,000,000 times from PyPI.
+.. Amazon, Google, Twilio, Mozilla, Heroku, PayPal, Transifex, Native Instruments, The Washington Post, Twitter, SoundCloud, Kippt, Readability, and Federal US Institutions use Requests internally. It has been downloaded over 1,000,000 times from PyPI.
 
-Amazon、Google、Mozilla、Heroku、PayPal、Transifex、Native Instruments、The Washington Post、Twitter、Kippt、Readability、Federal US Institutions
+Amazon、Google、Twilio, Mozilla, Heroku, PayPal, Transifex, Native Instruments, The Washington Post, Twitter, SoundCloud、Kippt、Readability、Federal US Institutions
 は内部でRequestsを使っています。PyPIから1,000,000回以上インストールされました。
 
 **Armin Ronacher**

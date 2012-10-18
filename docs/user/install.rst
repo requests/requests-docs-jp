@@ -37,13 +37,13 @@ Requestsのインストールは、 `pip <http://www.pip-installer.org/>`_ を�
 Cheeseshopミラー
 --------------------
 
-.. If the Cheeseshop is down, you can also install Requests from Kenneth Reitz's
-   personal `Cheeseshop mirror <http://pip.kennethreitz.com/>`_::
+.. If the Cheeseshop is down, you can also install Requests from one of the
+   mirrors. `Crate.io <http://crate.io>`_ is one of them::
 
-Cheeseshopはダウンしている場合は、Kenneth Reitzの `Cheeseshopのミラー <http://pip.kennethreitz.com/>`_ から
-インストールすることもできます。
+Cheeseshopはダウンしている場合は、ミラーからRequestsをインストールすることもできます。
+`Crate.io <http://crate.io>`_ はその内の一つです。 ::
 
-    $ pip install -i http://pip.kennethreitz.com/simple requests
+    $ pip install -i http://simple.crate.io/ requests
 
 
 .. Get the Code

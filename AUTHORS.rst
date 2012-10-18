@@ -123,3 +123,4 @@ Urllib3
 - Ian Cordasco <graffatcolmingov@gmail.com> @sigmavirus24
 - Rhys Elsmore
 - André Graf (dergraf)
+- Stephen Zhuang (everbird)
