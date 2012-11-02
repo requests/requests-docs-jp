@@ -124,3 +124,4 @@ Urllib3
 - Rhys Elsmore
 - André Graf (dergraf)
 - Stephen Zhuang (everbird)
+- Martijn Pieters
