@@ -47,6 +47,9 @@ Requestの機能の全ては、以下の7つのメソッドを使ってアクセ
 
 .. autofunction:: session
 
+.. autoclass:: Session
+   :inherited-members:
+
 例外
 ~~~~~~~~~~
 

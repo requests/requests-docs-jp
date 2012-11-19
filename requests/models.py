@@ -35,7 +35,7 @@ from .utils import (
     guess_json_utf)
 from .compat import (
     cookielib, urlparse, urlunparse, urljoin, urlsplit, urlencode, str, bytes,
-    StringIO, is_py2, chardet, json, builtin_str, urldefrag)
+    StringIO, is_py2, chardet, json, builtin_str, urldefrag, basestring)
 
 REDIRECT_STATI = (codes.moved, codes.found, codes.other, codes.temporary_moved)
 CONTENT_CHUNK_SIZE = 10 * 1024
@@ -113,7 +113,7 @@ class Request(object):
         # Dictionary or byte of querystring data to attach to the
         # :class:`Request <Request>`. The dictionary values can be lists for representing
         # multivalued query parameters.
-        #: :class:`Request <Request>` に追加する辞書、もしくはクエリ文字列のデータです。
+        #: :class:`Request <Request>` に追加するクエリ文字列の辞書です。
         #: 辞書の値は複数の値をクエリパラメーターに表示できるリストです。
         self.params = None
 
@@ -360,7 +360,9 @@ class Request(object):
         elif hasattr(data, '__iter__'):
             result = []
             for k, vs in to_key_val_list(data):
-                for v in isinstance(vs, list) and vs or [vs]:
+                if isinstance(vs, basestring) or not hasattr(vs, '__iter__'):
+                    vs = [vs]
+                for v in vs:
                     if v is not None:
                         result.append(
                             (k.encode('utf-8') if isinstance(k, str) else k,
