@@ -77,42 +77,55 @@ class Session(object):
         verify=True,
         cert=None):
 
-        #: A case-insensitive dictionary of headers to be sent on each
-        #: :class:`Request <Request>` sent from this
-        #: :class:`Session <Session>`.
+        # A case-insensitive dictionary of headers to be sent on each
+        # :class:`Request <Request>` sent from this
+        # :class:`Session <Session>`.
+        #: :class:`Session <Session>` から送られた個々の :class:`Request <Request>` に
+        #: ヘッダーの大文字と小文字を区別しない辞書。
         self.headers = from_key_val_list(headers or [])
 
-        #: Authentication tuple or object to attach to
-        #: :class:`Request <Request>`.
+        # Authentication tuple or object to attach to
+        # :class:`Request <Request>`.
+        #: :class:`Request <Request>` に添付されている認証情報のタプル、もしくはオブジェクト。
         self.auth = auth
 
-        #: Float describing the timeout of the each :class:`Request <Request>`.
+        # Float describing the timeout of the each :class:`Request <Request>`.
+        #: 個々の :class:`Request <Request>` のタイムアウトを指定する秒数。
         self.timeout = timeout
 
-        #: Dictionary mapping protocol to the URL of the proxy (e.g.
-        #: {'http': 'foo.bar:3128'}) to be used on each
-        #: :class:`Request <Request>`.
+        # Dictionary mapping protocol to the URL of the proxy (e.g.
+        # {'http': 'foo.bar:3128'}) to be used on each
+        # :class:`Request <Request>`.
+        #: プロトコルを個々の :class:`Request <Request>`
+        #: で使われているプロキシのURLとマッピングした辞書。
         self.proxies = from_key_val_list(proxies or [])
 
-        #: Event-handling hooks.
+        # Event-handling hooks.
+        #: イベント処理を行うフック。
         self.hooks = from_key_val_list(hooks or {})
 
-        #: Dictionary of querystring data to attach to each
-        #: :class:`Request <Request>`. The dictionary values may be lists for
-        #: representing multivalued query parameters.
+        # Dictionary of querystring data to attach to each
+        # :class:`Request <Request>`. The dictionary values may be lists for
+        # representing multivalued query parameters.
+        #: 個々の :class:`Request <Request>` に添付されているクエリ文字列データの辞書。
+        #: 辞書の値は複数のクエリパラメーターを複数の値として表現するためにリストになっている場合もあります。
         self.params = from_key_val_list(params or [])
 
-        #: Dictionary of configuration parameters for this
-        #: :class:`Session <Session>`.
+        # Dictionary of configuration parameters for this
+        # :class:`Session <Session>`.
+        #: :class:`Session <Session>` の設定の辞書。
         self.config = from_key_val_list(config or {})
 
-        #: Prefetch response content.
+        # Prefetch response content.
+        #: レスポンスの本文をプリフェッチ。
         self.prefetch = prefetch
 
-        #: SSL Verification.
+        # SSL Verification.
+        #: SSL認証。
         self.verify = verify
 
-        #: SSL certificate.
+        # SSL certificate.
+        #: SSL証明書。
         self.cert = cert
 
         for (k, v) in list(defaults.items()):
