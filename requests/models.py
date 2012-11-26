@@ -110,10 +110,10 @@ class Request(object):
         #: 辞書かバイトかファイルストリーム。
         self.data = None
 
-        # Dictionary or byte of querystring data to attach to the
+        # Dictionary of querystring data to attach to the
         # :class:`Request <Request>`. The dictionary values can be lists for representing
         # multivalued query parameters.
-        #: :class:`Request <Request>` に追加するクエリ文字列の辞書です。
+        #: :class:`Request <Request>` に添付するクエリ文字データの辞書です。
         #: 辞書の値は複数の値をクエリパラメーターに表示できるリストです。
         self.params = None
 
@@ -136,7 +136,7 @@ class Request(object):
         # If no proxies are given, allow configuration by environment variables
         # HTTP_PROXY and HTTPS_PROXY.
         if not self.proxies and self.config.get('trust_env'):
-            self.proxies = get_environ_proxies()
+            self.proxies = get_environ_proxies(self.url)
 
         self.data = data
         self.params = params
@@ -593,6 +593,14 @@ class Request(object):
                     content_type = None
                 else:
                     content_type = 'application/x-www-form-urlencoded'
+
+        self.headers['Content-Length'] = '0'
+        if hasattr(body, 'seek') and hasattr(body, 'tell'):
+            body.seek(0, 2)
+            self.headers['Content-Length'] = str(body.tell())
+            body.seek(0, 0)
+        elif body is not None:
+            self.headers['Content-Length'] = str(len(body))
 
         # Add content-type if it wasn't explicitly provided.
         if (content_type) and (not 'content-type' in self.headers):
