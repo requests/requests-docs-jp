@@ -42,9 +42,22 @@ requestsのテストスイートを実行するために、
     $ make
     $ make test
 
-.. The ``Makefile`` has various useful targets for testing.
+.. The ``Makefile`` has various useful targets for testing. For example, if you
+   want to see how your pull request will behave with Travis-CI you would run
+   ``make travis``.
 
 ``Makefile`` は、様々なテスト用の便利なツールがあります。
+例として、Travis-CIでのプルリクエストの振る舞いを確認する場合は、 ``make travis`` を実行して下さい。
+
+Versions of Python to Test On
+-----------------------------
+
+Officially (as of 26-Nov-2012), requests supports python 2.6-3.3. In the
+future, support for 3.1 and 3.2 may be dropped. In general you will need to
+test on at least one python 2 and one python 3 version. You can also set up
+Travis CI for your own fork before you submit a pull request so that you are
+assured your fork works. To use Travis CI for your fork and other projects see
+their `documentation <http://about.travis-ci.org/docs/user/getting-started/>`_.
 
 .. What Needs to be Done
    ---------------------
