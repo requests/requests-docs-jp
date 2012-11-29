@@ -49,15 +49,24 @@ requestsのテストスイートを実行するために、
 ``Makefile`` は、様々なテスト用の便利なツールがあります。
 例として、Travis-CIでのプルリクエストの振る舞いを確認する場合は、 ``make travis`` を実行して下さい。
 
-Versions of Python to Test On
------------------------------
+.. Versions of Python to Test On
+   -----------------------------
 
-Officially (as of 26-Nov-2012), requests supports python 2.6-3.3. In the
-future, support for 3.1 and 3.2 may be dropped. In general you will need to
-test on at least one python 2 and one python 3 version. You can also set up
-Travis CI for your own fork before you submit a pull request so that you are
-assured your fork works. To use Travis CI for your fork and other projects see
-their `documentation <http://about.travis-ci.org/docs/user/getting-started/>`_.
+テストするPythonのバージョン
+---------------------------------------------------
+
+.. Officially (as of 26-Nov-2012), requests supports python 2.6-3.3. In the
+   future, support for 3.1 and 3.2 may be dropped. In general you will need to
+   test on at least one python 2 and one python 3 version. You can also set up
+   Travis CI for your own fork before you submit a pull request so that you are
+   assured your fork works. To use Travis CI for your fork and other projects see
+   their `documentation <http://about.travis-ci.org/docs/user/getting-started/>`_.
+
+公式に(2012.11.26)、RequestsはPython 2.6から3.3をサポートします。
+将来的には、バージョン3.1と3.2はサポート対象から外すかもしれません。
+一般的に、Pythonのバージョン2から一つ、Pythonのバージョン3から一つを少なくともテストしなければいけません。
+フォークしたものが動作しているかを確認したい場合、プルリクエストを送る前にフォークしたものにTravis CIを設定することもできます。
+フォークしたものや他のプロジェクトのもので、Travis CIを使うためにはそれらの `ドキュメント <http://about.travis-ci.org/docs/user/getting-started/>`_ を見て下さい。
 
 .. What Needs to be Done
    ---------------------
