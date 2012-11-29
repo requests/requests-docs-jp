@@ -34,7 +34,7 @@ Requestsは活発に開発中で、プロジェクトへの貢献はどしどし
 .. You'll need to install ``gunicorn`` and ``httpbin`` and various other dependencies in
    order to run requests' test suite::
 
-requestsのテストスイートを実行するために、
+Requestsのテストスイートを実行するために、
 ``gunicorn`` や ``httpbin`` や他の依存するものをインストールする必要があります。 ::
 
     $ virtualenv env
