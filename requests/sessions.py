@@ -208,8 +208,8 @@ class Session(object):
         .. :param verify: (optional) if ``True``, the SSL cert will be verified. A CA_BUNDLE path can also be provided.
         .. :param cert: (optional) if String, path to ssl client cert file (.pem). If Tuple, ('cert', 'key') pair.
 
-        :param method: 新しい :class:`Request` オブジェクトのメソッド。
-        :param url: 新しい :class:`Request` オブジェクトのURL。
+        :param method: 新しく作成した :class:`Request` オブジェクトのメソッド。
+        :param url: 新しく作成した :class:`Request` オブジェクトのURL。
         :param params: :class:`Request` クエリ文字列として送られる辞書、もしくはデータ。(任意)
         :param data: :class:`Request` の本文として送られる辞書、もしくはデータ。(任意)
         :param headers: :class:`Request` と一緒に送信するためのHTTPヘッダーの辞書。(任意)
