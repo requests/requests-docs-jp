@@ -45,7 +45,7 @@ Pythonの標準の **urllib2** モジュールは、必要とされるHTTPの機
 
 .. See `the same code, without Requests <https://gist.github.com/973705>`_.
 
-`Requestsを使わずに同じ事をするときのコード <https://gist.github.com/973705>`_ を見て下さい。
+`Requestsを使わずに同じ事をするためのコード <https://gist.github.com/973705>`_ を見て下さい。
 
 .. Requests takes all of the work out of Python HTTP/1.1 — making your integration with web services seamless.
    There's no need to manually add query strings to your URLs, or to form-encode your POST data.
@@ -71,26 +71,26 @@ Amazon、Google、Twilio, Mozilla, Heroku, PayPal, Obama for America, Transifex,
     .. Requests is the perfect example how beautiful an API can be with the
        right level of abstraction.
 
-    Requestsはどのように美しいAPIを正しく抽象化できるかの完璧な例です。
+    Requestsは、どのようにして綺麗なAPIを正しく抽象化できるかの完璧な例です。
 
 **Matt DeBoard**
     .. I'm going to get @kennethreitz's Python requests module tattooed
        on my body, somehow. The whole thing.
 
-    私は@kennethreitzのPythonのRequestsモジュールのタトゥーを何とかして体に入れたい。以上。
+    @kennethreitz さんのPythonのRequestsモジュールのタトゥーを何とかして体に入れたい。以上。
 
 **Daniel Greenfeld**
     .. Nuked a 1200 LOC spaghetti code library with 10 lines of code thanks to
        @kennethreitz's request library. Today has been AWESOME.
 
-    1200行のスパゲッティーコードのライブラリを10数行くらいのコードにしてくれた@kennethreitzのリクエストライブラリに感謝しています。
+    1200行のスパゲッティーコードのライブラリを数10行くらいのコードにしてくれた@kennethreitzのリクエストライブラリに感謝しています。
     すばらしくなりました。
 
 **Kenny Meyers**
     .. Python HTTP: When in doubt, or when not in doubt, use Requests. Beautiful,
        simple, Pythonic.
 
-    PythonのHTTPにおいて、迷ったときも、そうでない時も、Requestsを使います。美しくて、シンプルで、Pythonicだ。
+    PythonのHTTPの実装: 使うか迷ったときも、そうでない時も、Requestsを使います。綺麗な設計で、シンプルで、Pythonicだ。
 
 .. Feature Support
    ---------------
@@ -100,7 +100,7 @@ Amazon、Google、Twilio, Mozilla, Heroku, PayPal, Obama for America, Transifex,
 
 .. Requests is ready for today's web.
 
-Requestsは現在のウェブに欠かせない機能を持っています。
+Requestsは、今日(こんにち)のウェブに欠かせない機能を持っています。
 
 .. International Domains and URLs
 .. Keep-Alive & Connection Pooling
@@ -138,8 +138,8 @@ Requestsは現在のウェブに欠かせない機能を持っています。
    background information about Requests, then focuses on step-by-step
    instructions for getting the most out of Requests.
 
-ドキュメントのこの章は、Requestsに関するいくつかの背景を説明することから始めます。
-それから、Requestsを最大限に使うための説明をステップバイステップで紹介します。
+ドキュメントのこの章は、Requestsに関するいくつかのバックグラウンドを紹介します。
+それから、Requestsを最大限に使うための説明をステップ・バイ・ステップで紹介することにフォーカスしています。
 
 .. toctree::
    :maxdepth: 2
@@ -178,7 +178,7 @@ APIドキュメント
 .. If you are looking for information on a specific function, class or method,
    this part of the documentation is for you.
 
-特定の関数やクラスやメソッドの情報を探しているなら、ドキュメントのこの章を見て下さい。
+特定の関数やクラスやメソッドの情報を探している場合は、ドキュメントのこの章を見て下さい。
 
 .. toctree::
    :maxdepth: 2
@@ -195,7 +195,7 @@ APIドキュメント
 .. If you want to contribute to the project, this part of the documentation is for
    you.
 
-プロジェクトに貢献したいなら、ドキュメントのこの章を見て下さい。
+プロジェクトに貢献する場合は、ドキュメントのこの章を見て下さい。
 
 .. toctree::
    :maxdepth: 1
