@@ -49,11 +49,7 @@ class CaseInsensitiveDict(dict):
 
 
 class LookupDict(dict):
-    """
-    .. Dictionary lookup object.
-
-    ルックアップオブジェクトの辞書。
-    """
+    """Dictionary lookup object."""
 
     def __init__(self, name=None):
         self.name = name

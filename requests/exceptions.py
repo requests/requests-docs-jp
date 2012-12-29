@@ -10,29 +10,17 @@ This module contains the set of Requests' exceptions.
 
 
 class RequestException(RuntimeError):
-    """
-    .. There was an ambiguous exception that occurred while handling your
-       request.
-
-    リクエストを処理している時に発生した不明瞭な例外がある時
-    """
+    """There was an ambiguous exception that occurred while handling your
+    request."""
 
 
 class HTTPError(RequestException):
-    """
-    .. An HTTP error occurred.
-
-    HTTPエラーが発生した時
-    """
+    """An HTTP error occurred."""
     response = None
 
 
 class ConnectionError(RequestException):
-    """
-    .. A Connection error occurred.
-
-    コネクションエラーが発生した時
-    """
+    """A Connection error occurred."""
 
 
 class SSLError(ConnectionError):
@@ -44,19 +32,11 @@ class Timeout(RequestException):
 
 
 class URLRequired(RequestException):
-    """
-    .. A valid URL is required to make a request.
-
-    リクエストを作成するために正しいURLを要求する時
-    """
+    """A valid URL is required to make a request."""
 
 
 class TooManyRedirects(RequestException):
-    """
-    .. Too many redirects.
-
-    リダイレクトの回数が多い時
-    """
+    """Too many redirects."""
 
 
 class MissingSchema(RequestException, ValueError):

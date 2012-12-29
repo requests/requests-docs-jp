@@ -4,7 +4,6 @@ import os
 import sys
 
 import requests
-from requests.compat import is_py2
 
 try:
     from setuptools import setup
@@ -15,27 +14,14 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
     sys.exit()
 
-os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
-
 packages = [
     'requests',
     'requests.packages',
+    'requests.packages.charade',
     'requests.packages.urllib3',
     'requests.packages.urllib3.packages',
     'requests.packages.urllib3.packages.ssl_match_hostname'
 ]
-
-if is_py2:
-    packages.extend([
-        'requests.packages.oauthlib',
-        'requests.packages.oauthlib.oauth1',
-        'requests.packages.oauthlib.oauth1.rfc5849',
-        'requests.packages.oauthlib.oauth2',
-        'requests.packages.oauthlib.oauth2.draft25',
-        'requests.packages.chardet',
-    ])
-else:
-    packages.append('requests.packages.chardet2')
 
 requires = []
 
@@ -59,16 +45,14 @@ setup(
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Natural Language :: English',
-        'License :: OSI Approved :: ISC License (ISCL)',
+        'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.0',
+        # 'Programming Language :: Python :: 3.0',
         'Programming Language :: Python :: 3.1',
         'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
     ),
 )
-
-del os.environ['PYTHONDONTWRITEBYTECODE']

@@ -3,6 +3,41 @@
 History
 -------
 
+1.0.3 (2012-12-18)
+++++++++++++++++++
+
+- Fix file upload encoding bug
+- Fix cookie behavior
+
+1.0.2 (2012-12-17)
+++++++++++++++++++
+
+- Proxy fix for HTTPAdapter.
+
+1.0.1 (2012-12-17)
+++++++++++++++++++
+
+- Cert verification exception bug.
+- Proxy fix for HTTPAdapter.
+
+1.0.0 (2012-12-17)
+++++++++++++++++++
+
+- Massive Refactor and Simplification
+- Switch to Apache 2.0 license
+- Swappable Connection Adapters
+- Mountable Connection Adapters
+- Mutable ProcessedRequest chain
+- /s/prefetch/stream
+- Removal of all configuration
+- Standard library logging
+- Make Reponse.json() callable, not property.
+- Usage of new charade project, which provides python 2 and 3 simultaneous chardet.
+- Removal of all hooks except 'response'
+- Removal of all authentication helpers (OAuth, Kerberos)
+
+This is not a backwards compatible change.
+
 0.14.2 (2012-10-27)
 +++++++++++++++++++
 
@@ -22,7 +57,7 @@ History
 
 
 0.14.0 (2012-09-02)
-+++++++++++++++++++
+++++++++++++++++++++
 
 - No more iter_content errors if already downloaded.
 

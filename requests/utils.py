@@ -19,50 +19,18 @@ import zlib
 from netrc import netrc, NetrcParseError
 
 from . import __version__
+from . import certs
 from .compat import parse_http_list as _parse_list_header
-from .compat import quote, quote_plus, urlparse, basestring, bytes, str, OrderedDict
+from .compat import quote, urlparse, bytes, str, OrderedDict, urlunparse
 from .cookies import RequestsCookieJar, cookiejar_from_dict
 
 _hush_pyflakes = (RequestsCookieJar,)
 
-CERTIFI_BUNDLE_PATH = None
-try:
-    # see if requests's own CA certificate bundle is installed
-    from . import certs
-    path = certs.where()
-    if os.path.exists(path):
-        CERTIFI_BUNDLE_PATH = certs.where()
-except ImportError:
-    pass
-
 NETRC_FILES = ('.netrc', '_netrc')
-
-# common paths for the OS's CA certificate bundle
-POSSIBLE_CA_BUNDLE_PATHS = [
-        # Red Hat, CentOS, Fedora and friends (provided by the ca-certificates package):
-        '/etc/pki/tls/certs/ca-bundle.crt',
-        # Ubuntu, Debian, and friends (provided by the ca-certificates package):
-        '/etc/ssl/certs/ca-certificates.crt',
-        # FreeBSD (provided by the ca_root_nss package):
-        '/usr/local/share/certs/ca-root-nss.crt',
-        # openSUSE (provided by the ca-certificates package), the 'certs' directory is the
-        # preferred way but may not be supported by the SSL module, thus it has 'ca-bundle.pem'
-        # as a fallback (which is generated from pem files in the 'certs' directory):
-        '/etc/ssl/ca-bundle.pem',
-]
-
-
-def get_os_ca_bundle_path():
-    """Try to pick an available CA certificate bundle provided by the OS."""
-    for path in POSSIBLE_CA_BUNDLE_PATHS:
-        if os.path.exists(path):
-            return path
-    return None
 
 # if certifi is installed, use its CA bundle;
 # otherwise, try and use the OS bundle
-DEFAULT_CA_BUNDLE_PATH = CERTIFI_BUNDLE_PATH or get_os_ca_bundle_path()
-
+DEFAULT_CA_BUNDLE_PATH = certs.where()
 
 def dict_to_sequence(d):
     """Returns an internal sequence dictionary update."""
@@ -254,66 +222,10 @@ def unquote_header_value(value, is_filename=False):
     return value
 
 
-def header_expand(headers):
-    """Returns an HTTP Header value string from a dictionary.
-
-    Example expansion::
-
-        {'text/x-dvi': {'q': '.8', 'mxb': '100000', 'mxt': '5.0'}, 'text/x-c': {}}
-        # Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c
-
-        (('text/x-dvi', {'q': '.8', 'mxb': '100000', 'mxt': '5.0'}), ('text/x-c', {}))
-        # Accept: text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c
-    """
-
-    collector = []
-
-    if isinstance(headers, dict):
-        headers = list(headers.items())
-    elif isinstance(headers, basestring):
-        return headers
-    elif isinstance(headers, str):
-        # As discussed in https://github.com/kennethreitz/requests/issues/400
-        # latin-1 is the most conservative encoding used on the web. Anyone
-        # who needs more can encode to a byte-string before calling
-        return headers.encode("latin-1")
-    elif headers is None:
-        return headers
-
-    for i, (value, params) in enumerate(headers):
-
-        _params = []
-
-        for (p_k, p_v) in list(params.items()):
-
-            _params.append('%s=%s' % (p_k, p_v))
-
-        collector.append(value)
-        collector.append('; ')
-
-        if len(params):
-
-            collector.append('; '.join(_params))
-
-            if not len(headers) == i + 1:
-                collector.append(', ')
-
-    # Remove trailing separators.
-    if collector[-1] in (', ', '; '):
-        del collector[-1]
-
-    return ''.join(collector)
-
-
 def dict_from_cookiejar(cj):
-    """
-    .. Returns a key/value dictionary from a CookieJar.
+    """Returns a key/value dictionary from a CookieJar.
 
-    CookieJarのkey/valueの辞書を返します。
-
-    .. :param cj: CookieJar object to extract cookies from.
-
-    :param cj: CookieJarオブジェクトからクッキーを取り出します。
+    :param cj: CookieJar object to extract cookies from.
     """
 
     cookie_dict = {}
@@ -325,16 +237,10 @@ def dict_from_cookiejar(cj):
 
 
 def add_dict_to_cookiejar(cj, cookie_dict):
-    """
-    .. Returns a CookieJar from a key/value dictionary.
+    """Returns a CookieJar from a key/value dictionary.
 
-    key/valueの辞書からCookieJarを返します。
-
-    .. :param cj: CookieJar to insert cookies into.
-    .. :param cookie_dict: Dict of key/values to insert into CookieJar.
-
-    :param cj: クッキーに挿入するCookieJar。
-    :param cookie_dict: CookieJarに挿入するためのkey/valuesの辞書。
+    :param cj: CookieJar to insert cookies into.
+    :param cookie_dict: Dict of key/values to insert into CookieJar.
     """
 
     cj2 = cookiejar_from_dict(cookie_dict)
@@ -344,14 +250,9 @@ def add_dict_to_cookiejar(cj, cookie_dict):
 
 
 def get_encodings_from_content(content):
-    """
-    .. Returns encodings from given content string.
+    """Returns encodings from given content string.
 
-    与えられたコンテンツの文字のエンコーディングを返します。
-
-    .. :param content: bytestring to extract encodings from.
-
-    :param content: エンコーディングを取り出すためのバイト文字列。
+    :param content: bytestring to extract encodings from.
     """
 
     charset_re = re.compile(r'<meta.*?charset=["\']*(.+?)["\'>]', flags=re.I)
@@ -360,14 +261,9 @@ def get_encodings_from_content(content):
 
 
 def get_encoding_from_headers(headers):
-    """
-    .. Returns encodings from given HTTP Header Dict.
+    """Returns encodings from given HTTP Header Dict.
 
-    与えられたHTTPヘッダーの辞書からエンコーディングを返します。
-
-    .. :param headers: dictionary to extract encoding from.
-
-    :param headers: エンコーディングを取り出すための辞書。
+    :param headers: dictionary to extract encoding from.
     """
 
     content_type = headers.get('content-type')
@@ -411,30 +307,17 @@ def iter_slices(string, slice_length):
 
 
 def get_unicode_from_response(r):
-    """
-    .. Returns the requested content back in unicode.
+    """Returns the requested content back in unicode.
 
-    リクエストされたコンテンツをユニコードで返します。
+    :param r: Response object to get unicode content from.
 
-    .. :param r: Response object to get unicode content from.
+    Tried:
 
-    :param r: ユニコードのコンテンツを取得するためのレスポンスオブジェクト。
+    1. charset from content-type
 
-    .. Tried:
+    2. every encodings from ``<meta ... charset=XXX>``
 
-    以下のことを試みます。 :
-
-    .. charset from content-type
-
-    .. every encodings from ``<meta ... charset=XXX>``
-
-    .. fall back and replace all unicode characters
-
-    1. Content-Typeからの文字コードを取得。
-
-    2. ``<meta ... charset=XXX>`` からエンコーディング。
-
-    3. フォールバックして、全てのユニコードの文字列を置き換えます。
+    3. fall back and replace all unicode characters
 
     """
 
@@ -457,8 +340,7 @@ def get_unicode_from_response(r):
 
 
 def stream_decompress(iterator, mode='gzip'):
-    """
-    Stream decodes an iterator over compressed data
+    """Stream decodes an iterator over compressed data
 
     :param iterator: An iterator over compressed data
     :param mode: 'gzip' or 'deflate'
@@ -520,7 +402,7 @@ def unquote_unreserved(uri):
                 parts[i] = '%' + parts[i]
         else:
             parts[i] = '%' + parts[i]
-        return ''.join(parts)
+    return ''.join(parts)
 
 
 def requote_uri(uri):
@@ -604,6 +486,13 @@ def default_user_agent():
             '%s/%s' % (p_system, p_release),
         ])
 
+def default_headers():
+    return {
+        'User-Agent': default_user_agent(),
+        'Accept-Encoding': ', '.join(('gzip', 'deflate', 'compress')),
+        'Accept': '*/*'
+    }
+
 
 def parse_header_links(value):
     """Return a dict of parsed link headers proxies.
@@ -644,6 +533,7 @@ _null = '\x00'.encode('ascii')  # encoding to ASCII for Python 3
 _null2 = _null * 2
 _null3 = _null * 3
 
+
 def guess_json_utf(data):
     # JSON always starts with two ASCII characters, so detection is as
     # easy as counting the nulls and from their location and count
@@ -671,3 +561,17 @@ def guess_json_utf(data):
             return 'utf-32-le'
         # Did not detect a valid UTF-32 ascii-range character
     return None
+
+
+def prepend_scheme_if_needed(url, new_scheme):
+    '''Given a URL that may or may not have a scheme, prepend the given scheme.
+    Does not replace a present scheme with the one provided as an argument.'''
+    scheme, netloc, path, params, query, fragment = urlparse(url, new_scheme)
+
+    # urlparse is a finicky beast, and sometimes decides that there isn't a
+    # netloc present. Assume that it's being over-cautious, and switch netloc
+    # and path if urlparse decided there was no netloc.
+    if not netloc:
+        netloc, path = path, netloc
+
+    return urlunparse((scheme, netloc, path, params, query, fragment))

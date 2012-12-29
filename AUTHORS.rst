@@ -111,7 +111,7 @@ Urllib3
 - Roman Haritonov <@reclosedev>
 - Josh Imhoff <joshimhoff13@gmail.com>
 - Arup Malakar <amalakar@gmail.com>
-- Danilo Bargen (gwrtheyrn)
+- Danilo Bargen (dbrgn)
 - Torsten Landschoff
 - Michael Holler (apotheos)
 - Timnit Gebru
@@ -126,3 +126,4 @@ Urllib3
 - Stephen Zhuang (everbird)
 - Martijn Pieters
 - Jonatan Heyman
+- David Bonner <dbonner@gmail.com> @rascalking
