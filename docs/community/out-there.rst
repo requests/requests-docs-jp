@@ -1,5 +1,8 @@
-Integrations
-============
+.. Integrations
+   ============
+
+インテグレーション
+========================
 
 ScraperWiki
 ------------
@@ -8,22 +11,35 @@ ScraperWiki
 you to run Python, Ruby, and PHP scraper scripts on the web. Now, Requests
 v0.6.1 is available to use in your scrapers!
 
-To give it a try, simply::
+`ScraperWiki <https://scraperwiki.com/>`_ はウェブ上でPython、Ruby、PHPのスクレイパースクリプトを実行できる優れたサービスです。
+現在、Requestsのバージョン0.6.1を使うことができます。
+
+.. To give it a try, simply::
+
+簡単なので、試してみて下さい。::
 
     import requests
 
 Python for iOS
 --------------
 
-Requests is built into the wonderful `Python for iOS <https://itunes.apple.com/us/app/python-2.7-for-ios/id485729872?mt=Python8>`_ runtime!
+.. Requests is built into the wonderful `Python for iOS <https://itunes.apple.com/us/app/python-2.7-for-ios/id485729872?mt=Python8>`_ runtime!
 
-To give it a try, simply::
+Requestsは、すばらしい `Python for iOS <https://itunes.apple.com/us/app/python-2.7-for-ios/id485729872?mt=Python8>`_ ランタイムに組み込まれています！
+
+.. To give it a try, simply::
+
+簡単なので、試してみて下さい。::
 
     import requests
 
 
-Articles & Talks
-================
+.. Articles & Talks
+   ================
+
+記事や講演
+===================
+
 - `Python for the Web <http://gun.io/blog/python-for-the-web/>`_ teaches how to use Python to interact with the web, using Requests.
 - `Daniel Greenfield's Review of Requests <http://pydanny.blogspot.com/2011/05/python-http-requests-for-humans.html>`_
 - `My 'Python for Humans' talk <http://python-for-humans.heroku.com>`_ ( `audio <http://codeconf.s3.amazonaws.com/2011/pycodeconf/talks/PyCodeConf2011%20-%20Kenneth%20Reitz.m4a>`_ )
