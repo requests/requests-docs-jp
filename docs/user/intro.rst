@@ -68,7 +68,10 @@ Requestsは、 `Apache2 License`_ でリリースされています。
 .. _`Apache2 License`: http://opensource.org/licenses/Apache-2.0
 
 
-Requests License
-----------------
+.. Requests License
+   ----------------
+
+Requestsライセンス
+--------------------------------
 
     .. include:: ../../LICENSE

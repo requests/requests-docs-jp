@@ -363,8 +363,11 @@ RequestsはMultipartエンコードのファイルをアップロードするこ
     }
 
 
-Response Status Codes
----------------------
+.. Response Status Codes
+   ---------------------
+
+レスポンスのステータスコード
+------------------------------------------
 
 .. We can check the response status code::
 
