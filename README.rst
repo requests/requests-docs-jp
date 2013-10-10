@@ -4,10 +4,14 @@
 Requests: 人間のためのHTTP
 =====================================
 
-このドキュメントは `Requests <http://docs.python-requests.org/>`_ のドキュメントを翻訳したものです。
-翻訳の間違いなどの指摘は、 `翻訳リポジトリのIssues <https://github.com/tokuda109/requests-docs-ja/issues>`_ に登録して頂けるとうれしいです。
+.. image:: https://badge.fury.io/py/requests.png
+    :target: http://badge.fury.io/py/requests
 
--------------------------------------
+.. image:: https://travis-ci.org/kennethreitz/requests.png?branch=master
+        :target: https://travis-ci.org/kennethreitz/requests
+
+.. image:: https://pypip.in/d/requests/badge.png
+        :target: https://crate.io/packages/requests/
 
 .. Requests is an Apache2 Licensed HTTP library, written in Python, for human
    beings.
@@ -51,7 +55,7 @@ Pythonの組み込みのurllib2モジュールは、必要なHTTP機能がほと
 Requestsは、HTTP/1.1のリクエストを送信することができます。
 ヘッダー、フォームデータ、マルチパートファイル、簡単なPythonの辞書形式でパラメータを添付することができ、
 同じ方法でレスポンスデータにアクセスすることができます。
-httplibや `urllib3 <https://github.com/shazow/urllib3>`_ が組み込まれていますが、
+httplibや `urllib3 <https://github.com/shazow/urllib3>`_ が一緒に組み込まれていますが、
 面倒な作業などは全てRequestsでやってくれます。
 
 
@@ -72,6 +76,7 @@ httplibや `urllib3 <https://github.com/shazow/urllib3>`_ が組み込まれて�
 .. Multipart File Uploads
 .. Connection Timeouts
 .. Thread-safety
+.. HTTP(S) proxy support
 
 - ドメインとURLの国際化
 - Keep-Aliveとコネクションプーリング
@@ -84,6 +89,7 @@ httplibや `urllib3 <https://github.com/shazow/urllib3>`_ が組み込まれて�
 - マルチパートファイルのアップロード
 - コネクションのタイムアウト
 - スレッドセーフ
+- HTTP(S)プロキシのサポート
 
 
 .. Installation
@@ -92,7 +98,7 @@ httplibや `urllib3 <https://github.com/shazow/urllib3>`_ が組み込まれて�
 インストール
 ---------------
 
-.. To install requests, simply:
+.. To install Requests, simply:
 
 Requestsをインストールするのは簡単です。
 
@@ -113,19 +119,32 @@ Requestsをインストールするのは簡単です。
 しかし、easy_installを使うべきではない。
 
 
+.. Documentation
+   -------------
+
+ドキュメント
+----------------
+
+.. Documentation is available at http://docs.python-requests.org/.
+
+ドキュメントは、http://docs.python-requests.org/ で確認することができます。
+
+
 .. Contribute
    ----------
 
 コントリビュート
 ---------------------
 
-.. Check for open issues or open a fresh issue to start a discussion around a feature idea or a bug. There is a Contributor Friendly tag for issues that should be ideal for people who are not very familiar with the codebase yet.
-.. Fork `the repository`_ on Github to start making your changes to the **master** branch (or branch off of it).
+.. Check for open issues or open a fresh issue to start a discussion around a feature idea or a bug. There is a `Contributor Friendly`_ tag for issues that should be ideal for people who are not very familiar with the codebase yet.
+.. If you feel uncomfortable or uncertain about an issue or your changes, feel free to email @sigmavirus24 and he will happily help you via email, Skype, remote pairing or whatever you are comfortable with.
+.. Fork `the repository`_ on GitHub to start making your changes to the **master** branch (or branch off of it).
 .. Write a test which shows that the bug was fixed or that the feature works as expected.
 .. Send a pull request and bug the maintainer until it gets merged and published. :) Make sure to add yourself to AUTHORS_.
 
 #. 公開されているissueの一覧をチェックするか、機能のアイデアやバグに関するディスカッションをするための新しいissueを作成して下さい。
-   まだコードに精通していない人にとって持って来いのContributor Friendlyタグがあります。
+   まだコードに精通していない人にとって持って来いの `Contributor Friendly`_ タグがあります。
+#. If you feel uncomfortable or uncertain about an issue or your changes, feel free to email @sigmavirus24 and he will happily help you via email, Skype, remote pairing or whatever you are comfortable with.
 #. **master** ブランチ(もしくはそれから派生したブランチ)に修正を加えるために、
    Githubの `リポジトリ <https://github.com/kennethreitz/requests>`_ をフォークして下さい。
 #. 期待している通りに動くか修正したバグが分かるようなテストを書く。
@@ -134,3 +153,4 @@ Requestsをインストールするのは簡単です。
 
 .. _`the repository`: http://github.com/kennethreitz/requests
 .. _AUTHORS: https://github.com/kennethreitz/requests/blob/master/AUTHORS.rst
+.. _Contributor Friendly: https://github.com/kennethreitz/requests/issues?direction=desc&labels=Contributor+Friendly&page=1&sort=updated&state=open
